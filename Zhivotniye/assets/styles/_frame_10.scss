@@ -1,0 +1,71 @@
+
+
+.main__zapros__admin {
+    padding-top: 35px;
+}
+
+.main__zapros__admin__content {
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.main__zapros__admin__h1 {
+    text-align: center;
+    font-weight: 400;
+    font-size: 38px;
+    line-height: 42px;
+    color: #000000;
+}
+
+
+.main__zapros__admin__table__section {
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+}
+.main__zapros__admin__h1 {
+}
+.main__zapros__admin__table {
+    width: 1060px;
+    height: 342px;
+    background-color: $yellow;
+    border: 1px solid $black;
+    border-collapse: collapse;
+}
+.main__zapros__admin__thead {
+}
+.main__zapros__admin__tr {
+    
+}
+.main__zapros__admin__th {
+    border: 1px solid $black;
+    height: 87px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
+}
+.main__zapros__admin__td {
+    border: 1px solid $black;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
+    vertical-align: middle;
+    text-align: center;
+}
+.td1__zapros {
+    width: 442px;
+
+}
+.td2__zapros {
+    width: 620px;
+}

@@ -1,0 +1,153 @@
+.main__frame_2 {
+    padding-bottom: 0px;
+}
+
+.main__pets__h1 {
+    margin: 0;
+    text-align: center;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 42px;
+
+}
+
+.main__pets__title {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+}
+.main__pets-photo {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 25px;
+    // margin-bottom: 40px;
+}
+
+.main__pets-photo__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.main__pets-photo__photo-block {
+    display: flex;
+    // padding-left: 30px;
+    // gap: 35px;
+}
+.main__pets-photo__photo-block__item {
+}
+.main__pets-photo__photo-block__item__img {
+}
+
+
+
+
+.main__pets__content {
+    text-align: center;
+}
+.main__pets__content__form {
+    width: 857px;
+    height: 441px;
+    background: $yellow;
+    border-radius: 30px;
+    padding: 67px 29px 42px 29px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.pets-btn {
+    box-sizing: border-box;
+
+    width: 271px;
+    height: 74px;
+    background: #FAA72B;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
+    
+    margin-top: 30px;
+
+    cursor: pointer;
+    border: 0px;
+    text-align: center;
+}
+
+
+
+
+.main__to-find {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 80px;
+}
+
+.main__to-find__cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0px 10px 0px 10px;
+}
+.main__to-find__card {
+    width: 582px;
+    height: 552px;
+    background: $yellow;
+    border-radius: 30px;
+    padding: 43px 5px 43px 33px;
+    margin-bottom: 96px;
+}
+.main__to-find__card__up-block {
+    display: flex;
+    gap: 20px;
+}
+.main__to-find__card__up-block__img-block {
+    width: 289px;
+    height: 233px;
+    background: #FFFFFF;
+    border-radius: 30px;
+    overflow: hidden;
+}
+.main__to-find__card__up-block__img-block__img {
+}
+.main__to-find__card__up-block__text-block {
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: baseline;
+    gap: 20px;
+}
+.main__to-find__card__up-block__text-block__item {
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
+}
+.main__to-find__card__down-block {
+    width: 515px;
+    height: 198px;
+    background: #FFFFFF;
+    border-radius: 30px;
+    margin-top: 37px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
+
+    padding: 10px;
+}

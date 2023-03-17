@@ -3,7 +3,7 @@ require_once '../main_functions.php';
 
 
 if(isset($_SESSION['admin']) && isset($_GET['action']) && $_GET['action']='remove'){
-	if(delete($_GET['table'],$_GET['id'])==1){
+	if(change_pet($_GET['table'],$_GET['id'])==1){
 		redirect('../../admin', 'ok=true');
 	}else {
 		redirect('../../admin', 'ok=false');
@@ -36,7 +36,6 @@ if(isset($_POST['ed-user-done'])){
 	}
 }
 if(isset($_POST['ed-addprod-done'])){
-	if(empty($_FILES['image_book']['name']))
 	if(add_product($_POST['ed-addprod-name'],$_POST['ed-addprod-price'],$_POST['ed-addprod-desc'],$_POST['ed-addprod-weight'],$_POST['category'], $_FILES['ed-addprod-pic']['name'])==1){
 		if(!move_uploaded_file($_FILES['ed-addprod-pic']['tmp_name'], "../../upload/".$_FILES['ed-addprod-pic']['name']))
 	{

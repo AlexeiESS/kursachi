@@ -1,0 +1,69 @@
+@import "settings";
+
+
+.header {
+    width: 1500px;
+    height: 265px;
+    background: $yellow;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 0 auto;
+    border-bottom: 1px solid #000000;
+    overflow: hidden;
+}
+.header__content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    
+}
+.header__left-content {
+    width: 763px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.header__logo-block {
+    font-family: 'Zen Old Mincho', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 75px;
+    line-height: 101px;
+    margin-bottom: 28px;
+    margin-left: 20px;
+    
+    
+}
+.header__logo-block__img {
+    
+}
+.header__left-content__btns-block {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 111px;
+}
+.header__right-content {
+
+}
+.header__right-content__img {
+    position: absolute;
+    top: 0;
+    right: -100px;
+}
+.header__right-content__soc-items {
+    position: absolute;
+    top: 45px;
+    right: -60px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.header__right-content__soc-items__item {
+
+}
+.header__right-content__soc-items__item__img {
+}
