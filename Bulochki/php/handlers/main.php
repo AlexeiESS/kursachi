@@ -3,7 +3,7 @@ require_once '../main_functions.php';
 
 
 if(isset($_SESSION['admin']) && isset($_GET['action']) && $_GET['action']='remove'){
-	if(change_pet($_GET['table'],$_GET['id'])==1){
+	if(delete($_GET['table'],$_GET['id'])==1){
 		redirect('../../admin', 'ok=true');
 	}else {
 		redirect('../../admin', 'ok=false');
