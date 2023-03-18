@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['user']) || isset($_SESSION['admin'])){header("Location: index.php")}
+if(isset($_SESSION['user']) || isset($_SESSION['admin'])){header("Location: index.php");}
 ?>
 <!DOCTYPE html>
 <html lang="ru">

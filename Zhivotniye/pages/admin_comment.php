@@ -1,4 +1,6 @@
-<?php session_start();if(!isset($_SESSION['admin']) || !isset($_SESSION['user'])) {header("Location: auth.php");} ?>
+<?php session_start(); if(!isset($_SESSION['admin'])){header("Location: auth.php");} require_once 'php/init.php'; 
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -26,6 +28,7 @@
                         <a href="frame_8.html" class="btn">Авторизация</a>
                         <a href="frame_9.html" class="btn">Регистрация</a>
                         <?php } ?>
+                        
                     </div>
                 </div>
         
@@ -49,39 +52,56 @@
     </header>
 
 
-     <!--MAIN-->
-     <main class="main main__frame_3">
-        <div class="main__menu"></div>
+    <!--MAIN-->
+    <main class="main main__frame_7">
+        <div class="main__menu__row"></div>
         <div class="wrapper">
-            <section class="main__otzyv">
-                <div class="main__menu__content">
-                    <a href="frame_1.html" class="btn">О нас</a>
-                    <a href="#" class="btn">Ищут дом</a>
-                    <a href="#" class="btn">Нашли дом</a>
-                    <a href="frame_3.html" class="btn current-btn">Отзывы</a>
-                    <a href="frame_4.html" class="btn">Контакты</a>
-                    <a href="frame_11.html" class="btn">Ищу питомца</a>
+            <section class="main__otzyv__admin">
+                <div class="main__menu__content__row">
+                    <a href="frame_5.html" class="btn current-btn">Уже нашли дом</a>
+                    <a href="frame_5.html" class="btn">Еще ищут дом</a>
+                    <a href="frame_7.html" class="btn">Отзывы</a>
+                    <a href="frame_10.html" class="btn">Заявки</a>
                 </div>
 
-                <div class="main__otzyv__content">
-                    <h1>Отзывы</h1>
-                    <div class="main__otzyv__content__form">
-                        <!-- Форма обратной связи -->
-                        <form class="main__otzyv__form" method="POST" action="php/handlers/main.php">
-                            <div class="main__otzyv__form__windows">
-                                <div class="main__otzyv__input-box">
-                                    <input class="main__otzyv__input-box__btn" type="file" name="img_comm" value="Загрузить фото" required/>
-                                </div>
-                                <div>
-                                    <textarea name="text_comm" class="main__otzyv__message-box" placeholder="Оставить отзыв..." required></textarea>
-                                </div>
-                            </div>
-                            <div>
-                                <input class="main__otzyv__button" name="add_comm" type="submit" value="Отправить" />
-                            </div>
-                        </form>
-                    </div>
+            </section>
+
+            <section class="main__otzyv__admin__table__section">
+                <h1 class="main__oyzyv__admin__h1">Отзывы</h1>
+                <div class="table__wrapper table__wrapper__otzyv">
+                    <table class="main__otzyv__admin__table">
+                        <thead class="main__otzyv__admin__thead">
+                            <tr class="main__otzyv__admin__tr">
+                                <th class="main__otzyv__admin__th">Фото</th>
+                                <th class="main__otzyv__admin__th">Имя</th>
+                                <th class="main__otzyv__admin__th">Текст</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             <?php $comm = $conn->query("SELECT * FROM commentaries "); foreach($comm as $row){ ?>
+                            <tr class="main__otzyv__admin__tr">
+                                <td class="main__otzyv__admin__td">
+                                    <img class="main__otzyv__admin__img" src="upload/<?php echo $row['img']; ?>" alt="">
+                                </td>
+                                <td class="main__otzyv__admin__td td1__otzyv"><?php echo $row['name']; ?></td>
+                                <td class="main__otzyv__admin__td td2__otzyv"><?php echo $row['text_com']; ?></td>
+                            </tr>
+                            <tr class="main__otzyv__admin__tr">
+                                <td colspan="5" class="main__otzyv__admin__td__btn-row">
+                                    <div class="btn-container">
+                                        <div class="btn btn-table"><a href="?action=change_comm&id=<?php echo $row['id']; ?>">Изменить</a></div>
+                                        <div  class="btn btn-table"><a href="php/handlers/main.php?action1=remove&table=commentaries&id=<?php echo $row['id']; ?>">Удалить</a></div>
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php } ?>  
+            
+                        </tbody>
+                    </table>
                 </div>
+
+
             </section>
         </div>
     </main>
@@ -122,7 +142,6 @@
             </div>
         </div>
     </footer>
-
-
+    
 </body>
 </html>

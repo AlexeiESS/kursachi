@@ -1,3 +1,7 @@
+<?php session_start(); if(!isset($_SESSION['admin'])){header("Location: auth.php");} require_once 'php/init.php'; 
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -18,14 +22,14 @@
                     <a href="frame_1.html" class="header__logo-block">
                         ИЩУ Д<img src="../assets/images/doggy-logo.svg" alt="" class="header__logo-block__img">М!
                     </a>
-                        <div class="header__left-content__btns-block">
+                    <div class="header__left-content__btns-block">
+
                         <?php if(isset($_SESSION['admin']) || isset($_SESSION['user'])){ ?>
                         <a href="exit.php" class="btn">Выйти</a>
                         <?php }else { ?>
                         <a href="frame_8.html" class="btn">Авторизация</a>
                         <a href="frame_9.html" class="btn">Регистрация</a>
                         <?php } ?>
-                        
                     </div>
                 </div>
         
@@ -50,10 +54,10 @@
 
 
     <!--MAIN-->
-    <main class="main main__frame_7">
+    <main class="main main__frame_10">
         <div class="main__menu__row"></div>
         <div class="wrapper">
-            <section class="main__otzyv__admin">
+            <section class="main__zapros__admin">
                 <div class="main__menu__content__row">
                     <a href="frame_5.html" class="btn current-btn">Уже нашли дом</a>
                     <a href="frame_5.html" class="btn">Еще ищут дом</a>
@@ -63,33 +67,24 @@
 
             </section>
 
-            <section class="main__otzyv__admin__table__section">
-                <h1 class="main__oyzyv__admin__h1">Отзывы</h1>
-                <div class="table__wrapper table__wrapper__otzyv">
-                    <table class="main__otzyv__admin__table">
-                        <thead class="main__otzyv__admin__thead">
-                            <tr class="main__otzyv__admin__tr">
-                                <th class="main__otzyv__admin__th">Фото</th>
-                                <th class="main__otzyv__admin__th">Имя</th>
-                                <th class="main__otzyv__admin__th">Текст</th>
+            <section class="main__zapros__admin__table__section">
+                <h1 class="main__zapros__admin__h1">Запросы</h1>
+                    <table class="main__zapros__admin__table">
+                        <thead class="main__zapros__admin__thead">
+                            <tr class="main__zapros__admin__tr">
+                                <th class="main__zapros__admin__th">Имя</th>
+                                <th class="main__zapros__admin__th">Номер телефона</th>
                             </tr>
                         </thead>
                         <tbody>
-                             <?php $comm = $conn->query("SELECT * FROM commentaries WHERE search = 0"); foreach($comm as $row){ ?>
-                            <tr class="main__otzyv__admin__tr">
-                                <td class="main__otzyv__admin__td">
-                                    <img class="main__otzyv__admin__img" src="upload/<?php echo $row['img']; ?>" alt="">
-                                </td>
-                                <td class="main__otzyv__admin__td td1__otzyv"><?php echo $row['name']; ?></td>
-                                <td class="main__otzyv__admin__td td2__otzyv"><?php echo $row['text_com']; ?></td>
+                             <?php $cont = $conn->query("SELECT * FROM contacts "); foreach($cont as $row){ ?>
+                            <tr class="main__zapros__admin__tr">
+                                <td class="main__zapros__admin__td td1__zapros"><?php echo $row['name']; ?></td>
+                                <td class="main__zapros__admin__td td2__zapros"><?php echo $row['tel']; ?></td>
                             </tr>
-                            <?php } ?>  
-            
+                            <?php } ?>
                         </tbody>
                     </table>
-                </div>
-
-
             </section>
         </div>
     </main>

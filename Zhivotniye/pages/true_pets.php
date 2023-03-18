@@ -1,3 +1,8 @@
+<?php
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>

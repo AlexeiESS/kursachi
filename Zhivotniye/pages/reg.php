@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['user']) || isset($_SESSION['admin'])){header("Location: index.php")}
+if(isset($_SESSION['user']) || isset($_SESSION['admin'])){header("Location: index.php");}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -56,7 +56,7 @@ if(isset($_SESSION['user']) || isset($_SESSION['admin'])){header("Location: inde
                                     <div class="row__label__block">
                                         <label class="row__label" for="number">Пароль:</label>
                                     </div>
-                                    <input type="password" name="number" id="number" class="txt" tabindex="4" placeholder="Введите пароль" required>
+                                    <input type="password" name="password" class="txt" placeholder="Введите пароль" required>
                                 </div>
                                 
                                 <div class="center">

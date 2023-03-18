@@ -1,3 +1,6 @@
+<?php session_start(); if(!isset($_SESSION['admin'])){header("Location: auth.php");} require_once 'php/init.php'; 
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -22,8 +25,8 @@
                         <?php if(isset($_SESSION['admin']) || isset($_SESSION['user'])){ ?>
                         <a href="exit.php" class="btn">Выйти</a>
                         <?php }else { ?>
-                        <a href="frame_8.html" class="btn">Авторизация</a>
-                        <a href="frame_9.html" class="btn">Регистрация</a>
+                        <a href="auth.php" class="btn">Авторизация</a>
+                        <a href="reg.php" class="btn">Регистрация</a>
                         <?php } ?>
 
                     </div>
@@ -66,23 +69,54 @@
                     <div class="main__pets__admin__content__form">
                         
                         <!-- Форма обратной связи -->
-                        <form class="main__pets__admin__form" action="#">
-                            <div class="main__pets__admin__form__windows">
-                                <div class="main__pets__admin__input-box">
-                                    <input class="main__pets__admin__input-box__btn" type="button" value="Загрузить фото" />
+                        <?php
+                            if(isset($_GET['action']) && $_GET['action']=='change'){
+ $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM pets WHERE id = ".$_GET['id'].""));
+                    ?>
+                            <form method="POST" enctype="multipart/form-data" class="main__pets__admin__form" action="php/handlers/main.php?id=<?php echo $conn->arr['id'] ?>">
+                                <div class="main__pets__admin__form__windows">
+                                    <div class="main__pets__admin__input-box">
+                                        <input class="main__pets__admin__input-box__btn" name="pet_img" type="file" value="Загрузить фото" />
+                                     <!--   <img class="main__pets__admin__img" src="upload/<?php //echo $conn->arr['img']; ?>" alt="">-->
+                                    </div>
+                                    <div class="row__pets__admin">
+                                        
+
+                                        <input type="text" value="<?php echo $conn->arr['name']; ?>" class="pets__admin__txt" name="pet_name" tabindex="1" placeholder="Кличка..." required>
+                                        <input type="text" class="pets__admin__txt" value="<?php echo $conn->arr['category']; ?>" name="pet_category" tabindex="2" placeholder="Порода..." required>
+                                        <input type="text" class="pets__admin__txt" value="<?php echo $conn->arr['age']; ?>" tabindex="3" placeholder="Возраст..." name="pet_age"required>
+                                        <textarea 
+                                        
+                                        class=" main__pets__admin__message-box" tabindex="4" name="desc_pet" placeholder="Описание..."><?php echo $conn->arr['description']; ?></textarea>
+                                    </div>
                                 </div>
-                                <div class="row__pets__admin">
-                                    <input type="text" class="pets__admin__txt" tabindex="1" placeholder="Кличка..." required>
-                                    <input type="text" class="pets__admin__txt" tabindex="2" placeholder="Порода..." required>
-                                    <input type="text" class="pets__admin__txt" tabindex="3" placeholder="Возраст..." required>
-                                    <textarea class="main__pets__admin__message-box" tabindex="4" placeholder="Описание..."></textarea>
+                                
+                                <div>
+                                    <input class="main__pets__admin__button" type="submit" name="edit_pet" value="Добавить" />
                                 </div>
-                            </div>
-                            
-                            <div>
-                                <input class="main__pets__admin__button" type="submit" value="Добавить" />
-                            </div>
-                        </form>
+                            </form>
+                            <?php }else { ?>
+
+                            <form enctype="multipart/form-data" class="main__pets__admin__form" method="POST" action="php/handlers/main.php">
+                                <div class="main__pets__admin__form__windows">
+                                    <div class="main__pets__admin__input-box">
+                                        <input class="main__pets__admin__input-box__btn" name="pet_img" type="file" value="Загрузить фото" />
+                                    </div>
+                                    <div class="row__pets__admin">
+                                        
+
+                                        <input type="text" class="pets__admin__txt" tabindex="1" placeholder="Кличка..." name="pet_name" required>
+                                        <input type="text" class="pets__admin__txt" tabindex="2" placeholder="Порода..." name="pet_category" required>
+                                        <input type="text" class="pets__admin__txt" tabindex="3" placeholder="Возраст..." name="pet_age" required>
+                                        <textarea class="main__pets__admin__message-box" tabindex="4" name="desc_pet" placeholder="Описание..." required></textarea>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <input class="main__pets__admin__button" type="submit" name="add_pet" value="Добавить" />
+                                </div>
+                            </form>
+                            <?php } ?>
                         
                     </div>
                 </div>
@@ -101,52 +135,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="main__pets__admin__tr">
-                                <td class="main__pets__admin__td">
-                                    <img class="main__pets__admin__img" src="../assets/images/frame_5/card_1.png" alt="">
-                                </td>
-                                <td class="main__pets__admin__td td1">Карла</td>
-                                <td class="main__pets__admin__td td2">Дворняга</td>
-                                <td class="main__pets__admin__td td3">3 мес</td>
-                                <td class="main__pets__admin__td td4">Любит морковь и тапочки. Охотно общается с новыми людьми и животными. Остерегается маленьких собак. Знает много команд, ест сухой корм, не стерилизована. </td>
-                            </tr>
-                            <tr class="main__pets__admin__tr">
-                                <td colspan="5" class="main__pets__admin__td__btn-row">
-                                    <div class="btn-container">
-                                        <div class="btn btn-table">Изменить</div>
-                                        <div class="btn btn-table">Удалить</div>
-                                        
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="main__pets__admin__tr">
-                                <td class="main__pets__admin__td">
-                                    <img src="../assets/images/frame_5/card_2.png" alt="">
-                                </td>
-                                <td class="main__pets__admin__td td1">Бублик</td>
-                                <td class="main__pets__admin__td td2">Дворняга</td>
-                                <td class="main__pets__admin__td td3">3 мес</td>
-                                <td class="main__pets__admin__td td4">Бублику 3 месяца. Активный щенок, подойдет любой семье, любит детей, отлично общается с другими питомцами. В еде неприхотлив, быстро запоминает команды. Привит. </td>
-                            </tr>
-                            <tr class="main__pets__admin__tr">
-                                <td colspan="5" class="main__pets__admin__td__btn-row">
-                                    <div class="btn-container">
-                                        <div class="btn btn-table">Изменить</div>
-                                        <div class="btn btn-table">Удалить</div>
-
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="main__pets__admin__tr">
-                                <td class="main__pets__admin__td">
-                                    <img src="../assets/images/frame_5/card_3.png" alt="">
-                                </td>
-                                <td class="main__pets__admin__td td1">Арма</td>
-                                <td class="main__pets__admin__td td2">Сибирская</td>
-                                <td class="main__pets__admin__td td3">3 года</td>
-                                <td class="main__pets__admin__td td4">Арме 3 года, но она активнее некоторых котят. Любит сырой картофель и играть с листьями. Ласковая, знает пару команд. Привита, стерилизована. </td>
-                            </tr>
-                        </tbody>
+                            <tbody>
+                                <?php $pets = $conn->query("SELECT * FROM pets WHERE search = 1"); foreach($pets as $row){ ?>
+                                <tr class="main__pets__admin__tr">
+                                    <td class="main__pets__admin__td">
+                                        <img class="main__pets__admin__img" src="upload/<?php echo $row['img']; ?>" alt="">
+                                    </td>
+                                    <td class="main__pets__admin__td td1"><?php echo $row['name']; ?></td>
+                                    <td class="main__pets__admin__td td2"><?php echo $row['category']; ?></td>
+                                    <td class="main__pets__admin__td td3"><?php echo $row['age']; ?></td>
+                                    <td class="main__pets__admin__td td4"><?php echo $row['description']; ?></td>
+                                </tr>
+                                <tr class="main__pets__admin__tr">
+                                    <td colspan="5" class="main__pets__admin__td__btn-row">
+                                        <div class="btn-container">
+                                            <div class="btn btn-table"><a href="?action=change&id=<?php echo $row['id']; ?>">Изменить</div>
+                                            <div class="btn btn-table"><a href="php/handlers/main.php?action1=remove&table=pets&id=<?php echo $row['id']; ?>">Удалить</a></div>                    
+                                        </div>
+                                    </td>
+                                </tr>
+                               <?php } ?>
+                            </tbody>
                     </table>
                 </div>
 

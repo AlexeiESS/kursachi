@@ -1,3 +1,8 @@
+<?php
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -19,8 +24,12 @@
                         ИЩУ Д<img src="../assets/images/doggy-logo.svg" alt="" class="header__logo-block__img">М!
                     </a>
                     <div class="header__left-content__btns-block">
+                        <?php if(isset($_SESSION['admin']) || isset($_SESSION['user'])){ ?>
+                        <a href="exit.php" class="btn">Выйти</a>
+                        <?php }else { ?>
                         <a href="auth.php" class="btn">Авторизация</a>
                         <a href="reg.php" class="btn">Регистрация</a>
+                        <?php } ?>
                     </div>
                 </div>
         
@@ -87,29 +96,20 @@
             </section>
             <section class="main__feedback">
                 <h3>Отзывы пользователей</h3>
+                <?php $comm = $conn->query("SELECT * FROM commentaries"); foreach($comm as $row){ ?>
                 <div class="main__feedback__content">
                     <div class="main__feedback__content__item">
                         <div class="main__feedback__content__item__title">
-                            <img src="../assets/images/frame_1/marina.png" alt="" class="main__feedback__content__item__title__img">
+                            <img src="upload/<?php echo $row['img']; ?>" alt="" class="main__feedback__content__item__title__img">
                             <div class="main__feedback__content__item__title__name">
-                                Марина Анатольевна
+                                <?php echo $row['name']; ?>
                             </div>
                         </div>
                         <div class="main__feedback__content__item__text">
-                            Чудесный приют! Бываю тут по субботам, помогаю выгуливать собак и вычесывать кошек. Все животные дружелюбные и умные. Персонал терпеливый, трепетно относятся к каждому песику и <br> кошечке, даже к ворону.  Все <br> содержится в чистоте...
+                            <?php echo $row['text_com']; ?>
                         </div>
                     </div>
-                    <div class="main__feedback__content__item">
-                        <div class="main__feedback__content__item__title">
-                            <img src="../assets/images/frame_1/luda.png" alt="" class="main__feedback__content__item__title__img">
-                            <div class="main__feedback__content__item__title__name">
-                                Людмила Семенова
-                            </div>
-                        </div>
-                        <div class="main__feedback__content__item__text">
-                            Бывала тут пару раз, когда выбирали собаку. Очень чисто, нет удушливого запаха в вольерах. У животных всегда есть чистая вода, кормление по расписанию. Взяли себе дворняжку 4 месяца, девочка Астра, очень любвеобильная и хорошо ладит даже с маленькими <br> детьми...
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
                 <a href="#" class="main__feedback__content_dop">Ещё</a>
             </section>

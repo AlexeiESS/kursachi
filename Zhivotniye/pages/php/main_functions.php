@@ -15,7 +15,7 @@ function register($login='', $name='', $email='', $password='')
 function qeury_search($login, $password)
 {
 	global $conn;
-	$conn->arr = $conn->fetchrow($conn->query("SELECT * FROM users WHERE login = '".mb_strtolower($login)."' AND password = '".md5(mb_strtolower($password))."'"));
+	$conn->arr = $conn->fetchrow($conn->query("SELECT * FROM users WHERE login = '".mb_strtolower($login)."' AND password = '".md5(mb_strtolower($password))."';"));
 	if(isset($conn->arr['password']))
 	{
 		return 1;
@@ -24,27 +24,38 @@ function qeury_search($login, $password)
 		return 0;
 	}
 }
-
+function add_comm($name, $img_comm, $text_comm){
+	global $conn;
+	$conn->query("INSERT INTO commentaries(id, name, text_com, img) VALUES (NULL, '$name','$text_comm','$img_comm')");
+	return 1;
+}
 function add_contact($name,$tel){
 	global $conn;
 	$conn->query("INSERT INTO contacts(id, name, tel) VALUES (NULL, '$name','$tel')");
 	return 1;
 }
-function edit_comm($name='', $email='', $tel='',$product='',$svaz=0, $id){
+
+function edit_comm($name='', $img_comm='', $text_comm='', $id){
 	global $conn;
+	if(empty($img_comm)){
 		$conn->query("
-		UPDATE contacts 
+		UPDATE commentaries 
 		SET name = '".$name."',
-		email = '".$email."',
-		tel = '".$tel."',
-		product = '".$product."',
-		svaz = ".$svaz."
+		text_com = '".$text_comm."',
+		img = '".$img_comm."'
 		WHERE id = $id;");
-	return 1;
+	return 1;}else {
+		$conn->query("
+		UPDATE commentaries 
+		SET name = '".$name."',
+		text_com = '".$text_comm."'
+		WHERE id = $id;");
+		return 1;
+	}
 }
-function add_product($name, $price, $description, $mass, $category, $img=''){
+function add_pet($name, $category, $age, $description, $img=''){
 	global $conn;
-	$conn->query("INSERT INTO products(id, name, price, description, mass, category, img) VALUES (NULL, '$name','$price','$description','$mass','$category', '$img')");
+	$conn->query("INSERT INTO pets(id, name, category, age, description, img, search) VALUES (NULL, '$name','$category','$age','$description', '$img', 0)");
 	return 1;
 }
 function delete($table, $id){
@@ -52,26 +63,24 @@ function delete($table, $id){
 	$conn->query("DELETE FROM $table WHERE id = $id");
 	return 1;
 }
-function edit_product($name, $price, $description, $mass, $category, $img, $id){
+function edit_pets($name, $category, $age, $description, $img, $id){
 	global $conn;
 	if(empty($img)){
 		$conn->query("
-		UPDATE products 
+		UPDATE pets 
 		SET name = '".$name."',
-		price = '".$price."',
-		description = '".$description."',
-		mass = '".$mass."',
-		category = '".$category."'
+		category = '".$category."',
+		age = '".$age."',
+		description = '".$description."'
 		WHERE id = $id;");
 		return 1;
 	}else {
 		$conn->query("
-		UPDATE products 
+		UPDATE pets 
 		SET name = '".$name."',
-		price = '".$price."',
-		description = '".$description."',
-		mass = '".$mass."',
 		category = '".$category."',
+		age = '".$age."',
+		description = '".$description."',
 		img = '".$img."'
 		WHERE id = $id;");
 		return 1;
@@ -79,16 +88,12 @@ function edit_product($name, $price, $description, $mass, $category, $img, $id){
 	
 }
 
-function add_comm($name, $img_comm, $text_comm){
-	global $conn;
-	$conn->query("INSERT INTO products(id, name, text_com, img) VALUES (NULL, '$name','$text_comm','$img_comm')");
-	return 1;
-}
+
 function change_pet($table, $id){
 	global $conn;
 		$conn->query("
 		UPDATE $table 
-		SET search = 1,
+		SET search = 1
 		WHERE id = $id;");
 	return 1;
 }

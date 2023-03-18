@@ -1,3 +1,4 @@
+<?php session_start();if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {header("Location: auth.php");} ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -18,8 +19,7 @@
                     <a href="frame_1.html" class="header__logo-block">
                         ИЩУ Д<img src="../assets/images/doggy-logo.svg" alt="" class="header__logo-block__img">М!
                     </a>
-                    <div class="header__left-content__btns-block">
-
+                        <div class="header__left-content__btns-block">
                         <?php if(isset($_SESSION['admin']) || isset($_SESSION['user'])){ ?>
                         <a href="exit.php" class="btn">Выйти</a>
                         <?php }else { ?>
@@ -49,38 +49,39 @@
     </header>
 
 
-    <!--MAIN-->
-    <main class="main main__frame_10">
-        <div class="main__menu__row"></div>
+     <!--MAIN-->
+     <main class="main main__frame_3">
+        <div class="main__menu"></div>
         <div class="wrapper">
-            <section class="main__zapros__admin">
-                <div class="main__menu__content__row">
-                    <a href="frame_5.html" class="btn current-btn">Уже нашли дом</a>
-                    <a href="frame_5.html" class="btn">Еще ищут дом</a>
-                    <a href="frame_7.html" class="btn">Отзывы</a>
-                    <a href="frame_10.html" class="btn">Заявки</a>
+            <section class="main__otzyv">
+                <div class="main__menu__content">
+                    <a href="frame_1.html" class="btn">О нас</a>
+                    <a href="#" class="btn">Ищут дом</a>
+                    <a href="#" class="btn">Нашли дом</a>
+                    <a href="frame_3.html" class="btn current-btn">Отзывы</a>
+                    <a href="frame_4.html" class="btn">Контакты</a>
+                    <a href="frame_11.html" class="btn">Ищу питомца</a>
                 </div>
 
-            </section>
-
-            <section class="main__zapros__admin__table__section">
-                <h1 class="main__zapros__admin__h1">Запросы</h1>
-                    <table class="main__zapros__admin__table">
-                        <thead class="main__zapros__admin__thead">
-                            <tr class="main__zapros__admin__tr">
-                                <th class="main__zapros__admin__th">Имя</th>
-                                <th class="main__zapros__admin__th">Номер телефона</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                             <?php $cont = $conn->query("SELECT * FROM contacts "); foreach($cont as $row){ ?>
-                            <tr class="main__zapros__admin__tr">
-                                <td class="main__zapros__admin__td td1__zapros"><?php echo $row['name']; ?></td>
-                                <td class="main__zapros__admin__td td2__zapros"><?php echo $row['tel']; ?></td>
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                <div class="main__otzyv__content">
+                    <h1>Отзывы</h1>
+                    <div class="main__otzyv__content__form">
+                        <!-- Форма обратной связи -->
+                        <form class="main__otzyv__form" method="POST" action="php/handlers/main.php" enctype="multipart/form-data">
+                            <div class="main__otzyv__form__windows">
+                                <div class="main__otzyv__input-box">
+                                    <input class="main__otzyv__input-box__btn" type="file" name="img_comm" value="Загрузить фото" required/>
+                                </div>
+                                <div>
+                                    <textarea name="text_comm" class="main__otzyv__message-box" placeholder="Оставить отзыв..." required></textarea>
+                                </div>
+                            </div>
+                            <div>
+                                <input class="main__otzyv__button" name="add_comm" type="submit" value="Отправить" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </section>
         </div>
     </main>
@@ -121,6 +122,7 @@
             </div>
         </div>
     </footer>
-    
+
+
 </body>
 </html>
