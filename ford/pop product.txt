@@ -1,0 +1,39 @@
+*.pop_image
+{
+	width: 170px;
+	height: 56px;
+	float: left;
+	background-image: url(../images/goods/Mustang_Parts_1.png);
+	background-repeat: no-repeat;
+	margin-left: 12px;
+	margin-top: 12px;
+	border-radius: 5px;
+}*/
+
+/*.pop_product:nth-child(1)>.pop_image
+{
+	background-image: url(../images/goods/Mustang_Parts_1.png);	
+}
+
+.pop_product:nth-child(2)>.pop_image
+{
+	background-image: url(../images/goods/Crate_Engines_1.png);	
+}
+
+.pop_product:nth-child(3) > .pop_image
+{
+	background-image: url(../images/goods/Packs_1.png);
+}
+.pop_product:nth-child(4) > .pop_image
+{
+	background-image: url(../images/goods/Superchargers_1.png);
+}
+.pop_product:nth-child(5) > .pop_image
+{
+	background-image: url(../images/goods/Emissions_Legal_1.png);
+}
+.pop_product:nth-child(6) > .pop_image
+{
+	background-image: url(../images/goods/Competition_1.png);
+}
+*/

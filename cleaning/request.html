@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чистим Дом</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="nav-elem" style="justify-content: left;">
+                <div class="company-logo">
+                    <img src="./img/Ellipse 1.svg" draggable="false" alt id="--logo-bg">
+                    <img src="./img/чИСТИМ. ДОМ.svg" draggable="false" alt id="--logo-text">
+                </div>
+            </div>
+            <div class="nav-elem" style="justify-content: right; gap: 30px;">
+                <button look="btn1" class="btn-myreqs"><a href="#">Мои заявки</a></button>
+                <button look="btn1" class="btn-logout"><a href="#">Выход</a></button>
+            </div>
+        </nav>
+        <form class="f-request">
+            <p id="some-note">Заполните заявку для получения оборудования</p>
+            <div class="--container">
+                <label for="user_login" style="margin-bottom: 6px;">Выберите тип оборудования</label>
+                <div class="input-wrap">
+                    <div class="dropdown" name="prod_type" optionchosen="-1">
+                        <img src="./img/Plus.svg" draggable="false" alt>
+                        <p id="--option-chosen">None</p>
+                        <div class="dropdown-content hidden">
+                            <div class="dd-container">
+                                <div class="dd-elem" id="0"><p>Option 1</p></div>
+                                <div class="dd-elem" id="1"><p>Option 2</p></div>
+                                <div class="dd-elem" id="2"><p>Option 3</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <label for="password" style="margin-top: 20px; margin-bottom: 6px;">Введите количество</label>
+                <div class="input-wrap">
+                    <img src="./img/Plus.svg" draggable="false" alt>
+                    <input type="number" name="password" min="1">
+                </div>
+            </div>
+            <input type="submit" name="sign_in" value="Оформить заявку" style="width: 251px; height: 44px; margin-top: 30px;" look="btn1">
+        </form>
+    </div>
+    <script src="./dropdown.js"></script>
+</body>
+</html>

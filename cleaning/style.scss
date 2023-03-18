@@ -1,0 +1,319 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+nav {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 80px;
+    margin-bottom: 40px;
+    #some-note {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: 'PT Mono';
+        font-size: 20px;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .nav-elem {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+}
+.f-request {
+    
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: 'PT Mono';
+  font-size: 20px;
+  cursor: pointer;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  user-select: none;
+}
+.dropdown-content {
+    user-select: none;
+    display: block;
+    position: absolute;
+    width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 10;
+    top: 49px;
+    box-sizing: border-box;
+    background: #EDDFAD;
+    .dd-container {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        .dd-elem {
+            height: 50px;
+            display: flex;
+            padding: 0 10px;
+            box-sizing: border-box;
+            align-items: center;
+            &:hover {
+                background: #d5c89b;
+            }
+        }
+    }
+}
+.hidden {
+    display: none;
+}
+.input-wrap {
+    user-select: none;
+    position: relative;
+    input[type="text"],input[type="password"],input[type="number"] {
+        padding-right: 46px !important;
+        padding-left: 46px !important;
+        position: relative;
+    }
+    #--option-chosen {
+        position: absolute;
+        z-index: 0;
+        left: 46px;
+        margin: 0;
+        padding: 0;
+        top: 14px;
+        font-family: 'PT Mono';
+        font-size: 20px;
+    }
+    img {
+        position: absolute;
+        top: 13px;
+        left: 13px;
+        z-index: 1;
+    }
+}
+.fixed-cont {
+	position: fixed;
+	background: rgba(0, 0, 0, 0.6);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 100;
+	width: 100%;
+	height: 100%;
+}
+.tinyblock {
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    top: 0;
+    box-sizing: border-box;
+    padding: 20px;
+}
+.btn-myreqs-active {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.f-myrequest-edit {
+    position: relative;
+    background: #F1EEE5;
+    font-family: 'PT Mono';
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    gap: 20px;
+    input[type="text"],input[type="number"] {
+        border: 2px solid #000;
+        height: 30px;
+        width: 100%;
+        padding: 0 10px;
+        font-size: 15px;
+        outline: 0;
+    }
+}
+.f-user-edit {
+    position: relative;
+    background: #F1EEE5;
+    font-family: 'PT Mono';
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    gap: 20px;
+    input[type="text"],input[type="number"],input[type="password"] {
+        border: 2px solid #000;
+        height: 30px;
+        width: 100%;
+        padding: 0 10px;
+        font-size: 15px;
+        outline: 0;
+    }
+}
+.my-requests {
+    #some-note {
+        font-family: 'PT Mono';
+        font-size: 20px;
+        margin-bottom: 50px;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+}
+table th,table td {
+    background: #F1EEE5;
+}
+table {
+    font-family: 'PT Mono';
+    font-size: 15px;
+    width: 100%;
+    background: #000;
+    .--action-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2px;
+        background: #000;
+        .--elem {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            background: #F1EEE5;
+            input[type="button"] {
+                font-size: 15px;
+                background: 0;
+                border: 0;
+                padding: 10px;
+                cursor: pointer;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    td {
+        padding: 10px 20px;
+    }
+    th {
+        padding: 0 20px;
+    }
+}
+table,table th, table td, table tr {
+    border: 1px solid #000;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    #some-note {
+        font-family: 'PT Mono';
+        font-size: 20px;
+        margin-bottom: 50px;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .--container {
+        display: flex;
+        flex-direction: column;
+        label {
+            font-family: 'PT Mono';
+            font-size: 20px;
+        }
+        input[type="text"],input[type="password"],input[type="number"],.dropdown {
+            width: 425px;
+            height: 49px;
+            background: rgba(160, 130, 96, 0.6);
+            border: 0;
+            font-size: 20px;
+            font-family: 'PT Mono';
+            padding: 18px;
+            box-sizing: border-box;
+        }
+    }
+}
+.container {
+    max-width: 1000px;
+    width: 100%;
+    background: #F1EEE5;
+    padding: 36px;
+    box-sizing: border-box;
+}
+.worth-notice {
+    background: #EDDFAD;
+    margin-top: 48px;
+    padding: 0 40px;
+    height: 117px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    text-align: center;
+    line-height: 16.8px;
+    font-family: 'PT Mono';
+}
+.phrase-arrows {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 54px;
+    position: relative;
+    .pa-elem {
+        height: 68px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'PT Mono';
+        a {
+            text-decoration: none;
+            color: #000;
+            margin: 0;
+            padding: 0;
+            width: 60%;
+            text-align: center;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+button[look="btn1"], input[look="btn1"] {
+    background: #EDDFAD;
+    width: 158px;
+    height: 54px;
+    border: 0;
+    outline: 0;
+    font-size: 20px;
+    font-family: 'PT Mono';
+    cursor: pointer;
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+}
+.preview-images {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.company-logo {
+    position: relative;
+    height: 100%;
+    #--logo-bg {
+        position: absolute;
+    }
+    #--logo-text {
+        position: absolute;
+        top: 8px;
+        left: 4px;
+    }
+}
