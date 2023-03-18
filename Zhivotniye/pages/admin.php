@@ -73,7 +73,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                             if(isset($_GET['action']) && $_GET['action']=='change'){
  $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM pets WHERE id = ".$_GET['id'].""));
                     ?>
-                            <form method="POST" enctype="multipart/form-data" class="main__pets__admin__form" action="php/handlers/main.php?id=<?php echo $conn->arr['id'] ?>">
+                            <form method="POST" enctype="multipart/form-data" class="main__pets__admin__form" action="php/handlers/main.php?id=<?php echo $conn->arr['id']; ?>">
                                 <div class="main__pets__admin__form__windows">
                                     <div class="main__pets__admin__input-box">
                                         <input class="main__pets__admin__input-box__btn" name="pet_img" type="file" value="Загрузить фото" />

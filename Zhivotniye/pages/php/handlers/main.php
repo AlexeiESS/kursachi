@@ -77,7 +77,7 @@ if(isset($_POST['edit_pet'])){
 	}
 }
 if(isset($_POST['edit_comm'])){
-	if(edit_pets($_POST['comm_name'], $_POST['comm_text'],$_FILES['comm_img']['name'], $_GET['id'])==1){
+	if(edit_comm($_POST['comm_name'], $_POST['comm_text'],$_FILES['comm_img']['name'], $_GET['id'])==1){
 		if(empty($_FILES['comm_img']['name'])){redirect('../../admin', 'ok=true');}else {
 			if(!move_uploaded_file($_FILES['comm_img']['tmp_name'], "../../upload/".$_FILES['comm_img']['name']))
 	{

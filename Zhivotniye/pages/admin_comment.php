@@ -89,7 +89,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                             <tr class="main__otzyv__admin__tr">
                                 <td colspan="5" class="main__otzyv__admin__td__btn-row">
                                     <div class="btn-container">
-                                        <div class="btn btn-table"><a href="?action=change_comm&id=<?php echo $row['id']; ?>">Изменить</a></div>
+                                        <div class="btn btn-table"><a href="add_comm?action=change_comm&id=<?php echo $row['id']; ?>">Изменить</a></div>
                                         <div  class="btn btn-table"><a href="php/handlers/main.php?action1=remove&table=commentaries&id=<?php echo $row['id']; ?>">Удалить</a></div>
                                         
                                     </div>

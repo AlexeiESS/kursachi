@@ -67,7 +67,26 @@
                     <h1>Отзывы</h1>
                     <div class="main__otzyv__content__form">
                         <!-- Форма обратной связи -->
-                        <form class="main__otzyv__form" method="POST" action="php/handlers/main.php" enctype="multipart/form-data">
+                        <?php if(isset($_SESSION['admin']) && isset($_GET['action']) && isset($_GET['id']) && $_GET['action']=='change_comm' && !empty($_GET['id'])){
+
+                             $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM commentaries WHERE id = ".$_GET['id'].""));
+                         ?>
+                        <form class="main__otzyv__form" method="POST" action="php/handlers/main.php?comm=change&id=<?php echo $conn->arr['id']; ?>" enctype="multipart/form-data">
+                            <div class="main__otzyv__form__windows">
+                                <div class="main__otzyv__input-box">
+                                    <input class="main__otzyv__input-box__btn" type="file" name="img_comm" value="Загрузить фото" required/>
+                                </div>
+                                <input type="text" name="comm_name" value="<?php echo $conn->arr['name']; ?>" required>
+                                <div>
+                                    <textarea name="text_comm" class="main__otzyv__message-box" placeholder="Оставить отзыв..." required><?php echo $conn->arr['text_com']; ?></textarea>
+                                </div>
+                            </div>
+                            <div>
+                                <input class="main__otzyv__button" name="edit_comm" type="submit" value="Отправить" />
+                            </div>
+                        </form>
+                    <?php }else { ?>
+                         <form class="main__otzyv__form" method="POST" action="php/handlers/main.php" enctype="multipart/form-data">
                             <div class="main__otzyv__form__windows">
                                 <div class="main__otzyv__input-box">
                                     <input class="main__otzyv__input-box__btn" type="file" name="img_comm" value="Загрузить фото" required/>
@@ -80,6 +99,7 @@
                                 <input class="main__otzyv__button" name="add_comm" type="submit" value="Отправить" />
                             </div>
                         </form>
+                    <?php } ?>
                     </div>
                 </div>
             </section>
