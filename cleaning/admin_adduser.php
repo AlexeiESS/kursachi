@@ -1,3 +1,4 @@
+<?php session_start(); if(!isset($_SESSION['admin'])){header("Location: ../../index.html");} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,7 @@
                 <button look="btn1" class="btn-logout"><a href="#">Выход</a></button>
             </div>
         </nav>
-        <form class="f-user-add">
+        <form class="f-user-add" method="POST" action="php/handlers/main.php">
             <div class="--container">
                 <label for="user_name" style="margin-bottom: 6px;">Введите имя</label>
                 <input type="text" name="user_name">

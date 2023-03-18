@@ -1,3 +1,9 @@
+<?php 
+    //Обязательные строки
+session_start(); if(!isset($_SESSION['admin']) && !isset($_SESSion['user'])){header("Location: auth.php");} require_once 'php/init.php'; 
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,65 +23,65 @@
                 </div>
             </div>
             <div class="nav-elem" style="justify-content: right; gap: 30px;">
-                <button look="btn1" class="btn-myreqs btn-myreqs-active" style="width: 169px;"><a href="#">Просмотреть заявки</a></button>
-                <button look="btn1" class="btn-myreqs" style="width: 169px;"><a href="#">Добавить пользователя</a></button>
-                <button look="btn1" class="btn-myreqs" style="width: 169px;"><a href="#">Список пользователей</a></button>
+                <button look="btn1" class="btn-myreqs" style="width: 203px;"><a href="#">Оставить заявку</a></button>
                 <button look="btn1" class="btn-logout"><a href="#">Выход</a></button>
             </div>
         </nav>
         <div class="my-requests">
-            <p id="some-note">Список заявок</p>
+            <p id="some-note">Мои заявки</p>
             <table>
                 <tr>
-                    <th><p>Имя пользователя</p></th>
                     <th><p>Название оборудования</p></th>
                     <th><p>Количество</p></th>
                     <th><p>Статус</p></th>
                     <th><p>Редактирование заявки</p></th>
                 </tr>
+                 <?php
+                    if(!isset($_SESSION['admin'])){$name=$_SESSION['user'];}else {$name=$_SESSION['admin'];}
+                  $product = $conn->query("SELECT * FROM contacts WHERE who = '".$name."'"); foreach($product as $row){ ?> 
                 <tr>
-                    <td><p>Имя Фамилия</p></td>
-                    <td><p>Швабра</p></td>
-                    <td><p>3</p></td>
-                    <td><p>Не выдано</p></td>
+                    <td><p><?php echo $row['product']; ?></p></td>
+                    <td><p><?php echo $row['size']; ?></p></td>
+                    <td><p><?php if($row['ready']==1){echo 'Выдано';}else {echo 'Не выдано';} ?></p></td>
                     <td><div class="--action-container">
                         <div class="--elem" style="border-right: 1px solid #000;">
-                            <input type="button" value="Выдать" class="give-product">
-                        </div>
-                        <div class="--elem" style="border-right: 1px solid #000; border-left: 1px solid #000;">
-                            <input type="button" value="Изменить" class="edit-product">
+                         <?php if($row['ready']!=1){ ?>   <input type="button" value="Изменить" class="edit-product<?php echo $row['id']; ?>"> <?php } ?>
                         </div>
                         <div class="--elem" style="border-left: 1px solid #000;">
-                            <input type="button" value="Удалить" class="delete-product">
+                            <a href="php/handlers/main.php?action=remove&table=contacts"><input type="button" value="Удалить" class="delete-product"></a>
                         </div>
                     </div></td>
                 </tr>
+                <?php } ?>
             </table>
         </div>
     </div>
     <script src="./dropdown.js"></script>
     <script>
-        document.querySelectorAll('.edit-product').forEach(__btn=>{
+        <?php
+                    if(!isset($_SESSION['admin'])){$name=$_SESSION['user'];}else {$name=$_SESSION['admin'];}
+                  $product = $conn->query("SELECT * FROM contacts WHERE who = '".$name."'"); foreach($product as $row){ ?> 
+        document.querySelectorAll('.edit-product<?php echo $row['id']; ?>').forEach(__btn=>{
             __btn.addEventListener('click',(ev)=>{
                 __targetTR_elem= ev.target.parentElement.parentElement.parentElement.parentElement;
                 document.body.insertAdjacentHTML('afterbegin',`
                 <div class="fixed-cont">
-                    <form class="f-myrequest-edit">
+                    <form method="POST" class="f-myrequest-edit" action="php/handlers/main.php?id=<?php echo $row['id']; ?>">
                         <div class="tinyblock">
                             <div class="tb-elem">
                                 <a href="javascript:void(0);" onclick="closeModal()"><img src="img/cross.svg" draggable="false" alt></a>
                             </div>
                         </div>
                         <label for="myreq_item_name">Название оборудования</label>
-                        <input type="text" name="myreq_item_name">
+                        <input value="<?php echo $row['product']; ?>" type="text" name="myreq_item_name">
                         <label for="myreq_item_name">Количетво оборудования</label>
-                        <input type="number" name="myreq_item_amount" min="1">
+                        <input value="<?php echo $row['size']; ?>" type="number" name="myreq_item_amount" min="1">
                         <input type="submit" look="btn1" name="myreq_edit_save" value="Сохранить">
                     </form>
                 </div>
                 `);
             });
-        });
+        });<?php } ?>
         function closeModal() {
             document.querySelector(".fixed-cont").remove();
         }

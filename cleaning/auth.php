@@ -1,3 +1,4 @@
+<?php session_start(); if(isset($_SESSION['user']) || isset($_SESSION['admin'])){header("Location: index.php");} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +19,7 @@
             </div>
             <p id="some-note">Авторизуйтесь, чтобы войти</p>
         </nav>
-        <form class="f-auth">
+        <form class="f-auth" method="POST" action="php/handlers/main.php">
             <div class="--container">
                 <label for="user_login" style="margin-bottom: 6px;">Введите логин</label>
                 <input type="text" name="user_login">

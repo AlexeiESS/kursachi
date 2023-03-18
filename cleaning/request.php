@@ -1,3 +1,9 @@
+<?php 
+    //Обязательные строки
+session_start(); if(!isset($_SESSION['admin']) && !isset($_SESSion['user'])){header("Location: auth.php");} require_once 'php/init.php'; 
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +27,7 @@
                 <button look="btn1" class="btn-logout"><a href="#">Выход</a></button>
             </div>
         </nav>
-        <form class="f-request">
+        <form class="f-request" method="POST" action="php/handlers/main.php">
             <p id="some-note">Заполните заявку для получения оборудования</p>
             <div class="--container">
                 <label for="user_login" style="margin-bottom: 6px;">Выберите тип оборудования</label>
@@ -31,9 +37,14 @@
                         <p id="--option-chosen">None</p>
                         <div class="dropdown-content hidden">
                             <div class="dd-container">
-                                <div class="dd-elem" id="0"><p>Option 1</p></div>
-                                <div class="dd-elem" id="1"><p>Option 2</p></div>
-                                <div class="dd-elem" id="2"><p>Option 3</p></div>
+                                <?php $product = $conn->query("SELECT * FROM products "); foreach($product as $row){ ?>
+                                <div class="dd-elem" id="0"><p><?php echo $row['name']; ?></p></div>
+                                <!-- В Value инпута передаваться должно имя продукта, например,
+                                <select name="product">
+                                    <option value="<?php //echo $row['']; ?>"> Option 1 </option>
+                                </select>
+                                    --->
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -41,10 +52,10 @@
                 <label for="password" style="margin-top: 20px; margin-bottom: 6px;">Введите количество</label>
                 <div class="input-wrap">
                     <img src="./img/Plus.svg" draggable="false" alt>
-                    <input type="number" name="password" min="1">
+                    <input type="number" name="size" min="1">
                 </div>
             </div>
-            <input type="submit" name="sign_in" value="Оформить заявку" style="width: 251px; height: 44px; margin-top: 30px;" look="btn1">
+            <input type="submit" name="add_cont" value="Оформить заявку" style="width: 251px; height: 44px; margin-top: 30px;" look="btn1">
         </form>
     </div>
     <script src="./dropdown.js"></script>

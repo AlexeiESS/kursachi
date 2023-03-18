@@ -1,3 +1,9 @@
+<?php 
+    //Обязательные строки
+session_start(); if(!isset($_SESSION['admin'])){header("Location: auth.php");} require_once 'php/init.php'; 
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,29 +23,32 @@
                 </div>
             </div>
             <div class="nav-elem" style="justify-content: right; gap: 30px;">
-                <button look="btn1" class="btn-myreqs" style="width: 169px;"><a href="#">Просмотреть заявки</a></button>
+                <button look="btn1" class="btn-myreqs btn-myreqs-active" style="width: 169px;"><a href="#">Просмотреть заявки</a></button>
                 <button look="btn1" class="btn-myreqs" style="width: 169px;"><a href="#">Добавить пользователя</a></button>
-                <button look="btn1" class="btn-myreqs btn-myreqs-active" style="width: 169px;"><a href="#">Список пользователей</a></button>
+                <button look="btn1" class="btn-myreqs" style="width: 169px;"><a href="#">Список пользователей</a></button>
                 <button look="btn1" class="btn-logout"><a href="#">Выход</a></button>
             </div>
         </nav>
         <div class="my-requests">
-            <p id="some-note">Данные пользователей</p>
+            <p id="some-note">Список заявок</p>
             <table>
                 <tr>
-                    <th><p>Имя</p></th>
-                    <th><p>Фамилия</p></th>
-                    <th><p>Логин</p></th>
-                    <th><p>Пароль</p></th>
+                    <th><p>Имя пользователя</p></th>
+                    <th><p>Название оборудования</p></th>
+                    <th><p>Количество</p></th>
+                    <th><p>Статус</p></th>
                     <th><p>Редактирование заявки</p></th>
                 </tr>
                 <tr>
-                    <td><p>Имя</p></td>
-                    <td><p>Фамилия</p></td>
-                    <td><p>Login</p></td>
-                    <td><p>123456</p></td>
+                    <td><p>Имя Фамилия</p></td>
+                    <td><p>Швабра</p></td>
+                    <td><p>3</p></td>
+                    <td><p>Не выдано</p></td>
                     <td><div class="--action-container">
                         <div class="--elem" style="border-right: 1px solid #000;">
+                            <input type="button" value="Выдать" class="give-product">
+                        </div>
+                        <div class="--elem" style="border-right: 1px solid #000; border-left: 1px solid #000;">
                             <input type="button" value="Изменить" class="edit-product">
                         </div>
                         <div class="--elem" style="border-left: 1px solid #000;">
@@ -57,21 +66,17 @@
                 __targetTR_elem= ev.target.parentElement.parentElement.parentElement.parentElement;
                 document.body.insertAdjacentHTML('afterbegin',`
                 <div class="fixed-cont">
-                    <form class="f-user-edit">
+                    <form class="f-myrequest-edit">
                         <div class="tinyblock">
                             <div class="tb-elem">
                                 <a href="javascript:void(0);" onclick="closeModal()"><img src="img/cross.svg" draggable="false" alt></a>
                             </div>
                         </div>
-                        <label for="edit_user_name">Имя</label>
-                        <input type="text" name="edit_user_name">
-                        <label for="edit_user_surname">Фамилия</label>
-                        <input type="text" name="edit_user_surname">
-                        <label for="edit_user_login">Логин</label>
-                        <input type="text" name="edit_user_login">
-                        <label for="edit_user_password">Пароль</label>
-                        <input type="password" name="edit_user_password">
-                        <input type="submit" look="btn1" name="edit_user_save" value="Сохранить">
+                        <label for="myreq_item_name">Название оборудования</label>
+                        <input type="text" name="myreq_item_name">
+                        <label for="myreq_item_name">Количетво оборудования</label>
+                        <input type="number" name="myreq_item_amount" min="1">
+                        <input type="submit" look="btn1" name="myreq_edit_save" value="Сохранить">
                     </form>
                 </div>
                 `);
