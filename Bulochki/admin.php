@@ -61,7 +61,7 @@ if(!isset($_SESSION['admin'])){
             __btn.addEventListener('click',()=>{
                 document.body.insertAdjacentHTML('afterbegin',`
                 <div class="fixed-cont">
-                    <form class="f-prod-add" enctype="multipart/form-data" action="php/handlers/main.php">
+                    <form class="f-prod-add" method="POST" enctype="multipart/form-data" action="php/handlers/main.php">
                         <a href="javascript:void(0);" onclick="closeModal()">[X]</a>
                         <input type="text" placeholder="Имя" name="ed-addprod-name">
                         <input type="text" placeholder="Вес" name="ed-addprod-weight">
