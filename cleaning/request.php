@@ -32,24 +32,16 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
             <div class="--container">
                 <label for="user_login" style="margin-bottom: 6px;">Выберите тип оборудования</label>
                 <div class="input-wrap">
-                    <div class="dropdown" name="prod_type" optionchosen="-1">
-                        <img src="./img/Plus.svg" draggable="false" alt>
-                        <p id="--option-chosen">None</p>
-                        <div class="dropdown-content hidden">
-                            <div class="dd-container">
-                                <select name="product">
-                                <?php $product = $conn->query("SELECT * FROM products "); foreach($product as $row){ ?>
-                                <option value="<?php echo $row['name']; ?>"><?php echo $row['name']; ?></option>
-                                <!-- В Value инпута передаваться должно имя продукта, например,
-                                <select name="product">
-                                    <option value="<?php //echo $row['']; ?>"> Option 1 </option>
-                                </select>
-                                    --->
-                                <?php } ?>
-                            </select>
-                            </div>
-                        </div>
-                    </div>
+                    <select name="product">
+                    <?php $product = $conn->query("SELECT * FROM products "); foreach($product as $row){ ?>
+                    <div><option value="<?php echo $row['name']; ?>"><?php echo $row['name']; ?></option></div>
+                    <!-- В Value инпута передаваться должно имя продукта, например,
+                    <select name="product">
+                    <option value="<?php //echo $row['']; ?>"> Option 1 </option>
+                    </select>
+                    --->
+                    <?php } ?>
+                    </select>
                 </div>
                 <label for="password" style="margin-top: 20px; margin-bottom: 6px;">Введите количество</label>
                 <div class="input-wrap">
