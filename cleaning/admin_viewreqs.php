@@ -39,49 +39,56 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                     <th><p>Статус</p></th>
                     <th><p>Редактирование заявки</p></th>
                 </tr>
+                <?php $product = $conn->query("SELECT * FROM contacts"); foreach($product as $row){ ?>
                 <tr>
-                    <td><p>Имя Фамилия</p></td>
-                    <td><p>Швабра</p></td>
-                    <td><p>3</p></td>
-                    <td><p>Не выдано</p></td>
+                    <td><p><?php echo $row['who']; ?></p></td>
+                    <td><p><?php echo $row['product']; ?></p></td>
+                    <td><p><?php echo $row['size']; ?></p></td>
+                    <td><p><?php  if($row['ready']==0){ ?>Не выдано<?php }else { ?>Выдано<?php } ?></p></td>
                     <td><div class="--action-container">
                         <div class="--elem" style="border-right: 1px solid #000;">
-                            <input type="button" value="Выдать" class="give-product">
+                           <a href="php/handlers/main.php?action=change&id=<?php echo $row['id']; ?>&table=contacts"> <input type="button" value="Выдать" class="give-product"></a>
                         </div>
                         <div class="--elem" style="border-right: 1px solid #000; border-left: 1px solid #000;">
-                            <input type="button" value="Изменить" class="edit-product">
+                            <input type="button" value="Изменить" class="edit-product<?php echo $row['id']; ?>">
                         </div>
                         <div class="--elem" style="border-left: 1px solid #000;">
-                            <input type="button" value="Удалить" class="delete-product">
+                            <a href="php/handlers/main.php?action1=remove&id=<?php echo $row['id']; ?>&table=contacts"><input type="button" value="Удалить" class="delete-product"></a>
                         </div>
                     </div></td>
                 </tr>
+            <?php } ?>
             </table>
         </div>
     </div>
     <script src="./dropdown.js"></script>
     <script>
-        document.querySelectorAll('.edit-product').forEach(__btn=>{
+        <?php $product = $conn->query("SELECT * FROM contacts"); foreach($product as $row){ ?>
+        document.querySelectorAll('.edit-product<?php echo $row['id']; ?>').forEach(__btn=>{
             __btn.addEventListener('click',(ev)=>{
                 __targetTR_elem= ev.target.parentElement.parentElement.parentElement.parentElement;
                 document.body.insertAdjacentHTML('afterbegin',`
                 <div class="fixed-cont">
-                    <form class="f-myrequest-edit">
+                    <form method="POST" action="php/handlers/main.php?id=<?php echo $row['id']; ?>" class="f-myrequest-edit">
                         <div class="tinyblock">
                             <div class="tb-elem">
                                 <a href="javascript:void(0);" onclick="closeModal()"><img src="img/cross.svg" draggable="false" alt></a>
                             </div>
                         </div>
                         <label for="myreq_item_name">Название оборудования</label>
-                        <input type="text" name="myreq_item_name">
+                        <select name="product">
+                        <?php $product = $conn->query("SELECT * FROM products"); foreach($product as $tt){ ?>
+                            <option <?php if($row['product']==$tt['name']){echo 'selected';} ?> value="<?php echo $tt['name']; ?>"><?php echo $tt['name']; ?></option>
+                        <?php } ?>
+                        </select>
                         <label for="myreq_item_name">Количетво оборудования</label>
-                        <input type="number" name="myreq_item_amount" min="1">
+                        <input value="<?php echo $row['size']; ?>" type="number" name="myreq_item_amount" min="1">
                         <input type="submit" look="btn1" name="myreq_edit_save" value="Сохранить">
                     </form>
                 </div>
                 `);
             });
-        });
+        });<?php } ?>
         function closeModal() {
             document.querySelector(".fixed-cont").remove();
         }

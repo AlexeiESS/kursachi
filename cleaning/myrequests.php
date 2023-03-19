@@ -1,6 +1,6 @@
 <?php 
     //Обязательные строки
-session_start(); if(!isset($_SESSION['admin']) && !isset($_SESSion['user'])){header("Location: auth.php");} require_once 'php/init.php'; 
+session_start(); if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])){header("Location: auth.php");} require_once 'php/init.php'; 
 $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
 
  ?>
@@ -34,6 +34,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                     <th><p>Название оборудования</p></th>
                     <th><p>Количество</p></th>
                     <th><p>Статус</p></th>
+
                     <th><p>Редактирование заявки</p></th>
                 </tr>
                  <?php
@@ -43,14 +44,15 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                     <td><p><?php echo $row['product']; ?></p></td>
                     <td><p><?php echo $row['size']; ?></p></td>
                     <td><p><?php if($row['ready']==1){echo 'Выдано';}else {echo 'Не выдано';} ?></p></td>
+                    <?php if($row['ready']!=1){ ?>
                     <td><div class="--action-container">
                         <div class="--elem" style="border-right: 1px solid #000;">
-                         <?php if($row['ready']!=1){ ?>   <input type="button" value="Изменить" class="edit-product<?php echo $row['id']; ?>"> <?php } ?>
+                            <input type="button" value="Изменить" class="edit-product<?php echo $row['id']; ?>"> 
                         </div>
                         <div class="--elem" style="border-left: 1px solid #000;">
-                            <a href="php/handlers/main.php?action=remove&table=contacts"><input type="button" value="Удалить" class="delete-product"></a>
+                            <a href="php/handlers/main.php?action=remove&table=contacts&id=<?php echo $row['id']; ?>"><input type="button" value="Удалить" class="delete-product"></a>
                         </div>
-                    </div></td>
+                    </div></td><?php } ?>
                 </tr>
                 <?php } ?>
             </table>
@@ -73,7 +75,11 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                             </div>
                         </div>
                         <label for="myreq_item_name">Название оборудования</label>
-                        <input value="<?php echo $row['product']; ?>" type="text" name="myreq_item_name">
+                        <select name="product">
+                        <?php $product = $conn->query("SELECT * FROM products"); foreach($product as $tt){ ?>
+                            <option <?php if($row['product']==$tt['name']){echo 'selected';} ?> value="<?php echo $tt['name']; ?>"><?php echo $tt['name']; ?></option>
+                        <?php } ?>
+                        </select>
                         <label for="myreq_item_name">Количетво оборудования</label>
                         <input value="<?php echo $row['size']; ?>" type="number" name="myreq_item_amount" min="1">
                         <input type="submit" look="btn1" name="myreq_edit_save" value="Сохранить">

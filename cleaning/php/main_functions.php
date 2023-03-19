@@ -34,8 +34,8 @@ function edit_user($id, $login, $password, $name,$surename){
 	global $conn;
 		$conn->query("
 		UPDATE users 
-		SET login = '".$login."',
-		password = '".$password."',
+		SET login = '".mb_strtolower($login)."',
+		password = '".md5(mb_strtolower($password))."',
 		name = '".$name."',
 		surename = '".$surename."'
 		WHERE id = $id;");

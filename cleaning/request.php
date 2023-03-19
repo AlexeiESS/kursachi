@@ -1,6 +1,6 @@
 <?php 
     //Обязательные строки
-session_start(); if(!isset($_SESSION['admin']) && !isset($_SESSion['user'])){header("Location: auth.php");} require_once 'php/init.php'; 
+session_start(); if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])){header("Location: auth.php");} require_once 'php/init.php'; 
 $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
 
  ?>
@@ -37,14 +37,16 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                         <p id="--option-chosen">None</p>
                         <div class="dropdown-content hidden">
                             <div class="dd-container">
+                                <select name="product">
                                 <?php $product = $conn->query("SELECT * FROM products "); foreach($product as $row){ ?>
-                                <div class="dd-elem" id="0"><p><?php echo $row['name']; ?></p></div>
+                                <option value="<?php echo $row['name']; ?>"><?php echo $row['name']; ?></option>
                                 <!-- В Value инпута передаваться должно имя продукта, например,
                                 <select name="product">
                                     <option value="<?php //echo $row['']; ?>"> Option 1 </option>
                                 </select>
                                     --->
                                 <?php } ?>
+                            </select>
                             </div>
                         </div>
                     </div>
