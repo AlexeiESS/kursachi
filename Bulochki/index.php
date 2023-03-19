@@ -21,10 +21,6 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
         
     </section>
     <section class="banner-content">
-        <div class="__admin-panel">
-            <a href="#">Работа с товарами</a>
-            <a href="#">Формы с контактами</a>
-        </div>
         <p id="--title">Cake for the soul</p>
         <p id="--inspire">Для самых сладких моментов</p>
         <p id="--slogan">счастье с ароматом булочек с корицей</p>
@@ -67,7 +63,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
             <?php 
             if(!isset($_GET['category'])){$product = $conn->query("SELECT * FROM products "); foreach($product as $row){ ?>
             <div class="product-item">
-                <a href="#" edit>изменить</a>
+                
                 <img src="upload/<?php echo $row['img']; ?>" draggable="false" alt>
                 <div class="--content">
                     <p id="--name"><?php echo $row['name']; ?></p>
@@ -83,7 +79,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
 
          ?>
             <div class="product-item">
-                <a href="#" edit>изменить</a>
+                
                 <img src="upload/<?php echo $row['img']; ?>" draggable="false" alt>
                 <div class="--content">
                     <p id="--name"><?php echo $row['name']; ?></p>
@@ -107,6 +103,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                 <p style="font-weight: 800;font-size: 32px;text-transform: uppercase;">Свяжитесь с нами по интересующим вопросам:</p>
             </div>
             <div class="cont-elem" style="font-weight: 300;font-size: 18px; flex-direction: column;">
+                <a href='auth.php'>Админ Панель</a>
                 <p>г.Самара, ул. Мичурина д. 149</p>
                 <p>тел. +7 (846) 958 47 89</p>
                 <p>Email: soulcake@gmail.com</p>
