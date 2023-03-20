@@ -1,0 +1,27 @@
+.wrapper {
+    position: relative;
+}
+.wrapper .container {
+    width: 100%;
+    height: calc(100% - 116px);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.order-msg {
+    text-align: center;
+    font-family: "RobotoSlab";
+}
+.order-msg h1 {
+    font-size: 48px;
+}
+.order-msg p {
+    font-size: 24px;
+    margin-top: 24px;
+    margin-bottom: 40px;
+}
+.order-msg a {
+    font-size: 20px;
+    color: #074060;
+}
