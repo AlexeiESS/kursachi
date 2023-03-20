@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,9 +23,13 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
                 <img src="./images/custom/magnifier.png" draggable="false" alt>
             </div>
 			<div class="some-stuff">
+			<?php if(!isset($_SESSION['user']) && !isset($_SESSION['admin'])){ ?>
 			<button class="sign_in">Вход</button>
 			<button class="sign_up">Регистрация</button>
-            <a href="#"><img src="./images/custom/cart.png" draggable="false" alt></a>
+			<?php }else { ?>
+			<a href="exit.php">Выход</a>
+            <a href="cart.php"><img src="./images/custom/cart.png" draggable="false" alt></a>
+        	<?php } ?>
 			</div>
 
 		</header>
@@ -37,25 +46,10 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
 
 		</nav>
 		
-		<main>	
+		<main>			
 
-			<div class="admin-container">
-				<div class="feat_products" style="font-size: 32px;">Admin Panel</div>
-                <div class="feat_products">Add products</div>
-                <form class="f-admin-prod-add">
-                    <label for="name_product">Enter a name</label>
-                    <input type="text" name="name_product" field>
-                    <label for="description_product">Enter a description</label>
-                    <input type="textarea" name="description_product" field>
-                    <label for="price_product">Enter a price</label>
-                    <input type="number" name="price_product" min="0" field>
-                    <fieldset style="padding: 20px;">
-                        <legend>Choose a photo</legend>
-                        <input type="file" name="img_product">
-                    </fieldset>
-                    <input type="submit" value="Add product" name="add_product">
-                </form>
-                <div class="feat_products">All products</div>
+			<div class="cart-container">
+				<div class="feat_products">Cart</div>
 				<div class="cart-prod-list">
                     <table style="width:100%">
                         <tr class="cart-list-categories">
@@ -63,17 +57,28 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
                           <th>Description</th>
                           <th>Price</th>
                           <th>Photo</th>
-                          <th>Actions with product</th>
+                          <th>Remove from cart</th>
                         </tr>
+                        <?php 
+                        if(isset($_SESSION['admin'])){$name=$_SESSION['admin'];}else{$name=$_SESSION['user'];}
+                        $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM contacts WHERE user = '".$name."'")); 
+                        $product = $conn->query("SELECT * FROM products WHERE name = '".$conn->arr['product']."'"); foreach($product as $row){ ?>
                         <tr class="clc-prod-item" id="0">
-                            <td class="--item-name">Name</td>
-                            <td class="--item-desc">Description</td>
-                            <td class="--item-price">Price</td>
-                            <td class="--item-photo"><div class="--img-container"><img src="./images/goods/302-384.JPG" draggable="false" alt="product-photo"></div></td>
-                            <td class="--item-rm"><div class="--wrap"><input type="button" value="Edit" name="cart_prod_edit"><input type="button" value="Remove" name="cart_prod_remove"></div></td>
+                            <td class="--item-name"><?php echo $row['name']; ?></td>
+                            <td class="--item-desc"><?php echo $row['description']; ?></td>
+                            <td class="--item-price"><?php echo $row['price']; ?></td>
+                            <td class="--item-photo"><div class="--img-container"><img src="upload/<?php echo $row['img']; ?>" draggable="false" alt="product-photo"></div></td>
+                            <?php
+                            $cont = $conn->query("SELECT * FROM contacts WHERE user = '".$name."'"); foreach($cont as $contt){ if($contt['buy']!=1){ ?>
+                            <td class="--item-rm"><a href="php/handlers/main.php?action=remove_cart&table=products&id=<?php echo $row['id']; ?>"><input type="button" value="Remove" name="cart_prod_remove"></a></td>
+                        <?php } }?>
                         </tr>
+                        <?php } ?>
                     </table>
 				</div>
+                <div style="padding: 40px; display: flex; justify-content: center; align-items: center;">
+                    <input type="button" value="Checkout" class="btn-checkout" name="btn_checkout">
+                </div>
 			</div>
 
 		</main>
@@ -148,7 +153,7 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
             __btn.addEventListener('click',()=>{
                 document.body.insertAdjacentHTML('afterbegin',`
                 <div class="fixed-cont">
-                    <form class="checkout-form">
+                    <form method="POST" action="php/handlers/main.php?user=<?php echo $name; ?>" class="checkout-form">
                         <div class="tinyblock">
                             <div class="tb-elem">
                                 <a href="javascript:void(0);" onclick="closeModal()"><img src="images/custom/cross.svg" draggable="false" alt></a>
@@ -159,7 +164,7 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
                             <input type="text" name="user_name">
                             <label for="user_name">Phone number:</label>
                             <input type="tel" name="user_phone">
-                            <input type="button" class="btn-call" name="btn_co_call" value="Wait for the manager's call">
+                            <input type="submit" class="btn-call" name="btn_co_call" value="Wait for the manager's call">
                         </div>
                     </form>
                 </div>
@@ -171,5 +176,13 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
             document.querySelector(".fixed-cont").remove();
         }
     </script>
+    <?php
+    if(isset($_GET['ok'])){
+    	if($_GET['ok']=='ok'){
+    		echo '<script>alert("Успешно, ожидайте, с вами скоро свяжется наш оператор!");</script>';
+    	}
+    }
+
+    ?>
 </body>
 </html>

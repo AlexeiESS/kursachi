@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,9 +23,13 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
                 <img src="./images/custom/magnifier.png" draggable="false" alt>
             </div>
 			<div class="some-stuff">
+			<?php if(!isset($_SESSION['user']) && !isset($_SESSION['admin'])){ ?>
 			<button class="sign_in">Вход</button>
 			<button class="sign_up">Регистрация</button>
-            <a href="#"><img src="./images/custom/cart.png" draggable="false" alt></a>
+			<?php }else { ?>
+			<a href="exit.php">Выход</a>
+            <a href="cart.php"><img src="./images/custom/cart.png" draggable="false" alt></a>
+        	<?php } ?>
 			</div>
 
 		</header>
@@ -84,42 +93,17 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
 			<div class="goods">
 				<div class="feat_products">Featured Products</div>
 				<div class="products">
+					<?php $product = $conn->query("SELECT * FROM products"); foreach($product as $row){ ?>
 					<div class="product">
-						<div class="prod_image"></div>
-						<h3>Air cleaner</h3>
-						<span>$10</span>
-						<input type="submit" name="buynow" value="BUY NOW">
+						<!---<div  class="prod_image"></div>--->
+						<div class="--img-container"><img width="150px" height="200px" src="upload/<?php echo $row['img']; ?>" draggable="false" alt="product-photo"></div>
+						<h3><?php echo $row['name']; ?></h3>
+						<span><?php echo $row['price']; ?></span>
+						<?php if(isset($_SESSION['user']) || isset($_SESSION['admin'])){ ?>
+						<input type="submit" name="buynow<?php echo $row['id']; ?>" value="BUY NOW">
+					<?php } ?>
 					</div>
-					<div class="product">
-						<div class="prod_image"></div>
-						<h3>Fan</h3>
-						<span>$30</span>
-						<input type="submit" name="buynow" value="BUY NOW">
-					</div>
-					<div class="product">
-						<div class="prod_image"></div>
-						<h3>Spring kit</h3>
-						<span>$300</span>
-						<input type="submit" name="buynow" value="BUY NOW">
-					</div>
-					<div class="product">
-						<div class="prod_image"></div>
-						<h3>Oil filter</h3>
-						<span>$10</span>
-						<input type="submit" name="buynow" value="BUY NOW">
-					</div>
-					<div class="product">
-						<div class="prod_image"></div>
-						<h3>Intake manifold</h3>
-						<span>$500</span>
-						<input type="submit" name="buynow" value="BUY NOW">
-					</div>
-					<div class="product">
-						<div class="prod_image"></div>
-						<h3>Suspension kit</h3>
-						<span>$300</span>
-						<input type="submit" name="buynow" value="BUY NOW">
-					</div>
+					<?php } ?>
 				</div>
 			</div>
 
@@ -163,12 +147,13 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
 				<a href="http://www.dyr4ik.ru/"> Dyr4ik</a>
 				</div>
 			</div>
-			<div class="adminpanel-link"><a href="#">Admin Panel</a></div>
+			<div class="adminpanel-link"><a href="admin.php">Admin Panel</a></div>
 			<div class="copyright">Copyright © 2023 Ford club</div>
 		</footer>
 	</div>
     <script>
-        document.getElementsByName('buynow').forEach(__btn=>{
+    	<?php $product = $conn->query("SELECT * FROM products"); foreach($product as $row){ ?>
+        document.getElementsByName('buynow<?php echo $row['id']; ?>').forEach(__btn=>{
             __btn.addEventListener('click',()=>{
                 document.body.insertAdjacentHTML('afterbegin',`
                 <div class="fixed-cont">
@@ -179,19 +164,20 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
                                 </div>
                             </div>
                             <div class="product-card-elem" style="width: 700px; display: flex; justify-content: center;">
-                                <img src="images/goods/302-384_1.jpg" draggable="false" alt>
+                                <img src="upload/<?php echo $row['img']; ?>" draggable="false" alt>
                             </div>
                             <div class="product-card-elem">
-                                <p style="font-weight: 700;font-size: 18px; color: #555555;">Product</p>
-                                <p style="font-weight: 600; color: gray;">$0</p>
-                                <button class="btn-buy" look="btn1">BUY NOW</button>
-                                <p style="font-weight: 400; color: gray; font-size: 14px;">Description</p>
+                                <p style="font-weight: 700;font-size: 18px; color: #555555;"><?php echo $row['name']; ?></p>
+                                <p style="font-weight: 600; color: gray;"><?php echo $row['price']; ?></p>
+                                <form method="post" action="php/handlers/main.php?id=<?php echo $row['id']; ?>">
+                                <button name="buy_product" type="submit" class="btn-buy" look="btn1">BUY NOW</button></form>
+                                <p style="font-weight: 400; color: gray; font-size: 14px;"><?php echo $row['description']; ?></p>
                             </div>
                         </div>
                     </div>
                 `);
             });
-        });
+        }); <?php } ?>
 		document.querySelector(".sign_in").addEventListener('click',()=>{
 			__osignin();
 		});
@@ -200,7 +186,7 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
 			closeModal();
 			document.body.insertAdjacentHTML('afterbegin',`
 			<div class="fixed-cont">
-                    <form class="checkout-form">
+                    <form method="POST" action="php/handlers/main.php" class="checkout-form">
                         <div class="tinyblock">
                             <div class="tb-elem">
                                 <a href="javascript:void(0);" onclick="closeModal()"><img src="images/custom/cross.svg" draggable="false" alt></a>
@@ -210,7 +196,7 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
                             <label for="user_login">Login:</label>
                             <input type="text" name="user_login" required>
                             <label for="user_password">Password:</label>
-                            <input type="tel" name="user_password" required>
+                            <input type="password" name="password" required>
                             <input type="submit" class="btn-auth" name="sign_in" value="Sign in">
 							<a href="javascript:void(0);" style="color: #555555;" onclick="__osignup()">Don't have an account? Sign up instead</a>
 							</div>
@@ -222,7 +208,7 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
 			closeModal();
 			document.body.insertAdjacentHTML('afterbegin',`
 			<div class="fixed-cont">
-                    <form class="checkout-form">
+                    <form method="POST" action="php/handlers/main.php" class="checkout-form">
                         <div class="tinyblock">
                             <div class="tb-elem">
                                 <a href="javascript:void(0);" onclick="closeModal()"><img src="images/custom/cross.svg" draggable="false" alt></a>
@@ -253,5 +239,14 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
 			if (document.querySelector(".fixed-cont")!= null) document.querySelector(".fixed-cont").remove();
         }
     </script>
+    <?php
+if(isset($_GET['ok'])){
+    if($_GET['ok']=='true'){
+        echo '<script>alert("Успешно!");</script>';
+    }else {
+        echo '<script>alert("Ошибка.");</script>';
+    }
+}
+?>
 </body>
 </html>
