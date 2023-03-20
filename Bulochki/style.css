@@ -156,11 +156,13 @@ nav .nav-elem .dropdown .dd-elem a:hover {
   position: relative;
 }
 .products .prod-container {
+  padding: 0 100px;
+  box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: row;
   gap: 60px;
-  justify-content: center;
+  justify-content: space-between;
 }
 .products .prod-wrap {
   width: 100%;
@@ -176,7 +178,7 @@ nav .nav-elem .dropdown .dd-elem a:hover {
 }
 .products .product-item {
   position: relative;
-  width: 350px;
+  min-width: 350px;
   background: #fff;
 }
 .products .product-item a[edit] {

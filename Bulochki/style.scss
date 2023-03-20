@@ -151,11 +151,13 @@ nav {
     overflow-x: auto;
     position: relative;
     .prod-container {
+        padding: 0 100px;
+        box-sizing: border-box;
         position: relative;
         display: flex;
         flex-direction: row;
         gap: 60px;
-        justify-content: center;
+        justify-content: space-between;
     }
     .prod-wrap {
         width: 100%;
@@ -171,7 +173,7 @@ nav {
     }
     .product-item {
         position: relative;
-        width: 350px;
+        min-width: 350px;
         background: #fff;
         a[edit] {
             position: absolute;
@@ -258,6 +260,14 @@ footer {
             color: #fff;
         }
     }
+    .admin-panel-href {
+        position: absolute;
+        right: 50px;
+        bottom: 50px;
+        a {
+            color: darkred;
+        }
+    }
 }
 .fixed-cont {
     position: fixed;
@@ -272,10 +282,11 @@ footer {
 .product-card {
     position: relative;
     width: 80%;
-    height: 500px;
+    height: 400px;
     display: flex;
     background: #fff;
     padding-top: 60px;
+    gap: 20px;
     a {
         text-decoration: none;
         color: #000;
@@ -294,7 +305,7 @@ footer {
     .product-card-elem {
         width: 100%;
         img {
-            height: 100%;
+            height: 350px;
             width: 350px;
         }
     }
