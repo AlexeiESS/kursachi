@@ -193,27 +193,11 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
             });
         });
 		document.querySelector(".sign_in").addEventListener('click',()=>{
-			document.body.insertAdjacentHTML('afterbegin',`
-			<div class="fixed-cont">
-                    <form class="checkout-form">
-                        <div class="tinyblock">
-                            <div class="tb-elem">
-                                <a href="javascript:void(0);" onclick="closeModal()"><img src="images/custom/cross.svg" draggable="false" alt></a>
-                            </div>
-                        </div>
-                        <div class="f-container">
-                            <label for="user_login">Login:</label>
-                            <input type="text" name="user_login">
-                            <label for="user_password">Password:</label>
-                            <input type="tel" name="user_password">
-                            <input type="button" class="btn-call" name="sign_in" value="Sign in">
-                        </div>
-                    </form>
-                </div>
-			`);
+			__osignin();
 		});
 
-		document.querySelector(".sign_up").addEventListener('click',()=>{
+		function __osignin() {
+			closeModal();
 			document.body.insertAdjacentHTML('afterbegin',`
 			<div class="fixed-cont">
                     <form class="checkout-form">
@@ -224,19 +208,49 @@ integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4
                         </div>
                         <div class="f-container">
                             <label for="user_login">Login:</label>
-                            <input type="text" name="user_login">
-                            <label for="new_password">Password:</label>
-                            <input type="tel" name="new_password">
-							<label for="repeat_new_password">Password again:</label>
-                            <input type="tel" name="repeat_new_password">
-                            <input type="button" class="btn-call" name="sign_up" value="Sign up">
-                        </div>
+                            <input type="text" name="user_login" required>
+                            <label for="user_password">Password:</label>
+                            <input type="tel" name="user_password" required>
+                            <input type="submit" class="btn-auth" name="sign_in" value="Sign in">
+							<a href="javascript:void(0);" style="color: #555555;" onclick="__osignup()">Don't have an account? Sign up instead</a>
+							</div>
                     </form>
                 </div>
 			`);
+		}
+		function __osignup() {
+			closeModal();
+			document.body.insertAdjacentHTML('afterbegin',`
+			<div class="fixed-cont">
+                    <form class="checkout-form">
+                        <div class="tinyblock">
+                            <div class="tb-elem">
+                                <a href="javascript:void(0);" onclick="closeModal()"><img src="images/custom/cross.svg" draggable="false" alt></a>
+                            </div>
+                        </div>
+                        <div class="f-container">
+							<label for="user_name">Name:</label>
+                            <input type="text" name="user_name" required>
+                            <label for="user_login">Login:</label>
+                            <input type="text" name="user_login" required>
+							<label for="user_tel">Phone number:</label>
+                            <input type="tel" name="user_tel" required>
+                            <label for="new_password">Password:</label>
+                            <input type="password" name="new_password" required>
+							<label for="repeat_new_password">Password again:</label>
+                            <input type="password" name="repeat_new_password" required>
+                            <input type="submit" class="btn-auth" name="sign_up" value="Sign up">
+							<a href="javascript:void(0);" style="color: #555555;" onclick="__osignin()">Already have an account? Sign in instead</a>
+							</div>
+                    </form>
+                </div>
+			`);
+		}
+		document.querySelector(".sign_up").addEventListener('click',()=>{
+			__osignup();
 		});
         function closeModal() {
-            document.querySelector(".fixed-cont").remove();
+			if (document.querySelector(".fixed-cont")!= null) document.querySelector(".fixed-cont").remove();
         }
     </script>
 </body>

@@ -487,7 +487,7 @@ footer
 	font-family: OpenSans;
 	font-size: 18px;
 }
-.btn-call {
+.btn-auth {
 	width: 50%;
 	height: 40px;
 	cursor: pointer;
@@ -574,7 +574,7 @@ footer
 	font-family: OpenSans;
 	font-size: 18px;
 }
-.checkout-form input[type="text"], .checkout-form input[type="tel"] {
+.checkout-form input[type="text"], .checkout-form input[type="password"], .checkout-form input[type="tel"] {
 	width: 60%;
 	text-align: center;
 	height: 30px;
