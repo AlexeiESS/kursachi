@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 *{
 	padding: 0px;
 	margin: 0px;
@@ -10,6 +11,7 @@ body
 header
 {
 	min-height: 70px;
+	padding: 0 50px;
 }
 header a {
 	text-decoration: none;
@@ -21,9 +23,128 @@ header >span
 color: #074060;
 font-family: "RobotoSlab";
 font-size: 40px;
-margin-left: 50px;
-float: left;
 } 
+.top-block {
+	position: relative;
+	height: 60px;
+	margin-top: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.tour-edit-cont {
+	display: flex;
+	justify-content: center;
+}
+.f-add-tour {
+	width: 100%;
+	padding: 50px;
+	gap: 46px;
+}
+.f-add-tour .--tour-photo {
+	width: 309px;
+	height: 345px;
+	background: #8D8C8C;
+	border-radius: 40px;
+	position: relative;
+}
+.f-add-tour .--subelem {
+	display: flex;
+	flex-direction: column;
+	gap: 42px;
+}
+.--tour-photo label {
+	position: absolute;
+	width: 100%;
+	height: 57px;
+	background: #08537D;
+	color: #fff;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 20px;
+	bottom: 0;
+	font-weight: 500;
+	border-radius: 0 0 40px 40px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	border: 1px solid #FFFFFF;
+	box-sizing: border-box;
+	align-items: center;
+}
+.f-add-tour input[type="text"], .f-add-tour input[type="date"], .f-add-tour input[type="number"] {
+	width: 283px;
+	height: 34px;
+	border: 1px solid #000000;
+	outline: 0;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 20px;
+	font-weight: 400;
+}
+.f-add-tour input[type="date"] {
+	width: 138px;
+	font-size: 16px;
+}
+.f-add-tour #inputlabel {
+	position: absolute;
+	text-align: right;
+	width: 120px;
+	left: -125px;
+	top: 5px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 20px;
+	font-weight: 500;
+}
+.tour-edit-cont .f-add-tour {
+	display: flex;
+	justify-content: center;
+	flex-direction: column
+}
+.f-add-tour .f-elem {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	flex-direction: row;
+	gap: 160px;
+}
+.f-add-tour input[type="submit"] {
+	background: #08537D;
+	border: 1px solid #FFFFFF;
+	border-radius: 10px;
+	width: 233px;
+	height: 57px;
+	font-size: 20px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 500;
+	cursor: pointer;
+	color: #fff;
+}
+.top-block .--elem {
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+.top-block .--elem a {
+	font-family: 'Montserrat', sans-serif;
+	text-decoration: none;
+	font-size: 20px;
+	color: #103C54;
+	font-weight: 500;
+}
+.top-block h1 {
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	color: #103C54;
+	text-align: center;
+	font-size: 30px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 500;
+}
+.top-block #some-sep {
+	position: absolute;
+	box-sizing: border-box;
+	border: 2px solid #103C54;
+	width: 100%;
+	bottom: 0;
+}
 header >input
 {
 	width: 250px;
@@ -528,7 +649,128 @@ border: 1px solid black;
 	color: #074060;
 	border: 2px solid rgb(7, 64, 96); 
 }
-
-
-
-
+.auth_container {
+	display: flex;
+	justify-content: center;
+	margin-top: 47px;
+}
+.auth_container form input[type="submit"] {
+	background: #08537D;
+	border: 1px solid #FFFFFF;
+	border-radius: 10px;
+	width: 194px;
+	height: 44px;
+	font-size: 20px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 500;
+	cursor: pointer;
+	margin-top: 55px;
+	color: #fff;
+}
+.auth_container label {
+	position: absolute;
+	text-align: right;
+	width: 100px;
+	left: -105px;
+	top: 5px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 20px;
+	font-weight: 500;
+}
+.auth_container input[type="text"], input[type="password"] {
+	width: 283px;
+	height: 34px;
+	border: 1px solid #000000;
+	outline: 0;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 20px;
+	font-weight: 400;
+}
+.tours-table table {
+	position: relative;
+	background: #000;
+	margin-bottom: 80px;
+	width: 100%;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 15px;
+	font-weight: 500;
+	color: #103C54;
+}
+.tours-table table tr {
+	background: #fff;
+}
+.tours-table table td {
+	padding: 10px;
+}
+.tours-table table td img {
+	width: 178px;
+	height: 93px;
+}
+.tours-table table th {
+	padding: 20px;
+	font-size: 20px;
+	font-weight: 500;
+}
+.tours-table table td input {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 15px;
+	font-weight: 500;
+	border: 2px solid #000;
+	width: 100%;
+	box-sizing: border-box;
+	outline: 0;
+	padding: 5px;
+}
+.tours-table table td .--flexblock {
+	display: flex;
+	flex-direction: row;
+	gap: 4px;
+	background: #000;
+	justify-content: center;
+	align-items: center;
+}
+.--flexblock input[type="submit"] {
+	width: 100%;
+	cursor: pointer;
+	background: 0;
+	border: 0;
+	background: #fff;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 15px;
+	font-weight: 500;
+	padding: 10px;
+}
+.--flexblock input[type="submit"]:hover {
+	text-decoration: underline;
+}
+.tours-table table tr,.tours-table table td,.tours-table table th {
+	border: 1px solid #000;
+}
+.tour-edit-bar {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.tour-edit-bar .btn-st {
+	background: #1B6188;
+	border: 0;
+	width: 224px;
+	height: 41px;
+	color: #fff;
+	font-size: 20px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 500;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	outline: 0;
+	cursor: pointer;
+}
+.tour-edit-bar .--flex {
+	display: flex;
+	flex-direction: row;
+	gap: 1px;
+	padding: 1px;
+	background: #010203;
+}
