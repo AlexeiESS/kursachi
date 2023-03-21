@@ -148,16 +148,16 @@ nav {
     justify-content: center;
     height: auto;
     background: #e4e4e4;
-    overflow-x: auto;
     position: relative;
     .prod-container {
         padding: 0 100px;
         box-sizing: border-box;
         position: relative;
-        display: flex;
-        flex-direction: row;
+        display: grid;
         gap: 60px;
-        justify-content: space-between;
+        height: auto;
+        grid-template-columns: repeat(3, 350px);
+        justify-content: center;
     }
     .prod-wrap {
         width: 100%;
@@ -173,7 +173,7 @@ nav {
     }
     .product-item {
         position: relative;
-        min-width: 350px;
+        width: 350px;
         background: #fff;
         a[edit] {
             position: absolute;
