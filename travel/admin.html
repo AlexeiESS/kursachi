@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Pandatravel</title>
+    <meta charset = "UTF-8">
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <link href="css/ordered.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+        <div class="wrapper">
+            <!-- Шапка сайта -->
+            <header>
+                <span><a href="#">PANDATRAVEL</a></span>
+                <div class="top-block">
+                    <div class="--elem" style="justify-content: left;"><a href="#">Назад</a></div>
+                    <div class="--elem" style="justify-content: center;"><h1>Карточка тура</h1></div>
+                    <div class="--elem" style="justify-content: right;"><a href="#">Выйти</a></div>
+                    <span id="some-sep"></span>       
+                </div>          
+            </header>
+            <div class="tour-edit-cont">
+                <form class="f-add-tour">
+                    <div class="f-elem">
+                        <div class="--subelem">
+                            <div class="--tour-photo">
+                                <label for="tour_photo">Загрузить фото</label>
+                                <input type="file" name="tour_photo" id="tour_photo" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="--subelem">
+                            <div style="position: relative;">
+                                <label for="tour_name" id="inputlabel">Название:</label>
+                                <input type="text" name="tour_name" id="tour_name">
+                            </div>
+                            <div>
+                                <div style="position: relative;">
+                                    <label for="tour_date_begin" id="inputlabel">Даты:</label>
+                                    <input type="date" name="tour_date_begin" id="tour_date_begin">
+                                    <input type="date" name="tour_date_end" id="tour_date_end">
+                                </div>
+                            </div>
+                            <div style="position: relative;">
+                                <label for="tour_desc" id="inputlabel">Описание:</label>
+                                <input type="text" name="tour_desc" id="tour_desc">
+                            </div>
+                            <div style="position: relative;">
+                                <label for="tour_price" id="inputlabel">Цена:</label>
+                                <input type="number" name="tour_price" id="tour_price" min="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="f-elem">
+                        <input type="submit" name="tour_add">
+                    </div>
+                </form>
+            </div>
+            <div class="tours-table">
+                <form>
+                    <table>
+                        <tr>
+                            <th><p>Название</p></th>
+                            <th style="width: 178px; box-sizing: border-box;"><p>Фото</p></th>
+                            <th><p>Даты</p></th>
+                            <th><p>Описание</p></th>
+                            <th><p>Цена</p></th>
+                            <th><p>Управление</p></th>
+                        </tr>
+                        <tr>
+                            <td><p>Шерегеш</p></td>
+                            <td><img src="images/goods/sheregesh.png" draggable="false" alt></td>
+                            <td><p>18-19 февраля 2023</p></td>
+                            <td><p>Знаменитые ёлки и снег</p></td>
+                            <td><p>9000 р</p></td>
+                            <td>
+                                <div class="--flexblock">
+                                    <input type="submit" value="Изменить" name="tour_edit">
+                                    <input type="submit" value="Удалить" name="tour_remove">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <!-- Меню навигации -->
+            <!-- Основной раздел сайта -->
+            <!-- Подвал -->
+            <div class="admin_container">
+                 
+            </div>
+            <footer>
+                <div class="copyright">
+                        <span>2023 © Pandatravel - туры выходного дня.</span>
+                        <span>Дизайн и разработка: команда ДиП</span>
+                </div>
+            </footer>        
+        </div>
+</body>
+</html>
