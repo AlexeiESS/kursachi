@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="nav-elem" style="justify-content: left; align-items: center; width: 192px;">
+                <div class="--logo-block">
+                    <a href="#"><img src="./img/logo.svg" draggable="false" alt></a>
+                </div>
+            </div>
+            <div class="nav-elem" style="justify-content: center; align-items: center; flex-direction: column;">
+                <div class="--menu-block">
+                    <p style="font-weight: 700;">Администратор</p>
+                </div>
+                <div class="--menu-block">
+                    <p><span style="font-weight: 700;">Домики</span> | Бронирования</p>
+                </div>
+            </div>
+            <div class="nav-elem" style="justify-content: right; width: 260px;">
+                <div class="--contact-block">
+                    <p>г. Калуга</p>
+                    <a href="tel:+70000000000">+7(000)000-00-00</a>
+                </div>
+            </div>
+        </nav>
+        <div class="tinyblock">
+            <a href="#">
+                <img src="img/back-arrow.svg" draggable="false" alt>
+                Вернуться
+            </a>
+        </div>
+        <form class="f-edit-req">
+            <table>
+                <tr>
+                    <th><p>Имя</p></th>
+                    <td><p><input type=text name="req_name" value="Имя Фамилия"></p></td>
+                </tr>
+                <tr>
+                    <th><p>Номер телефона</p></th>
+                    <td><p><input type="tel" name="req_tel" value="7 (982) 088 80 51"></p></td>
+                </tr>
+                <tr>
+                    <th><p>Название</p></th>
+                    <td><p><input type="text" name="req_housename" value="Уикенд вдвоём"></p></td>
+                </tr>
+                <tr>
+                    <th><p>День</p></th>
+                    <td><p><input type="date" name="req_day_begin"> - <input type="date" name="req_day_end"></p></td>
+                </tr>
+                <tr>
+                    <th><p>Время</p></th>
+                    <td><p><input type="time" value="12:00" name="req_time_begin"> - <input type="time" value="12:00" name="req_time_end"></p></td>
+                </tr>
+                <tr>
+                    <th style="height: 112px;"><p>Комментарий</p></th>
+                    <td><input type="text" style="width: 100%;" name="req_comment" value='Домик "Уикенд вдвоём"'></td>
+                </tr>
+                <tr>
+                    <th><p>Статус</p></th>
+                    <td>
+                        <div class="--flex-col-block">
+                            <label for="req_contacted-1">Связались</label>
+                            <input type="radio" name="req_contacted" id="req_contacted-1">
+                            <label for="req_contacted-2">Ждёт звонка</label>
+                            <input type="radio" name="req_contacted" id="req_contacted-2">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="--btn-cont">
+                <input type="submit" value="Сохранить изменения" name="req_save">
+                <input type="submit" value="Удалить" name="req_remove">
+            </div>
+        </form>
+    </div>
+    <footer>
+        <img src="img/logo.svg" draggable="false" alt>
+        <a href="#">Авторизация администратора</a>
+    </footer>
+</body>
+</html>

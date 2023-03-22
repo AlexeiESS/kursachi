@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="nav-elem" style="justify-content: left; align-items: center; width: 192px;">
+                <div class="--logo-block">
+                    <a href="#"><img src="./img/logo.svg" draggable="false" alt></a>
+                </div>
+            </div>
+            <div class="nav-elem" style="justify-content: center; align-items: center; flex-direction: column;">
+                <div class="--menu-block">
+                    <p style="font-weight: 700;">Администратор</p>
+                </div>
+                <div class="--menu-block">
+                    <p><span style="font-weight: 700;">Домики</span> | Бронирования</p>
+                </div>
+            </div>
+            <div class="nav-elem" style="justify-content: right; width: 260px;">
+                <div class="--contact-block">
+                    <p>г. Калуга</p>
+                    <a href="tel:+70000000000">+7(000)000-00-00</a>
+                </div>
+            </div>
+        </nav>
+        <div class="tinyblock">
+            <a href="#">
+                <img src="img/back-arrow.svg" draggable="false" alt>
+                Вернуться
+            </a>
+        </div>
+        <form class="f-edit-house">
+            <table>
+                <tr>
+                    <th><p>Название</p></th>
+                    <th style="width: 182px;"><p>Фото</p></th>
+                    <th><p>Цена в будни</p></th>
+                    <th><p>Цена в вых. дни</p></th>
+                    <th><p>Описание</p></th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="house_name" value="Шумная компания"></td>
+                    <td>
+                        <div class="--photo-cont">
+                            <label><img src="img/houses/house1.png" draggable="false" alt></label>
+                        </div>
+                    </td>
+                    <td><input type="number" name="house_price_workdays" value=7500 min=0><p> руб/сут</p></td>
+                    <td><input type="number" name="house_price_holidays" value=9500 min=0><p> руб/сут</p></td>
+                    <td><input type="text" name="house_desc" value="Домик вместительностью до 10 человек. Своя мангальная зона, сауна-бочка на 3-5 часов. Из развлечений - караоке, настольные игры, бадминтон, фрисби."></td>
+                </tr>
+            </table>
+            <div class="--btn-cont">
+                <input type="submit" value="Готово" user="house_edit">
+                <input type="submit" value="Удалить" user="house_remove">
+            </div>
+        </form>
+    </div>
+    <footer>
+        <img src="img/logo.svg" draggable="false" alt>
+        <a href="#">Авторизация администратора</a>
+    </footer>
+</body>
+</html>
