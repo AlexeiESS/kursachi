@@ -24,24 +24,29 @@ function qeury_search($login, $password)
 		return 0;
 	}
 }
-function add_contact($name,$product,$phonen=''){
+function add_contact($name,$email,$phonen,$tour,$date_1,$date_2){
 	global $conn;
-	$conn->query("INSERT INTO contacts(id, user,phonen, product, buy) VALUES (NULL, '$name','$phonen','$product', 0)");
+	$conn->query("INSERT INTO contacts(id, name,email, phonen, tour, date_1,date_2, svaz) VALUES (NULL, '$name','$email','$phonen', '$tour','$date_1','$date_2',0)");
 	return 1;
 }
-function add_buy_contact($user, $phone){
+function edit_contact($name,$email,$phonen,$tour,$date_1,$date_2,$svaz, $id){
 	global $conn;
 	$conn->query("
 		UPDATE contacts 
-		SET buy = 1,
-		phonen = '".$phone."'
-		WHERE user = $user;");
+		SET name = '".$name."',
+		email = '".$email."',
+		phonen = '".$phonen."',
+		tour = '".$tour."',
+		date_1 = '".$date_1."',
+		date_2 = '".$date_2."',
+		svaz = $svaz
+		WHERE id = $id;");
 		return 1;
 }
 
-function add_product($name, $price, $description, $img=''){
+function add_tours($name, $description, $price, $date_1, $date_2, $img=''){
 	global $conn;
-	$conn->query("INSERT INTO products(id, name, price, description,img) VALUES (NULL, '$name','$price','$description','$img')");
+	$conn->query("INSERT INTO tours(id, name, description, price,date_1,date_2,img) VALUES (NULL, '$name','$description','$price','$date_1','$date_2','$img')");
 	return 1;
 }
 function delete($table, $id){
@@ -49,22 +54,26 @@ function delete($table, $id){
 	$conn->query("DELETE FROM $table WHERE id = $id");
 	return 1;
 }
-function edit_product($name, $price, $description, $img='', $id){
+function edit_tours($name, $description, $price, $date_1, $date_2, $img='', $id){
 	global $conn;
 	if(empty($img)){
 		$conn->query("
-		UPDATE products 
+		UPDATE tours 
 		SET name = '".$name."',
+		description = '".$description."',
 		price = '".$price."',
-		description = '".$description."'
+		date_1 = '".$date_1."',
+		date_2 = '".$date_2."'
 		WHERE id = $id;");
 		return 1;
 	}else {
 		$conn->query("
-		UPDATE products 
+		UPDATE tours 
 		SET name = '".$name."',
-		price = '".$price."',
 		description = '".$description."',
+		price = '".$price."',
+		date_1 = '".$date_1."',
+		date_2 = '".$date_2."',
 		img = '".$img."'
 		WHERE id = $id;");
 		return 1;

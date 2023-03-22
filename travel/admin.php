@@ -5,7 +5,7 @@ if(!isset($_SESSION['admin'])){
 }
 require_once 'php/init.php';
 $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
- ?>
+?>
 <!DOCTYPE html>
 
 <html>
@@ -30,7 +30,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                 </div>          
             </header>
             <div class="tour-edit-cont">
-                <form class="f-add-tour">
+                <form class="f-add-tour" method="POST" action="php/handlers/main.php" enctype="multipart/form-data">
                     <div class="f-elem">
                         <div class="--subelem">
                             <div class="--tour-photo">
@@ -76,21 +76,28 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                             <th><p>Цена</p></th>
                             <th><p>Управление</p></th>
                         </tr>
-                        <?php ?>
+                        <?php $tours = $conn->query("SELECT * FROM tours "); foreach($tours as $row){ 
+                            $date_1 = date('j',$row['date_1']);
+                            $date_2 = date('j',$row['date_2']);
+                            $month_1 = date('F',$row['date_1']);  
+                            $month_2 = date('F',$row['date_2']);
+                            $year_1 = date('o',$row['date_1']);
+                            $year_2 = date('o',$row['date_2']);
+                            ?>
                         <tr>
-                            <td><p><?php echo row['name']; ?></p></td>
-                            <td><img src="upload/<?php echo row['img']; ?>" draggable="false" alt></td>
-                            <td><p>18-19 февраля 2023</p></td>
-                            <td><p><?php echo row['description']; ?></p></td>
-                            <td><p><?php echo row['price']; ?></p></td>
+                            <td><p><?php echo $row['name']; ?></p></td>
+                            <td><img src="upload/<?php echo $row['img']; ?>" draggable="false" alt></td>
+                            <td><p><?php echo $date_1; ?>-<?php echo $date_2; ?> <?php echo $month_1; if($month_1!=$month_2){echo '-'.$month_2;}?> <?php echo $year_1; if($year_1!=$year_2){echo '-'.$year_2;}?></p></td>
+                            <td><p><?php echo $row['description']; ?></p></td>
+                            <td><p><?php echo $row['price']; ?></p></td>
                             <td>
                                 <div class="--flexblock">
-                                    <a href="edittour.php?id=<?php echo row['id']; ?>"><input type="submit" value="Изменить" name="tour_edit"></a>
-                                    <a href="php/handlers/main.php?table=tours&id=<?php echo row['id']; ?>"><input type="submit" value="Удалить" name="tour_remove">
+                                    <a href="edittour.php?id=<?php echo $row['id']; ?>"><input value="Изменить" name="tour_edit"></a>
+                                    <a href="php/handlers/main.php?action=remove&table=tours&id=<?php echo $row['id']; ?>"><input value="Удалить" name="tour_remove"></a>
                                 </div>
                             </td>
                         </tr>
-                        <?php ?>
+                        <?php } ?>
                     </table>
                 </form>
             </div>

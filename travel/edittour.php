@@ -31,7 +31,10 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
             </header>
             <div class="tour-edit-cont" style="margin-top: 66px; padding: 0 50px;">
                 <div class="tours-table" style="width: 100%;">
-                    <form>
+                    <?php
+                            $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM tours WHERE id = '".$_GET['id']."'")); 
+                            ?>
+                    <form method="POST" action="php/handlers/main.php?id=<?php echo $conn->arr['id']; ?>" enctype="multipart/form-data">
                         <table>
                             <tr>
                                 <th><p>Название</p></th>
@@ -39,31 +42,25 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                                 <th><p>Даты</p></th>
                                 <th><p>Описание</p></th>
                                 <th><p>Цена</p></th>
-                                <th><p>Управление</p></th>
                             </tr>
+                            
                             <tr>
-                                <td><input type="text" value="Шерегеш" name="tour_name"></td>
-                                <td><img src="images/goods/sheregesh.png" draggable="false" alt></td>
+                                <td><input type="text" value="<?php echo $conn->arr['name']; ?>" name="tour_name"></td>
+                                <td><img src="upload/<?php echo $conn->arr['img']; ?>" draggable="false" alt></td>
                                 <td>
                                     <div class="--flexblock" style="background: #fff;">
-                                        <input type="date" name="tour_date_start">
-                                        <input type="date" name="tour_date_end">
+                                        <input type="date" <?php echo 'value="'.date("Y-m-d", $conn->arr['date_1']).'"'; ?>  name="tour_date_start">
+                                        <input <?php echo 'value="'.date("Y-m-d", $conn->arr['date_2']).'"'; ?> type="date" name="tour_date_end">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="--flexblock">
-                                        <input type="text" value="Знаменитые ёлки и снег" name="tour_desc">
+                                        <input type="text" value="<?php echo $conn->arr['description']; ?>" name="tour_desc">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="--flexblock" style="background: #fff;">
-                                        <input type="number" min="0" value=9000 name="tour_price"><p>р</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="--flexblock">
-                                        <input type="submit" value="Изменить" name="tour_edit">
-                                        <input type="submit" value="Удалить" name="tour_remove">
+                                        <input type="number" min="0" value="<?php echo $conn->arr['price']; ?>" name="tour_price"><p></p>
                                     </div>
                                 </td>
                             </tr>
@@ -73,7 +70,6 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                                 <label id="--newphoto" for="tour_photo" class="btn-st">Новое фото</label>
                                 <input type="file" name="tour_photo" style="display: none;" id="tour_photo">
                                 <input type="submit" value="Изменить" name="tour_edit" class="btn-st">
-                                <input type="submit" value="Удалить" name="tour_remove" class="btn-st">
                             </div>
                         </div>
                     </form>

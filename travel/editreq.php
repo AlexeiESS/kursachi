@@ -31,7 +31,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
             </header>
             <div class="tour-edit-cont" style="margin-top: 66px; padding: 0 50px;">
                 <div class="tours-table" style="width: 100%;">
-                    <form>
+                    <form method="POST" action="php/handlers/main.php?id=<?php echo $_GET['id']; ?>">
                         <table>
                             <tr>
                                 <th><p>Имя</p></th>
@@ -41,30 +41,33 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                                 <th><p>Даты</p></th>
                                 <th><p>Связь с менеджером</p></th>
                             </tr>
+                            <?php
+                            $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM contacts WHERE id = '".$_GET['id']."'"));
+                            ?>
                             <tr>
-                                <td><input type="text" value="Имя Фамилия" name="req_name"></td>
-                                <td><input type="email" value="abc@mail.ru" name="req_email"></td>
-                                <td><input type="tel" value="88005553535" name="req_tel"></td>
-                                <td><input type="text" value="Шерегеш" name="req_tour"></td>
+                                <td><input type="text" value="<?php echo $conn->arr['name']; ?>" name="req_name"></td>
+                                <td><input type="email" value="<?php echo $conn->arr['email']; ?>" name="req_email"></td>
+                                <td><input type="tel" value="<?php echo $conn->arr['phonen']; ?>" name="req_tel"></td>
+                                <td><input type="text" value="<?php echo $conn->arr['tour']; ?>" name="req_tour"></td>
                                 <td>
                                     <div class="--flexblock" style="background: #fff;">
-                                        <input type="date" name="req_tour_date_start">
-                                        <input type="date" name="req_tour_date_end">
+                                        <input <?php echo 'value="'.date("Y-m-d", $conn->arr['date_1']).'"'; ?> type="date" name="req_tour_date_start">
+                                        <input <?php echo 'value="'.date("Y-m-d", $conn->arr['date_2']).'"'; ?>  type="date" name="req_tour_date_end">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="--flexblock" style="background: #fff;">
                                         <label for="req_contact_manager-1">Да</label>
-                                        <input type="radio" name="req_contact_manager" id="req_contact_manager-1">
+                                        <input <?php if($conn->arr['svaz']==1){echo 'checked';} ?> type="radio" value="1" name="req_contact_manager" id="req_contact_manager">
                                         <label for="req_contact_manager-2">Нет</label>
-                                        <input type="radio" name="req_contact_manager" id="req_contact_manager-2">
+                                        <input type="radio" <?php if($conn->arr['svaz']==0){echo 'checked';} ?> name="req_contact_manager" value="0" id="req_contact_manager">
                                     </div>
                                 </td>
                             </tr>
                         </table>
                         <div class="tour-edit-bar">
                             <div class="--flex">
-                                <input type="submit" value="Изменить" name="tour_edit" class="btn-st">
+                                <input type="submit" value="Изменить" name="cont_edit" class="btn-st">
                             </div>
                         </div>
                     </form>

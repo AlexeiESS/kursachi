@@ -1,3 +1,7 @@
+<?php
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 
 <html>
@@ -39,33 +43,24 @@
                 <!-- Раздел с турами -->
                 <div class="allgoods">
                     <h2 id="ту"> Туры </h2>
+                    <?php $tours = $conn->query("SELECT * FROM tours "); foreach($tours as $row){ 
+                            $date_1 = date('j',$row['date_1']);
+                            $date_2 = date('j',$row['date_2']);
+                            $month_1 = date('F',$row['date_1']);  
+                            $month_2 = date('F',$row['date_2']);
+                            $year_1 = date('o',$row['date_1']);
+                            $year_2 = date('o',$row['date_2']);
+                            ?>
                     <div class="good">
-                        <div class="good_image" url='images/goods/sheregesh.png'>Шерегеш</div>
+                        <div class="good_image" url='upload/<?php echo $row['img']; ?>'><?php echo $row['name']; ?></div>
                         <div class="good_text">
-                            <h3>18-19 февраля</h3>
-                            <p>Знаменитые елки и снег</p>
+                            <h3><?php echo $date_1; ?>-<?php echo $date_2; ?> <?php echo $month_1; if($month_1!=$month_2){echo '-'.$month_2;}?> <?php echo $year_1; if($year_1!=$year_2){echo '-'.$year_2;}?></h3>
+                            <p><?php echo $row['description']; ?></p>
                         </div>
-                        <input type="submit" name="buttom" value="Подробнее" class="tour-more" id="0"> 
-                        <input type="submit" name="buttom" value="Забронировать" class="btn-buy" id="0"> 
+                        <input type="submit" name="buttom" value="Подробнее" class="tour-more<?php echo $row['id']; ?>" id="<?php echo $row['id']; ?>"> 
+                        <input type="submit" name="buttom" value="Забронировать" class="btn-buy<?php echo $row['id']; ?>" id="<?php echo $row['id']; ?>"> 
                     </div>
-                    <div class="good">
-                        <div class="good_image" url='images/goods/zhyuratkul.png'>Зюраткуль</div>
-                        <div class="good_text">
-                            <h3>04-05 марта</h3>
-                            <p>Жемчужина Урала</p>
-                        </div>
-                        <input type="submit" name="buttom" value="Подробнее" class="tour-more" id="1"> 
-                        <input type="submit" name="buttom" value="Забронировать" class="btn-buy" id="1"> 
-                    </div>
-                    <div class="good">
-                        <div class="good_image" url="images/goods/mana.png"> Мана</div>
-                        <div class="good_text">
-                            <h3>11-12 марта</h3>
-                            <p>Реки и горы. Горы и реки</p>
-                        </div>
-                        <input type="submit" name="buttom" value="Подробнее" class="tour-more" id="2"> 
-                        <input type="submit" name="buttom" value="Забронировать" class="btn-buy" id="2"> 
-                    </div>
+                    <?php } ?>
                 </div>
                 <!-- Раздел с описанием команды -->
                 <div class="team">
@@ -124,24 +119,33 @@
             </footer>        
         </div>
         <script>
-            let productcards= [];
-            let contactform= `
+            <?php $tours = $conn->query("SELECT * FROM tours "); foreach($tours as $row){ 
+                            $date_1 = date('j',$row['date_1']);
+                            $date_2 = date('j',$row['date_2']);
+                            $month_1 = date('F',$row['date_1']);  
+                            $month_2 = date('F',$row['date_2']);
+                            $year_1 = date('o',$row['date_1']);
+                            $year_2 = date('o',$row['date_2']);
+                            ?>
+            let productcards<?php echo $row['id']; ?>= [];
+            
+            let contactform<?php echo $row['id']; ?>= `
                         <div class="fixed-cont">
-                            <form class="checkout-form">
+                            <form class="checkout-form" method="POST" action="php/handlers/main.php?id=<?php echo $row['id']; ?>">
                                 <div class="tb-elem">
                                     <a href="javascript:void(0);" onclick="closeModal()"><img src="images/custom/cross.svg" draggable="false" alt></a>
                                 </div>
                                 <div class="form-elem">
                                     <label for="user_name">Ваше имя</label>
-                                    <input type="text" name="user_name" id="user_name">
+                                    <input type="text" name="user_name" id="user_name" required>
                                 </div>
                                 <div class="form-elem">
                                     <label for="user_email">Электронный адрес</label>
-                                    <input type="email" name="user_email" id="user_email">
+                                    <input type="email" name="user_email" id="user_email" required>
                                 </div>
                                 <div class="form-elem">
                                 <label for="user_tel">Ваш номер телефона</label>
-                                <input type="tel" name="user_tel" id="user_tel">
+                                <input type="tel" name="user_tel" id="user_tel" required>
                                 </div>
                                 <div class="form-elem">
                                     <input type="submit" value="Отправить заявку" name="buy_product">
@@ -150,7 +154,7 @@
                         </div>
                         `;
             document.querySelectorAll('.good').forEach(__good=>{
-                productcards.push(`<div class="fixed-cont">
+                productcards<?php echo $row['id']; ?>.push(`<div class="fixed-cont">
                             <div class="product-card">
                                 <div class="tinyblock">
                                     <div class="tb-elem">
@@ -158,33 +162,34 @@
                                     </div>
                                 </div>
                                 <div class="product-card-elem" style="width: 700px; display: flex; justify-content: center;">
-                                    <img src="${__good.querySelector('.good_image').getAttribute('url')}" draggable="false" alt>
+                                    <img src="upload/<?php echo $row['img']; ?>" draggable="false" alt>
                                 </div>
                                 <div class="product-card-elem">
-                                    <p style="font-weight: 700;font-size: 24px; color: #555555;">${/*Здесь название тура*/__good.querySelector('.good_image').innerHTML}</p>
-                                    <p style="font-weight: 600; color: gray; font-size: 18px;"><span style="font-weight: 400;">Цена:</span> $${/*Здесь стоимость продукта*/100}</p>
-                                    <p style="font-weight: 600; color: #d57426; font-size: 18px; margin-bottom: 14px;"><span style="font-weight: 400;">Дата проведения:</span> ${/*Здесь дата проведения тура*/__good.querySelector('.good_text h3').innerHTML}</p>
-                                    <button class="btn-buy" look="btn1">Забронировать</button>
-                                    <p style="font-weight: 400; color: gray; font-size: 16px; margin-top: 10px;">${__good.querySelector('.good_text p').innerHTML}</p>
+                                    <p style="font-weight: 700;font-size: 24px; color: #555555;"><?php echo $row['name']; ?></p>
+                                    <p style="font-weight: 600; color: gray; font-size: 18px;"><span style="font-weight: 400;">Цена:</span> $<?php echo $row['price']; ?></p>
+                                    <p style="font-weight: 600; color: #d57426; font-size: 18px; margin-bottom: 14px;"><span style="font-weight: 400;">Дата проведения:</span> <?php echo $date_1; ?>-<?php echo $date_2; ?> <?php echo $month_1; if($month_1!=$month_2){echo '-'.$month_2;}?> <?php echo $year_1; if($year_1!=$year_2){echo '-'.$year_2;}?></p>
+                                    <button class="btn-buy<?php echo $row['id']; ?>" id="<?php echo $row['id']; ?>" look="btn1">Забронировать</button>
+                                    <p style="font-weight: 400; color: gray; font-size: 16px; margin-top: 10px;"><?php echo $row['description']; ?></p>
                                 </div>
                             </div>
                         </div>`);
             });
-            document.querySelectorAll('.btn-buy').forEach(__btn=>{
+            document.querySelectorAll('.btn-buy<?php echo $row['id']; ?>').forEach(__btn=>{
                 __btn.addEventListener('click',(ev)=>{
                         closeModal();
-                        document.body.insertAdjacentHTML('afterbegin',contactform);
+                        document.body.insertAdjacentHTML('afterbegin',contactform<?php echo $row['id']; ?>);
                     });
             });
-            document.querySelectorAll('.tour-more').forEach(__btn=>{
+            document.querySelectorAll('.tour-more<?php echo $row['id']; ?>').forEach(__btn=>{
                 __btn.addEventListener('click',(ev)=>{
-                    document.body.insertAdjacentHTML('afterbegin',productcards[parseInt(ev.target.getAttribute('id'))]);
-                    document.querySelector('.btn-buy').addEventListener('click',(ev)=>{
+                    document.body.insertAdjacentHTML('afterbegin',productcards<?php echo $row['id']; ?>[parseInt(ev.target.getAttribute('id'))]);
+                    document.querySelector('.btn-buy<?php echo $row['id']; ?>').addEventListener('click',(ev)=>{
                         closeModal();
-                        document.body.insertAdjacentHTML('afterbegin',contactform);
+                        document.body.insertAdjacentHTML('afterbegin',contactform<?php echo $row['id']; ?>);
                     });
                 });
             });
+            <?php } ?>
             function closeModal() {
                 if (document.querySelector('.fixed-cont')!=null) {
                     document.querySelector(".fixed-cont").remove();

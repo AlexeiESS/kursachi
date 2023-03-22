@@ -42,20 +42,29 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                                 <th><p>Связь с менеджером</p></th>
                                 <th><p>Управление</p></th>
                             </tr>
+                            <?php $cont = $conn->query("SELECT * FROM contacts "); foreach($cont as $row){ 
+                                $date_1 = date('j',$row['date_1']);
+                            $date_2 = date('j',$row['date_2']);
+                            $month_1 = date('F',$row['date_1']);  
+                            $month_2 = date('F',$row['date_2']);
+                            $year_1 = date('o',$row['date_1']);
+                            $year_2 = date('o',$row['date_2']);
+                            ?>
                             <tr>
-                                <td><p>Имя Фамилия</p></td>
-                                <td><p>abc@mail.ru</p></td>
-                                <td><p>88005553535</p></td>
-                                <td><p>Шерегеш</p></td>
-                                <td><p>18-19 февраля 2023</p></td>
-                                <td><p>Да</p></td>
+                                <td><p><?php echo $row['name']; ?></p></td>
+                                <td><p><?php echo $row['email']; ?></p></td>
+                                <td><p><?php echo $row['phonen']; ?></p></td>
+                                <td><p><?php echo $row['tour']; ?></p></td>
+                                <td><p><?php echo $date_1; ?>-<?php echo $date_2; ?> <?php echo $month_1; if($month_1!=$month_2){echo '-'.$month_2;}?> <?php echo $year_1; if($year_1!=$year_2){echo '-'.$year_2;}?></p></td>
+                                <td><p><?php if($row['svaz']!=0){echo 'Да';}else {echo 'Нет';} ?></p></td>
                                 <td>
                                     <div class="--flexblock">
-                                        <input type="submit" value="Изменить" name="req_edit">
-                                        <input type="submit" value="Удалить" name="req_remove">
+                                        <a href="editreq.php?id=<?php echo $row['id']; ?>"><input value="Изменить" name="req_edit"></a>
+                                        <a href="php/handlers/main.php?action=remove&table=contacts&id=<?php echo $row['id']; ?>"><input value="Удалить" name="req_remove"></a>
                                     </div>
                                 </td>
                             </tr>
+                        <?php } ?>
                         </table>
                     </form>
                 </div>
