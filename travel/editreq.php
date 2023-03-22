@@ -1,3 +1,11 @@
+<?php 
+session_start();
+if(!isset($_SESSION['admin'])){
+    header("Location: index.php");
+}
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+ ?>
 <!DOCTYPE html>
 
 <html>
@@ -26,46 +34,37 @@
                     <form>
                         <table>
                             <tr>
-                                <th><p>Название</p></th>
-                                <th style="width: 178px; box-sizing: border-box;"><p>Фото</p></th>
+                                <th><p>Имя</p></th>
+                                <th><p>Эл. адрес</p></th>
+                                <th><p>Номер телефона</p></th>
+                                <th><p>Тур</p></th>
                                 <th><p>Даты</p></th>
-                                <th><p>Описание</p></th>
-                                <th><p>Цена</p></th>
-                                <th><p>Управление</p></th>
+                                <th><p>Связь с менеджером</p></th>
                             </tr>
                             <tr>
-                                <td><input type="text" value="Шерегеш" name="tour_name"></td>
-                                <td><img src="images/goods/sheregesh.png" draggable="false" alt></td>
+                                <td><input type="text" value="Имя Фамилия" name="req_name"></td>
+                                <td><input type="email" value="abc@mail.ru" name="req_email"></td>
+                                <td><input type="tel" value="88005553535" name="req_tel"></td>
+                                <td><input type="text" value="Шерегеш" name="req_tour"></td>
                                 <td>
                                     <div class="--flexblock" style="background: #fff;">
-                                        <input type="date" name="tour_date_start">
-                                        <input type="date" name="tour_date_end">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="--flexblock">
-                                        <input type="text" value="Знаменитые ёлки и снег" name="tour_desc">
+                                        <input type="date" name="req_tour_date_start">
+                                        <input type="date" name="req_tour_date_end">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="--flexblock" style="background: #fff;">
-                                        <input type="number" min="0" value=9000 name="tour_price"><p>р</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="--flexblock">
-                                        <input type="submit" value="Изменить" name="tour_edit">
-                                        <input type="submit" value="Удалить" name="tour_remove">
+                                        <label for="req_contact_manager-1">Да</label>
+                                        <input type="radio" name="req_contact_manager" id="req_contact_manager-1">
+                                        <label for="req_contact_manager-2">Нет</label>
+                                        <input type="radio" name="req_contact_manager" id="req_contact_manager-2">
                                     </div>
                                 </td>
                             </tr>
                         </table>
                         <div class="tour-edit-bar">
                             <div class="--flex">
-                                <label id="--newphoto" for="tour_photo" class="btn-st">Новое фото</label>
-                                <input type="file" name="tour_photo" style="display: none;" id="tour_photo">
                                 <input type="submit" value="Изменить" name="tour_edit" class="btn-st">
-                                <input type="submit" value="Удалить" name="tour_remove" class="btn-st">
                             </div>
                         </div>
                     </form>
