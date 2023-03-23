@@ -68,7 +68,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                         </div>
                     </td>
                     <td>
-                        <input type="file" style="display: none;" id="house_photo" name="house_photo">
+                        <input type="file" id="house_photo" name="house_photo">
                     </td>
                     <td>
                         <select name="sale_type">
