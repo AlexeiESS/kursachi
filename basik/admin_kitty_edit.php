@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(!isset($_SESSION['admin'])){
+    header("Location: index.php");
+}if(!isset($_GET['id'])){header("Location: index.php");}
+
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +27,10 @@
         <a href="#" style="font-weight: 700;">Каталог</a>
         <a href="#">Заявки</a>
     </div>
-    <form>
+    <?php
+                            $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM products WHERE id = '".$_GET['id']."'"));
+                            ?>
+    <form method="POST" action="php/handlers/main.php?id<?php echo $conn->arr['id']; ?>" enctype="multipart/form-data">
         <div class="separator">
             <div class="--rect">
                 <p>Внесение изменений</p>
@@ -28,28 +40,28 @@
             <div class="kittie-elem">
                 <div class="--col-wrap">
                     <div class="--elem --photo-elem">
-                        <img id="--photo" src="img/basik.png" draggable="false" alt>
+                        <img id="--photo" src="upload/<?php echo $conn->arr['img']; ?>" draggable="false" alt>
                     </div>
                     <div class="--elem --desc-elem">
-                        <p id="--title"><input type="text" value="Басик BABY в вязаной шапке" name="kitty_name"></p>
-                        <p id="--desc"><textarea name="kitty_desc">Малыш Басик в трогательной вязаной шапочке с завязочками и большим помпоном. В комплекте ярко-жёлтый флисовый шарфик с узелками на концах.</textarea></p>
+                        <p id="--title"><input type="text" value="<?php echo $conn->arr['name']; ?>" name="kitty_name"></p>
+                        <input type="file" name="kitty_photo" style="display: none;" id="kitty_photo" required>
+                        <p id="--desc"><textarea name="kitty_desc"><?php echo $conn->arr['description']; ?></textarea></p>
                         <div class="--flex-block">
                             <div>
-                                <p><input type="number" value=1638 min=0 name="kitty_price"> руб</p>
+                                <p><input type="number" value="<?php echo $conn->arr['price']; ?>" min=0 name="kitty_price"> руб</p>
                             </div>
                             <div>
-                                <p>Вес: <input type="number" value=0.5 min=0 step="0.1" name="kitty_weight"> кг</p>
+                                <p>Вес: <input type="number" value="<?php echo $conn->arr['masse']; ?>" min=0 step="0.1" name="kitty_weight"> кг</p>
                             </div>
                             <div>
-                                <p>Рост: <input type="number" value=20 min=0 name="kitty_height"> см</p>
+                                <p>Рост: <input type="number" value="<?php echo $conn->arr['height']; ?>" min=0 name="kitty_height"> см</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="--col-wrap">
                     <div class="--btn-block">
-                        <input type="submit" name="kittie_save" btn value="Изменить">
-                        <input type="submit" name="kittie_remove" btn value="Удалить">
+                        <input type="submit" name="kittie_save_edit" btn value="Изменить">
                     </div>
                 </div>
             </div>

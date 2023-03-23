@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['admin'])){
+    header("Location: index.php");
+}
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +26,7 @@
         <a href="#" style="font-weight: 700;">Каталог</a>
         <a href="#">Заявки</a>
     </div>
-    <form>
+    <form method="POST" action="php/handlers/main.php" enctype="multipart/form-data">
         <div class="separator">
             <div class="--rect">
                 <p>Добавить</p>
@@ -29,20 +37,20 @@
                 <div class="--col-wrap">
                     <div class="--elem --photo-elem">
                         <label for="kitty_photo"></label>
-                        <input type="file" name="kitty_photo" style="display: none;" id="kitty_photo">
+                        <input type="file" name="kitty_photo" style="display: none;" id="kitty_photo" required>
                     </div>
                     <div class="--elem --desc-elem">
-                        <p id="--title"><input type="text" placeholder="Введите название" name="kitty_name"></p>
-                        <p id="--desc"><textarea name="kitty_desc" placeholder="Введите описание"></textarea></p>
+                        <p id="--title"><input type="text" placeholder="Введите название" name="kitty_name" required></p>
+                        <p id="--desc"><textarea name="kitty_desc" placeholder="Введите описание" required></textarea></p>
                         <div class="--flex-block">
                             <div>
-                                <p><input type="number" placeholder="Цена" min=0 name="kitty_price"> руб</p>
+                                <p><input type="number" placeholder="Цена" min=0 name="kitty_price" required> руб</p>
                             </div>
                             <div>
-                                <p>Вес: <input type="number" placeholder="Вес" min=0 step="0.1" name="kitty_weight"> кг</p>
+                                <p>Вес: <input type="number" placeholder="Вес" min=0 step="0.1" name="kitty_weight" required> кг</p>
                             </div>
                             <div>
-                                <p>Рост: <input type="number" placeholder="Рост" min=0 name="kitty_height"> см</p>
+                                <p>Рост: <input type="number" placeholder="Рост" min=0 name="kitty_height" required> см</p>
                             </div>
                         </div>
                     </div>

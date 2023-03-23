@@ -1,3 +1,9 @@
+<?php
+if(!isset($_GET['id'])){header("Location: index.php");}
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +31,10 @@
                 <p>Оставить заявку</p>
             </div>
         </div>
-        <form>
+        <form method="POST" action="php/handlers/main.php?id=<?php echo $_GET['id']; ?>">
+            <div>
+                <label for="order_name">Ваш продукт:</label>
+            </div>
             <div>
                 <label for="order_name">Имя:</label>
                 <input type="text" id="order_name" name="order_name">
@@ -33,6 +42,10 @@
             <div>
                 <label for="order_city">Город:</label>
                 <input type="text" id="order_city" name="order_city">
+            </div>
+            <div>
+                <label for="order_city">Колличество</label>
+                <input type="number" id="order_city" name="summary_product">
             </div>
             <div>
                 <label for="order_tel">Номер телефона:</label>

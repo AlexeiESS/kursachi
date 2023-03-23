@@ -1,3 +1,7 @@
+<?php
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,28 +43,30 @@
         </div>
     </div>
     <section class="kitties">
+        <?php $product = $conn->query("SELECT * FROM products "); foreach($product as $row){ ?>
         <div class="kittie-elem">
             <div class="--col-wrap">
                 <div class="--elem">
-                    <img id="--photo" src="img/basik.png" draggable="false" alt>
+                    <img id="--photo" src="upload/<?php echo $row['img']; ?>" draggable="false" alt>
                 </div>
                 <div class="--elem">
-                    <p id="--title">Басик BABY в вязаной шапке</p>
-                    <p id="--desc">Малыш Басик в трогательной вязаной шапочке с завязочками и большим помпоном. В комплекте ярко-жёлтый флисовый шарфик с узелками на концах.</p>
+                    <p id="--title"><?php echo $row['name']; ?></p>
+                    <p id="--desc"><?php echo $row['description']; ?></p>
                 </div>
             </div>
             <div class="--col-wrap">
                 <div class="--price">
-                    <p>1 680 руб</p>
+                    <p><?php echo $row['price']; ?> руб</p>
                 </div>
             </div>
             <div class="--col-wrap">
                 <div class="--btn-block">
-                    <a href="#">Подробнее</a>
-                    <a href="#">Заказать</a>
+                    <a href="card.php?id=<?php echo $row['id']; ?>">Подробнее</a>
+                    <a href="order.php?id=<?php echo $row['id']; ?>">Заказать</a>
                 </div>
             </div>
         </div>
+        <?php } ?>
     </section>
     <div class="separator">
         <div class="--rect">

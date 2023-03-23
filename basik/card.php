@@ -1,3 +1,9 @@
+<?php
+if(!isset($_GET['id'])){header("Location: index.php");}
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +21,7 @@
     </nav>
     <div class="nav-small">
         <a href="#">Basik Baby</a>
-        <a href="#">Каталог</a>
+        <a href="index.php">Каталог</a>
         <a href="#">Контакты</a>
         <a href="#">Оставить заявку</a>
     </div>
@@ -26,29 +32,32 @@
             </div>
         </div>
         <section class="kitties card">
+            <?php
+                            $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM products WHERE id = '".$_GET['id']."'"));
+                            ?>
             <div class="kittie-elem">
                 <div class="--col-wrap">
                     <div class="--elem">
-                        <img id="--photo" src="img/basik.png" draggable="false" alt>
+                        <img id="--photo" src="upload/<?php $conn->arr['img']; ?>" draggable="false" alt>
                         <div class="--price">
-                            <p>1 680 руб</p>
+                            <p><?php $conn->arr['price']; ?> руб</p>
                         </div>
                     </div>
                     <div class="--elem">
-                        <p id="--desc">Малыш Басик в трогательной вязаной шапочке с завязочками и большим помпоном. В комплекте ярко-жёлтый флисовый шарфик с узелками на концах.</p>
+                        <p id="--desc"><?php $conn->arr['description']; ?></p>
                         <div class="--flex-block">
                             <div>
-                                <p>Вес: 0,5 кг</p>
+                                <p>Вес: <?php $conn->arr['masse']; ?> кг</p>
                             </div>
                             <div>
-                                <p>Рост: 20 см</p>
+                                <p>Рост: <?php $conn->arr['height']; ?> см</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="--col-wrap">
                     <div class="--btn-block">
-                        <a href="#" class="btn-order">Заказать</a>
+                        <a href="order.php?id=<?php $conn->arr['id']; ?>" class="btn-order">Заказать</a>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(isset($_SESSION['admin'])){
+    header("Location: admin.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +23,7 @@
         <p style="font-weight: 700;">АВТОРИЗАЦИЯ АДМИНИСТРАТОРА</p>
     </div>
     <div class="f-container">
-        <form>
+        <form method="POST" action="php/handlers/main.php">
             <div>
                 <label for="user_login">Логин:</label>
                 <input type="text" id="user_login" name="user_login">

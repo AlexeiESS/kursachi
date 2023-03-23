@@ -53,6 +53,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                 <tr>
                     <th><p>Название</p></th>
                     <th style="width: 182px;"><p>Фото</p></th>
+                    <th><p>Изменить фото</p></th>
                     <th><p>Тип цены</p></th>
                     <th><p>Цена в будни</p></th>
                     <th><p>Цена в вых. дни</p></th>
@@ -63,8 +64,11 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                     <td>
                         <div class="--photo-cont">
                             <label><img src="upload/<?php echo $conn->arr['img']; ?>" draggable="false" alt></label>
-                            <input type="file" style="display: none;" id="house_photo" name="house_photo">
+                            
                         </div>
+                    </td>
+                    <td>
+                        <input type="file" style="display: none;" id="house_photo" name="house_photo">
                     </td>
                     <td>
                         <select name="sale_type">

@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['admin'])){
+    header("Location: index.php");
+}
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,39 +33,42 @@
             </div>
         </div>
         <section class="kitties card admin-kitties">
+            <?php $product = $conn->query("SELECT * FROM products "); foreach($product as $row){ ?>
             <div class="kittie-elem">
                 <div class="--col-wrap">
                     <div class="--elem --photo-elem">
-                        <img id="--photo" src="img/basik.png" draggable="false" alt>
+                        <img id="--photo" src="upload/<?php echo $row['img']; ?>" draggable="false" alt>
                     </div>
                     <div class="--elem --desc-elem">
-                        <p id="--title">Басик BABY в вязаной шапке</p>
-                        <p id="--desc">Малыш Басик в трогательной вязаной шапочке с завязочками и большим помпоном. В комплекте ярко-жёлтый флисовый шарфик с узелками на концах.</p>
+                        <p id="--title"><?php echo $row['name']; ?></p>
+                        <p id="--desc"><?php echo $row['description']; ?></p>
                         <div class="--flex-block">
                             <div>
-                                <p>1 638 руб</p>
+                                <p><?php echo $row['price']; ?> руб</p>
                             </div>
                             <div>
-                                <p>Вес: 0,5 кг</p>
+                                <p>Вес: <?php echo $row['masse']; ?> кг</p>
                             </div>
                             <div>
-                                <p>Рост: 20 см</p>
+                                <p>Рост: <?php echo $row['height']; ?> см</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="--col-wrap">
                     <div class="--btn-block">
-                        <a href="#" class="btn-edit">Изменить</a>
-                        <a href="#" class="btn-remove">Удалить</a>
+                        <a href="admin_kitty_edit.php?id=<?php echo $row['id']; ?>" class="btn-edit">Изменить</a>
+                        <a href="php/handlers/main.php?action=remove&id=<?php echo $row['id']; ?>&table=products" class="btn-remove">Удалить</a>
                     </div>
                 </div>
-                <div class="--col-wrap">
-                    <div class="--btn-block">
-                        <a href="#" class="btn-edit" style="font-weight: 700;">Добавить</a>
-                    </div>
-                </div>
+                
             </div>
+            <?php } ?>
+            <div class="--col-wrap">
+                    <div class="--btn-block">
+                        <a href="admin_kitty_add.php" class="btn-edit" style="font-weight: 700;">Добавить</a>
+                    </div>
+                </div>
         </section>
     </form>
     <footer>
