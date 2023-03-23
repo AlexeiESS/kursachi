@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+            <nav>
+                <div class="nav-elem">
+                    <div class="--elem">
+                        <p>7 (906) 852 - 78- 00</p>
+                        <p>7 (3412) 66 - 55- 25</p>
+                    </div>
+                    <div class="--elem">
+                        <p>г. Ижевск, ул. 30 лет Победы, 48</p>
+                    </div>
+                    <div class="--elem">
+                        <a href="#" class="btn-contact">Записаться</a>
+                    </div>
+                </div>
+                <div class="nav-elem">
+                    <div class="--line"></div>
+                </div>
+                <div class="nav-elem" style="padding: 34px 80px;">
+                    <a href="#"><img src="img/SHINE.png" draggable="false" alt></a>
+                    <a href="#">О нас</a>
+                    <a href="#">Услуги</a>
+                    <a href="#">Мастера</a>
+                    <a href="#">Контакты</a>
+                </div>
+            </nav>
+            <h1>Панель администратора</h1>
+            <section class="admin">
+                <div class="admin-elem --buttons">
+                    <a href="#">Заявки на перезвон</a>
+                    <a href="#" class="--admin-cat-active">Мастера</a>
+                    <a href="#">Услуги</a>
+                </div>
+                <div class="admin-elem --table">
+                    <h2 style="margin-top: 0;">Добавить мастера</h2>
+                    <form>
+                        <input type="text" placeholder="Ввести имя" name="master_name">
+                        <input type="text" placeholder="Специальность" name="master_spec">
+                        <input type="text" placeholder="Добавить описание" name="master_desc"  style="height: 209px;">
+                        <label for="master_photo">Загрузить фото</label>
+                        <input type="file" name="master_photo" id="master_photo" style="display: none;">
+                        <input type="submit" name="master_add" value="Добавить мастера">
+                    </form>
+                </div>
+                
+            </section>
+            <section class="admin-bottom">
+                <div class="admin-elem --table">
+                    <table>
+                        <tr>
+                            <th>Имя</th>
+                            <th>Номер телефона</th>
+                            <th>Статус</th>
+                            <th>Действие</th>
+                        </tr>
+                        <tr>
+                            <td>Мастер 1</td>
+                            <td>79995554466</td>
+                            <td>Обратно</td>
+                            <td style="background: rgba(96, 161, 221, 0.3);">
+                                <div class="--flex-block">
+                                    <a href="#" style="border-right: 2px solid #000;">Вернуть в список невыполненных</a>
+                                    <a href="#">Изменить</a>
+                                    <a href="#" style="border-left: 2px solid #000;">Удалить</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Мастер 2</td>
+                            <td>79995554433</td>
+                            <td>Не обратно</td>
+                            <td style="background: rgba(96, 161, 221, 0.3);">
+                                <div class="--flex-block">
+                                    <a href="#" style="border-right: 2px solid #000;">Пометить выполненным</a>
+                                    <a href="#">Изменить</a>
+                                    <a href="#" style="border-left: 2px solid #000;">Удалить</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
