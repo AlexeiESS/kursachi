@@ -38,26 +38,26 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
             <div class="kittie-elem">
                 <div class="--col-wrap">
                     <div class="--elem">
-                        <img id="--photo" src="upload/<?php $conn->arr['img']; ?>" draggable="false" alt>
+                        <img id="--photo" src="upload/<?php echo $conn->arr['img']; ?>" draggable="false" alt>
                         <div class="--price">
-                            <p><?php $conn->arr['price']; ?> руб</p>
+                            <p><?php echo $conn->arr['price']; ?> руб</p>
                         </div>
                     </div>
                     <div class="--elem">
-                        <p id="--desc"><?php $conn->arr['description']; ?></p>
+                        <p id="--desc"><?php echo $conn->arr['description']; ?></p>
                         <div class="--flex-block">
                             <div>
-                                <p>Вес: <?php $conn->arr['masse']; ?> кг</p>
+                                <p>Вес: <?php echo $conn->arr['masse']; ?> кг</p>
                             </div>
                             <div>
-                                <p>Рост: <?php $conn->arr['height']; ?> см</p>
+                                <p>Рост: <?php echo $conn->arr['height']; ?> см</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="--col-wrap">
                     <div class="--btn-block">
-                        <a href="order.php?id=<?php $conn->arr['id']; ?>" class="btn-order">Заказать</a>
+                        <a href="order.php?id=<?php echo $conn->arr['id']; ?>" class="btn-order">Заказать</a>
                     </div>
                 </div>
             </div>

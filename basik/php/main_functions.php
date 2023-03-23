@@ -29,14 +29,14 @@ function qeury_search($login, $password)
 
 function add_product($name, $description, $price,$masse,$height, $img=''){
 	global $conn;
-	$conn->query("INSERT INTO homes(id, name, description, price,masse, height, img) VALUES (NULL, '$name','$description','$price','$masse','$height','$img')");
+	$conn->query("INSERT INTO products(id, name, description, price,masse, height, img) VALUES (NULL, '$name','$description','$price','$masse','$height','$img')");
 	return 1;
 }
 function edit_product($name, $description, $price,$masse,$height, $img='', $id){
 	global $conn;
 	if(empty($img)){
 		$conn->query("
-		UPDATE homes 
+		UPDATE products 
 		SET name = '".$name."',
 		description = '".$description."',
 		price = '".$price."',
@@ -46,7 +46,7 @@ function edit_product($name, $description, $price,$masse,$height, $img='', $id){
 		return 1;
 	}else {
 		$conn->query("
-		UPDATE homes 
+		UPDATE products 
 		SET name = '".$name."',
 		description = '".$description."',
 		price = '".$price."',
@@ -62,31 +62,47 @@ function edit_product($name, $description, $price,$masse,$height, $img='', $id){
 
 
 
-function add_contact($name,$product, $phonen, $date_day, $date_time_begin, $date_time_end, $text){
+function add_contact($name,$product,$city, $phonen, $summary){
 	global $conn;
-	$conn->query("INSERT INTO contacts(id, name,product, phonen, date_day,date_time_begin,date_time_end, text_cont, svaz) VALUES (NULL, '$name','$product','$phonen','$date_day','$date_time_begin','$date_time_end','$text', 0)");
+	$conn->query("INSERT INTO contacts(id, name,product, city, phonen, summary, svaz) VALUES (NULL, '$name','$product','$city','$phonen','$summary', 0)");
 	return 1;
 }
 
 
-function edit_cont($name,$product, $phonen, $date_day, $date_time_begin, $date_time_end, $text,$svaz, $id){
+function edit_cont($name,$product,$city, $phonen,$summary, $svaz, $id){
 	global $conn;
 	$conn->query("
 		UPDATE contacts 
 		SET name = '".$name."',
 		product = '".$product."',
+		city = '".$city."',
 		phonen = '".$phonen."',
-		date_day = '".$date_day."',
-		date_time_begin = '".$date_time_begin."',
-		date_time_end = '".$date_time_end."',
-		text_cont = '".$text."',
+		summary = '".$summary."',
 		svaz = '".$svaz."'
 		WHERE id = $id;");
 		return 1;
 }
 
 
-
+function edit_banner($title,$description,$img){
+	global $conn;
+	if(empty($img)){
+		$conn->query("
+		UPDATE settings 
+		SET title = '".$title."',
+		description = '".$description."'
+		WHERE id = 1;");
+		return 1;
+	}else {
+	$conn->query("
+		UPDATE settings 
+		SET title = '".$title."',
+		description = '".$description."',
+		img = '".$img."'
+		WHERE id = 1;");
+		return 1;
+	}
+}
 
 
 function delete($table, $id){

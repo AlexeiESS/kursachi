@@ -27,7 +27,10 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
         <a href="#">Каталог</a>
         <a href="#" style="font-weight: 700;">Заявки</a>
     </div>
-    <form class="admin-orders f-order-edit">
+    <?php
+                            $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM contacts WHERE id = '".$_GET['id']."'"));
+                            ?>
+    <form class="admin-orders f-order-edit" action="php/handlers/main.php?id=<?php echo $conn->arr['id']; ?>" method="POST"> 
         <div class="separator">
             <div class="--rect">
                 <p>Внесение изменений</p>
@@ -36,15 +39,23 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
         <table>
             <tr>
                 <th>Имя</th>
-                <td><input type="text" value="Алексей" name="order_name"></td>
+                <td><input type="text" value="<?php echo $conn->arr['name']; ?>" name="order_name"></td>
             </tr>
             <tr>
                 <th>Город</th>
-                <td><input type="text" value="Архангельск" name="order_city"></td>
+                <td><input type="text" value="<?php echo $conn->arr['city']; ?>" name="order_city"></td>
             </tr>
             <tr>
                 <th>Номер телефона</th>
-                <td><input type="tel" value="78445620200" name="order_tel"></td>
+                <td><input type="tel" value="<?php echo $conn->arr['phonen']; ?>" name="order_tel"></td>
+            </tr>
+            <tr>
+                <th>Продукт</th>
+                <td><input type="text" value="<?php echo $conn->arr['product']; ?>" id="order_city" name="product"></td>
+            </tr>
+            <tr>
+                <th>Колличество</th>
+                <td><input type="number" value="<?php echo $conn->arr['summary']; ?>" id="order_city" name="summary_product"></td>
             </tr>
             <tr>
                 <th>Статус</th>
@@ -52,19 +63,19 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                     <div class="--flex-block">
                         <div>
                             <label for="order_waiting-0">Не связались</label>
-                            <input type="radio" name="order_waiting" id="order_waiting-0">
+                            <input <?php if($conn->arr['svaz']==0){echo 'checked';} ?> type="radio" value="0" name="order_waiting" id="order_waiting-0">
                         </div>
                         <div>
                             <label for="order_waiting-1">Связались</label>
-                            <input type="radio" name="order_waiting" id="order_waiting-1">
+                            <input <?php if($conn->arr['svaz']==1){echo 'checked';} ?> type="radio" value="1" name="order_waiting" id="order_waiting-1">
                         </div>
                     </div>
                 </td>
             </tr>
-            <tr>
+            <!--<tr>
                 <th>Описание</th>
                 <td><input type="text" name="order_desc"></td>
-            </tr>
+            </tr>-->
         </table>
         <div class="--col-wrap">
             <div class="--btn-block">

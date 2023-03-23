@@ -30,7 +30,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
     <?php
                             $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM products WHERE id = '".$_GET['id']."'"));
                             ?>
-    <form method="POST" action="php/handlers/main.php?id<?php echo $conn->arr['id']; ?>" enctype="multipart/form-data">
+    <form method="POST" action="php/handlers/main.php?id=<?php echo $conn->arr['id']; ?>" enctype="multipart/form-data">
         <div class="separator">
             <div class="--rect">
                 <p>Внесение изменений</p>
@@ -44,7 +44,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                     </div>
                     <div class="--elem --desc-elem">
                         <p id="--title"><input type="text" value="<?php echo $conn->arr['name']; ?>" name="kitty_name"></p>
-                        <input type="file" name="kitty_photo" style="display: none;" id="kitty_photo" required>
+                        <input type="file" name="kitty_photo" id="kitty_photo" >
                         <p id="--desc"><textarea name="kitty_desc"><?php echo $conn->arr['description']; ?></textarea></p>
                         <div class="--flex-block">
                             <div>
@@ -61,7 +61,8 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                 </div>
                 <div class="--col-wrap">
                     <div class="--btn-block">
-                        <input type="submit" name="kittie_save_edit" btn value="Изменить">
+                        <input type="submit" name="kittie_save_edit" btn value="Изменить"> 
+                       
                     </div>
                 </div>
             </div>

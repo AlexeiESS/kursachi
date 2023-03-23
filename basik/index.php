@@ -23,18 +23,18 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
         <a href="#">Контакты</a>
         <a href="#">Оставить заявку</a>
     </div>
+    <?php
+                            $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM settings "));
+                            ?>
     <section class="banner">
         <div class="banner-elem" id="block-1" style="height: 55px;">
-            <img src="img/banner.png" draggable="false" alt>
+            <img src="upload/<?php echo $conn->arr['img']; ?>" draggable="false" alt>
         </div>
         <div class="banner-elem" id="block-2">
             <div class="--rect">
-                <p>Basik Baby</p>
+                <p><?php echo $conn->arr['title']; ?></p>
             </div>
-            <p>Возьми себе малыша Басика и он станет твоим лучшим другом!<br> 
-                Большой выбор разных стилей, каждый найдет Басика, который будет по душе.<br><br><br>
-                
-                Ткань и наполнитель гипоаллергенные, быстросохнущие, не садятся при стирке.</p>
+            <p><?php echo $conn->arr['description']; ?></p>
         </div>
     </section>
     <div class="separator">

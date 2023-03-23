@@ -26,19 +26,19 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
         <a href="#">Каталог</a>
         <a href="#">Заявки</a>
     </div>
-    <form>
+    <?php
+                            $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM settings "));
+                            ?>
+    <form method="POST" action="php/handlers/main.php" enctype="multipart/form-data">
         <section class="banner">
             <div class="banner-elem" id="block-1" style="height: 55px;">
-                <img src="img/banner.png" draggable="false" alt>
+                <img src="upload/<?php echo $conn->arr['img']; ?>" draggable="false" alt>
             </div>
             <div class="banner-elem" id="block-2">
                 <div class="--rect">
-                    <p>Basik Baby</p>
+                    <p><input type="text" name="banner_title" value="<?php echo $conn->arr['title']; ?>"></p>
                 </div>
-                <p><textarea name="banner_desc" style="width: 100%; height: 100%;">Возьми себе малыша Басика и он станет твоим лучшим другом!<br> 
-                    Большой выбор разных стилей, каждый найдет Басика, который будет по душе.<br><br><br>
-                    
-                    Ткань и наполнитель гипоаллергенные, быстросохнущие, не садятся при стирке.</textarea></p>
+                <p><textarea name="banner_desc" style="width: 100%; height: 100%;"><?php echo $conn->arr['description']; ?></textarea></p>
             </div>
         </section>
         <div class="--btn-block">

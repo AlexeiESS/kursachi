@@ -43,25 +43,28 @@ if(isset($_POST['kittie_save_edit'])){
 
 
 
-if(isset($_POST['add_cont'])){
-	$date = strtotime($_POST['book_date']);
-	$time_1 = strtotime($_POST['time_begin']);
-	$time_2 = strtotime($_POST['time_end']);
-	if(add_contact($_POST['book_name'],$_POST['book_house'],$_POST['book_tel'],$date, $time_1,$time_2,$_POST['book_comment'])==1) 
+if(isset($_POST['order_send'])){
+	$conn->arr = $conn->fetchrow($conn->query("SELECT * FROM products WHERE id = '".$_GET['id']."'"));
+	$product = $conn->arr['name'];
+	if(add_contact($_POST['order_name'],$product,$_POST['order_city'], $_POST['order_tel'],$_POST['summary_product'])==1) 
 	{
 		redirect('../../index', 'ok=true');
 	}else {redirect('../../index', 'ok=false');}
 }
 
-
-if(isset($_POST['req_save'])){
-	$date = strtotime($_POST['req_day_begin']);
-	$time_1 = strtotime($_POST['req_time_begin']);
-	$time_2 = strtotime($_POST['req_time_end']);
-	if(edit_cont($_POST['req_name'],$_POST['req_housename'],$_POST['req_tel'],$date, $time_1,$time_2,$_POST['req_comment'],$_POST['req_contacted'],$_GET['id'])==1)
-	{
-		redirect('../../requests', 'ok=true');
-	}else {redirect('../../requests', 'ok=false');}
+if(isset($_POST['order_save'])){
+	if(edit_cont($_POST['order_name'],$_POST['product'],$_POST['order_city'], $_POST['order_tel'],$_POST['summary_product'], $_POST['order_waiting'],$_GET['id'])==1){
+		redirect('../../admin', 'ok=true');
+	}else {redirect('../../admin', 'ok=false');}
+}
+if(isset($_POST['banner_edit'])){
+	if(edit_banner($_POST['banner_title'],$_POST['banner_desc'], $_FILES['banner_photo']['name'])==1){
+		if(empty($_FILES['banner_photo']['name'])){redirect('../../admin', 'ok=true');}else {
+		if(!move_uploaded_file($_FILES['banner_photo']['tmp_name'], "../../upload/".$_FILES['banner_photo']['name']))
+		{
+			redirect('../../admin', 'ok=false');
+		}else {redirect('../../admin', 'ok=true');}}
+	}
 }
 
 

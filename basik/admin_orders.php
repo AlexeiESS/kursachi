@@ -41,19 +41,21 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                 <th>Описание</th>
                 <th style="width: 329px;">Управление</th>
             </tr>
+            <?php $cont = $conn->query("SELECT * FROM contacts "); foreach($cont as $row){ ?>
             <tr>
-                <td>Алексей</td>
-                <td>Архангельск</td>
-                <td>78445620200</td>
-                <td>Не связались</td>
-                <td>Басик “Космос” 2 шт</td>
+                <td><?php echo $row['name']; ?></td>
+                <td><?php echo $row['city']; ?></td>
+                <td><?php echo $row['phonen']; ?></td>
+                <td><?php if($row['svaz']==0){echo 'Не связались';}else {echo 'Cвязались';} ?></td>
+                <td><?php echo $row['product']; ?> - <?php echo $row['summary']; ?> шт</td>
                 <td>
                     <div class="--flex-block">
-                        <a href="#">Редактировать</a>
-                        <a href="#">Удалить</a>
+                        <a href="admin_orders_edit.php?id=<?php echo $row['id']; ?>">Редактировать</a>
+                        <a href="php/handlers/main.php?action=remove&id=<?php echo $row['id']; ?>&table=contacts">Удалить</a>
                     </div>
                 </td>
             </tr>
+            <?php } ?>
         </table>
     </section>
     <footer>
