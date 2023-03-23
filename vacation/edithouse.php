@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(!isset($_SESSION['admin'])){
+    header("Location: index.php");
+}if(!isset($_GET['id'])){header("Location: index.php");}
+
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,30 +45,40 @@
                 Вернуться
             </a>
         </div>
-        <form class="f-edit-house">
+        <?php
+                            $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM homes WHERE id = '".$_GET['id']."'"));
+                            ?>
+        <form class="f-edit-house" method="POST" action="php/handlers/main.php?id=<?php echo $conn->arr['id']; ?>" enctype="multipart/form-data">
             <table>
                 <tr>
                     <th><p>Название</p></th>
                     <th style="width: 182px;"><p>Фото</p></th>
+                    <th><p>Тип цены</p></th>
                     <th><p>Цена в будни</p></th>
                     <th><p>Цена в вых. дни</p></th>
                     <th><p>Описание</p></th>
                 </tr>
                 <tr>
-                    <td><input type="text" name="house_name" value="Шумная компания"></td>
+                    <td><input type="text" name="house_name" value="<?php echo $conn->arr['name']; ?>"></td>
                     <td>
                         <div class="--photo-cont">
-                            <label><img src="img/houses/house1.png" draggable="false" alt></label>
+                            <label><img src="upload/<?php echo $conn->arr['img']; ?>" draggable="false" alt></label>
+                            <input type="file" style="display: none;" id="house_photo" name="house_photo">
                         </div>
                     </td>
-                    <td><input type="number" name="house_price_workdays" value=7500 min=0><p> руб/сут</p></td>
-                    <td><input type="number" name="house_price_holidays" value=9500 min=0><p> руб/сут</p></td>
-                    <td><input type="text" name="house_desc" value="Домик вместительностью до 10 человек. Своя мангальная зона, сауна-бочка на 3-5 часов. Из развлечений - караоке, настольные игры, бадминтон, фрисби."></td>
+                    <td>
+                        <select name="sale_type">
+                            <option <?php if($conn->arr['sale_type']!=0){echo 'selected';} ?> value="1">Оплата в сутки</option>
+                            <option <?php if($conn->arr['sale_type']==0){echo 'selected';} ?> value="0">Оплата в час</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="house_price_workdays" value="<?php echo $conn->arr['price']; ?>" min=0><p> руб</p></td>
+                    <td><input type="number" name="house_price_holidays" value="<?php echo $conn->arr['price_2']; ?>" min=0><p> руб</p></td>
+                    <td><input type="text" name="house_desc" value="<?php echo $conn->arr['description']; ?>"></td>
                 </tr>
             </table>
             <div class="--btn-cont">
-                <input type="submit" value="Готово" user="house_edit">
-                <input type="submit" value="Удалить" user="house_remove">
+                <input type="submit" value="Готово" name="house_edit" user="house_edit">
             </div>
         </form>
     </div>

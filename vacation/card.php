@@ -1,3 +1,9 @@
+<?php
+if(!isset($_GET['id'])){header("Location: index.php");}
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,25 +33,28 @@
                 </div>
             </div>
         </nav>
+        <?php
+                            $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM homes WHERE id = '".$_GET['id']."'"));
+                            ?>
         <div class="card">
             <div class="card-elem">
-                <img src="img/houses/house2.png" draggable="false" alt>
+                <img src="upload/<?php echo $conn->arr['img']; ?>" draggable="false" alt>
             </div>
             <div class="card-elem">
-                <p id="--title">На свежем воздухе</p>
+                <p id="--title"><?php echo $conn->arr['name']; ?></p>
                 <div class="--desc-block">
-                    <p>Беседка с мостиком и мангальной зоной. Река в 200 метрах. Вся территория обработана от клещей. В вечернее время можно опустить жалюзи по всему периметру беседки. Рассчитана на 12-15 человек.</p>
+                    <p><?php echo $conn->arr['description']; ?></p>
                 </div>
                 <div class="--price-block">
                     <div class="--elem">
-                        <p>пн - чт: 1000 руб/час</p>
+                        <p>будни: <?php $conn->arr['price']; ?> руб/<?php if($conn->arr['sale_type']!=1){echo 'час';}else {echo 'сутки';} ?></p>
                     </div>
                     <div class="--elem">
-                        <p>пт-вс и праздники: 1200 руб/час</p>
+                        <p>праздники: <?php $conn->arr['price_2']; ?> руб/<?php if($conn->arr['sale_type']!=1){echo 'час';}else {echo 'сутки';} ?></p>
                     </div>
                 </div>
                 <div class="--btn-cont">
-                    <a href="#" class="btn-book">Забронировать</a>
+                    <a href="book.php?id=<?php echo $conn->arr['id']; ?>" class="btn-book">Забронировать</a>
                 </div>
             </div>
         </div>

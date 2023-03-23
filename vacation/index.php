@@ -1,3 +1,7 @@
+<?php
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,48 +60,22 @@
                 </div>
             </div>
             <div class="grid-3">
+                <?php $homes = $conn->query("SELECT * FROM homes "); foreach($homes as $row){ ?>
                 <div class="grid-item">
-                    <img src="img/houses/house0.png" draggable="false" alt>
-                    <p id="--house-name">Уикенд вдвоём</p>
+                    <img src="upload/<?php echo $row['img']; ?>" draggable="false" alt>
+                    <p id="--house-name"><?php echo $row['name']; ?></p>
                     <div class="--desc-block">
-                        <p>Домик со всеми удобствами, своей мангальной зоной и выходом к реке. Рассчитан на 2 человека, максимальное количество - 4 (требуется доплата за доп. спальные места).</p>
+                        <p><?php echo $row['description']; ?></p>
                     </div>
                     <div class="--price-block">
-                        <p>от 3500 руб/сут</p>
+                        <p>от <?php echo $row['price']; ?> руб/<?php if($row['sale_type']!=1){echo 'час';}else {echo 'сутки';} ?></p>
                     </div>
                     <div class="--action-block">
-                        <a href="#">Подробнее</a>
-                        <a href="#">Забронировать</a>
+                        <a href="card.php?id=<?php echo $row['id']; ?>">Подробнее</a>
+                        <a href="book.php?id=<?php echo $row['id']; ?>">Забронировать</a>
                     </div>
                 </div>
-                <div class="grid-item">
-                    <img src="img/houses/house1.png" draggable="false" alt>
-                    <p id="--house-name">Шумная компания</p>
-                    <div class="--desc-block">
-                        <p>Домик вместительностью до 10 человек. Своя мангальная зона, сауна-бочка на 3-5 часов. Из развлечений - караоке, настольные игры, бадминтон, фрисби.</p>
-                    </div>
-                    <div class="--price-block">
-                        <p>от 7500 руб/сут</p>
-                    </div>
-                    <div class="--action-block">
-                        <a href="#">Подробнее</a>
-                        <a href="#">Забронировать</a>
-                    </div>
-                </div>
-                <div class="grid-item">
-                    <img src="img/houses/house2.png" draggable="false" alt>
-                    <p id="--house-name">На свежем воздухе</p>
-                    <div class="--desc-block">
-                        <p>Беседка с мостиком и мангальной зоной. Река в 200 метрах. Вся территория обработана от клещей. В вечернее время можно опустить жалюзи по всему периметру беседки. Рассчитана на 12-15 человек.</p>
-                    </div>
-                    <div class="--price-block">
-                        <p>от 1000 руб/час</p>
-                    </div>
-                    <div class="--action-block">
-                        <a href="#">Подробнее</a>
-                        <a href="#">Забронировать</a>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </section>
         <section class="team">

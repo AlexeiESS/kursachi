@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(!isset($_SESSION['admin'])){
+    header("Location: index.php");
+}
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +45,7 @@
                 Вернуться
             </a>
         </div>
-        <form class="card house-add">
+        <form class="card house-add" method="POST" action="php/handlers/main.php" enctype="multipart/form-data">
             <div class="card-elem">
                 <div class="--elem" style="margin-right: 180px;">
                     <div class="--house-photo">
@@ -56,6 +65,15 @@
                     <div class="--input-wrap">
                         <label for="house_price_holidays">Цена в выходные дни:</label>
                         <input type="text" id="house_price_holidays" name="house_price_holidays" required text>
+                    </div>
+                    <div>
+                        <label for="house_price_holidays">
+                            Тип цены
+                        </label>
+                        <select name="sale_type">
+                            <option value="1">Оплата в сутки</option>
+                            <option value="0">Оплата в час</option>
+                        </select>
                     </div>
                     <div class="--input-wrap" style="align-items: start;">
                         <label for="house_desc">Описание:</label>

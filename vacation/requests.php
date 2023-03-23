@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['admin'])){
+    header("Location: index.php");
+}
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,19 +55,23 @@
                     <th><p>Комментарий</p></th>
                     <th><p>Статус</p></th>
                 </tr>
+                <?php $cont = $conn->query("SELECT * FROM contacts "); foreach($cont as $row){ ?>
                 <tr>
-                    <td><p>Имя Фамилия</p></td>
-                    <td><p>7 (982) 000 51 85</p></td>
-                    <td><p></p></td>
-                    <td><p></p></td>
-                    <td><p></p></td>
-                    <td><p>Домик на компанию 9 человек и лабрадор.</p></td>
-                    <td><p>Ждёт звонка</p></td>
-                </tr>
+                    <td><p><?php echo $row['name']; ?></p></td>
+                    <td><p><?php echo $row['phonen']; ?></p></td>
+                    <td><p><?php echo $row['product']; ?></p></td>
+                    <td><p><?php echo date("g:i a",$row['date_time_begin']); ?> - <?php echo date("g:i a",$row['date_time_end']); ?></p></td>
+                    <td><p><?php echo date("F j, Y",$row['date_day']); ?></p></td>
+                    <td><p><?php echo $row['text_cont']; ?></p></td>
+                    <td><p><?php if($row['svaz']!=1){echo 'Ждёт звонка';}else {echo 'Обслужен';} ?></p></td>
+                
+
                 <div class="--btn-cont">
-                    <a href="#">Изменить</a>
-                    <a href="#">Удалить</a>
+                    <a href="editreq.php?id=<?php echo $row['id']; ?>">Изменить</a>
+                    <a href="php/handlers/main.php?action=remove&id=<?php echo $row['id']; ?>&table=contacts">Удалить</a>
                 </div>
+                </tr>
+                <?php } ?>
             </table>
         </div>
     </div>

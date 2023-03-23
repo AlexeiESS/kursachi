@@ -1,3 +1,7 @@
+<?php
+session_start();
+if(isset($_SESSION['admin'])){header("Location: admin.php");}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +34,7 @@
                 </div>
             </div>
         </nav>
-        <form class="f-auth" style="margin-top: 56px;">
+        <form class="f-auth" style="margin-top: 56px;" method="POST" action="php/handlers/main.php">
             <div class="--container">
                 <div style="display: flex; flex-direction: row; gap: 11px;">
                     <label for="user_login">Логин:</label>
