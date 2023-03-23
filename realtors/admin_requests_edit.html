@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="address-block">
+            <p>
+                г. Кострома, ул. Магистральная, 20<br>3, 2 этаж, офис 4
+            </p>
+        </div>
+        <img id="houseico" src="img/houseico.svg" draggable="false" alt>
+        <div class="stripe-container">
+            <div class="stripes">
+                <div id="--stripe-1"></div>
+                <div id="--stripe-2"></div>
+                <div id="--stripe-3"></div>
+                <p>стены</p>
+            </div>
+        </div>
+        <div class="tel-block">
+            <img src="img/tel.svg" draggable="false" alt><a href="tel:79125210012">7 (912) 521 00 12</a>
+        </div>
+    </nav>
+    <div class="main">
+        <div class="container">
+            <section class="top-block">
+                <div class="bar">
+                    <a href="#"><img src="img/back.png" draggable="false" alt></a>
+                    <a href="#">Преимущества</a>
+                    <a href="#">Объекты</a>
+                    <a href="#" style="font-weight: 700;">Оставить заявку</a>
+                    <a href="#"><img src="img/exit.png" draggable="false" alt></a>
+                </div>
+                <form class="f-request-edit">
+                    <div class="stripe-container">
+                        <div class="stripes">
+                            <div id="--stripe-1"></div>
+                            <div id="--stripe-2"></div>
+                            <div id="--stripe-3"></div>
+                            <p style="font-size: 30px; font-family: 'Open Sans', sans-serif;">Редактор</p>
+                        </div>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Имя</th>
+                            <td>Арсений</td>
+                        </tr>
+                        <tr>
+                            <th>Номер телефона</th>
+                            <td>7 (985) 028 00 12</td>
+                        </tr>
+                        <tr>
+                            <th>Адрес</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Статус</th>
+                            <td>
+                                <div class="--flex-block">
+                                    <div>
+                                        <label for="req_waiting-0">Ждет звонка</label>
+                                        <input type="radio" name="req_waiting" id="req_waiting-0">
+                                    </div>
+                                    <div>
+                                        <label for="req_waiting-1">Связались</label>
+                                        <input type="radio" name="req_waiting" id="req_waiting-1">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="--button-block" style="margin-bottom: 45px;">
+                        <input type="submit" value="Сохранить" name="house_save" btn style="font-weight: 700;">
+                    </div>
+                </form>
+                <div class="admin-bar">
+                    <a href="#">Администратор</a>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

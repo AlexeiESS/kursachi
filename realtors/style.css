@@ -1,0 +1,532 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 0.1em;
+}
+
+input {
+  font-family: "Open Sans", sans-serif;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  position: relative;
+  width: 1417px;
+  background-image: url("img/navrect.svg");
+  background-size: contain;
+  height: 111px;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+nav .address-block {
+  position: absolute;
+  left: 120px;
+}
+nav .tel-block {
+  position: absolute;
+  right: 120px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+nav .tel-block a {
+  text-decoration: none;
+  color: #000;
+}
+nav .stripes {
+  font-family: "Playfair Display", serif;
+  font-size: 55px;
+}
+nav #houseico {
+  margin-right: 120px;
+}
+
+.stripe-container {
+  display: flex;
+  height: auto;
+  height: 70px;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.stripes {
+  position: absolute;
+  padding: 0 10px;
+  display: flex;
+  justify-content: center;
+}
+.stripes p {
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.stripes #--stripe-1 {
+  position: absolute;
+  width: 2px;
+  height: calc(100% + 8px);
+  background: #000;
+  left: 0;
+  top: 0;
+}
+.stripes #--stripe-2 {
+  position: absolute;
+  width: calc(100% + 12px);
+  height: 2px;
+  background: #000;
+  bottom: 0;
+}
+.stripes #--stripe-3 {
+  position: absolute;
+  width: 2px;
+  height: calc(100% + 8px);
+  background: #000;
+  right: 0;
+  top: 0;
+}
+
+.main {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  position: relative;
+  max-width: 1279px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.top-block {
+  position: relative;
+}
+.top-block .bar {
+  width: 100%;
+  height: 55px;
+  background: #FFD670;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+}
+.top-block .bar a {
+  font-weight: 400;
+  font-size: 20px;
+  color: #000;
+  text-decoration: none;
+}
+.top-block .banner {
+  position: relative;
+  height: 435px;
+  background-image: url("img/banner.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.top-block .banner .--slogan {
+  position: absolute;
+  bottom: 47px;
+  left: 47px;
+  width: 403px;
+  height: 166px;
+  background: rgba(13, 161, 166, 0.67);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.top-block .banner .--slogan p {
+  font-weight: 600;
+  font-size: 35px;
+  line-height: 48px;
+  letter-spacing: 0.1em;
+  color: #000;
+  text-align: center;
+}
+.top-block .admin-bar {
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFD670;
+}
+.top-block .admin-bar a {
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.features {
+  margin-top: 65px;
+}
+.features .stripes p {
+  font-family: "Open Sans", sans-serif;
+  font-size: 30px;
+}
+.features .pros-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 43px;
+}
+.features .pros-cont .pc-elem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+}
+.features .pros-cont .pc-elem .--wrap {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+.features .pros-cont .pc-elem .--se-textcont {
+  padding: 12px 0;
+}
+.features .pros-cont .pc-elem .--subelem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  font-size: 20px;
+  line-height: 27px;
+}
+.features .pros-cont .pc-elem .--subelem #--title {
+  font-weight: 700;
+}
+.features .pros-cont .pc-elem .--subelem #--desc {
+  font-weight: 400;
+}
+
+.--button-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 58px;
+  gap: 66px;
+  margin-top: 22px;
+  width: 100%;
+}
+.--button-block a, .--button-block input[btn], .--button-block label[btn] {
+  width: 372px;
+  height: 58px;
+  background: rgba(13, 161, 166, 0.5);
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+  border: 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.objects {
+  margin-top: 65px;
+}
+.objects .stripes p {
+  font-family: "Open Sans", sans-serif;
+  font-size: 30px;
+}
+.objects .flat-container {
+  display: flex;
+  flex-direction: column;
+  gap: 78px;
+  margin-top: 32px;
+}
+.objects .flat-container .fc-elem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.objects .flat-container .fc-elem .--bottom-block {
+  background: #FFF1CE;
+  min-height: 307px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.objects .flat-container .fc-elem .--bottom-block p {
+  text-align: center;
+  line-height: 27px;
+}
+.objects .flat-container .fc-elem .--top-block {
+  width: 439px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.objects .flat-container .fc-elem .--top-block img {
+  margin-bottom: 8px;
+  width: 439px;
+  height: 221px;
+}
+.objects .flat-container .fc-elem .--top-block .--house-photo {
+  width: 439px;
+  height: 221px;
+  background: #FFD670;
+}
+.objects .flat-container .fc-elem .--top-block .--desc-rect {
+  background: #FFF1CE;
+  height: 58px;
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.objects .flat-container .fc-elem .--top-block .--desc-rect p {
+  text-align: center;
+}
+
+.contacts {
+  position: relative;
+  height: 426px;
+  background: rgba(13, 161, 166, 0.5);
+  margin-top: 60px;
+}
+.contacts .stripes p {
+  font-family: "Open Sans", sans-serif;
+  font-size: 30px;
+}
+
+footer {
+  height: 310px;
+  background: #FFD670;
+  border: 1px solid #000000;
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 0 78px;
+}
+footer .ft-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 190px;
+}
+footer .ft-links a {
+  text-decoration: none;
+  color: #000;
+}
+footer .ft-links .--tel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+footer .ft-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 190px;
+  margin-left: 300px;
+}
+footer .ft-info .--schedule {
+  line-height: 38px;
+}
+footer .map {
+  position: absolute !important;
+  right: 78px;
+}
+
+iframe {
+  border: 0;
+}
+
+.f-admin-auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 425px;
+  gap: 10px;
+}
+.f-admin-auth input[type=text], .f-admin-auth input[type=password] {
+  width: 444px;
+  height: 57px;
+  outline: 0;
+  border: 0;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "OpenSans", sans-serif;
+  background: rgba(255, 214, 112, 0.28);
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.f-admin-auth div {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.f-admin-auth label {
+  display: flex;
+  width: 237px;
+  height: 57px;
+  background: rgba(255, 214, 112, 0.28);
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 20px;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+}
+
+.f-feat-edit input {
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+}
+.f-feat-edit .--subelem {
+  width: 100%;
+}
+.f-feat-edit .--subelem p {
+  background: rgba(255, 214, 112, 0.28);
+  padding: 16px;
+  height: 100%;
+}
+
+.f-feat-add {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 39px;
+  margin-bottom: 52px;
+}
+.f-feat-add .f-elem {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+.f-feat-add .f-elem .--button-block {
+  justify-content: space-between;
+}
+.f-feat-add .--elem {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.f-feat-add input[type=text] {
+  background: rgba(255, 214, 112, 0.28);
+  height: 57px;
+  min-height: 57px;
+  border: 0;
+  outline: 0;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 0.1em;
+  color: #000;
+  padding: 0 28px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.f-feat-add .feat-photo {
+  background: #FFD670;
+  width: 439px;
+  height: 221px;
+  display: flex;
+}
+
+.f-house-edit p, .f-house-add p {
+  width: 100%;
+  box-sizing: border-box;
+}
+.f-house-edit input, .f-house-add input {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "Open Sans", sans-serif;
+}
+.f-house-edit .--bottom-block, .f-house-add .--bottom-block {
+  width: 100%;
+}
+
+.f-house-add input::-moz-placeholder {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.f-house-add input::placeholder {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  margin-top: 58px;
+  margin-bottom: 58px;
+}
+table tr {
+  text-align: center;
+}
+table .--flex-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+table .--flex-block a {
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #000;
+}
+table .--flex-block a:hover {
+  text-decoration: underline;
+}
+table th {
+  width: 237px;
+  height: 57px;
+  background: rgba(255, 214, 112, 0.28);
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+table td {
+  height: 57px;
+  background: rgba(255, 214, 112, 0.28);
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.f-request-edit table tr {
+  display: flex;
+  gap: 30px;
+}
+.f-request-edit table th {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+.f-request-edit table td {
+  text-align: left;
+  padding: 0 12px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin-top: 10px;
+}/*# sourceMappingURL=style.css.map */
