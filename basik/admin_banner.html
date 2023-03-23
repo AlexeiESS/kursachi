@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <nav>
+        <a href="#"><img src="img/logo.png" draggable="false" alt></a>
+        <p>г. Тюмень, ул. Пионеров, 24<br>
+            Тел. 7 (5522) 84-56-23</p>
+    </nav>
+    <div class="nav-small">
+        <a href="#" style="font-weight: 700;">Basik Baby</a>
+        <a href="#">Каталог</a>
+        <a href="#">Заявки</a>
+    </div>
+    <form>
+        <section class="banner">
+            <div class="banner-elem" id="block-1" style="height: 55px;">
+                <img src="img/banner.png" draggable="false" alt>
+            </div>
+            <div class="banner-elem" id="block-2">
+                <div class="--rect">
+                    <p>Basik Baby</p>
+                </div>
+                <p><textarea name="banner_desc" style="width: 100%; height: 100%;">Возьми себе малыша Басика и он станет твоим лучшим другом!<br> 
+                    Большой выбор разных стилей, каждый найдет Басика, который будет по душе.<br><br><br>
+                    
+                    Ткань и наполнитель гипоаллергенные, быстросохнущие, не садятся при стирке.</textarea></p>
+            </div>
+        </section>
+        <div class="--btn-block">
+            <label btn for="banner_photo">Загрузить новое фото</label>
+            <input type="file" style="display: none;" id="banner_photo" btn name="banner_photo">
+            <input type="submit" btn name="banner_edit" value="Изменить">
+        </div>
+    </form>
+    <footer>
+        <a href="#">Выход из панели администратора</a>
+    </footer>
+</body>
+</html>

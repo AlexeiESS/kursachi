@@ -1,0 +1,460 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito", sans-serif;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  border-spacing: 0;
+}
+
+nav {
+  height: 123px;
+  background: #87DBFF;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 100px;
+}
+nav p {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 42px;
+}
+
+.nav-small {
+  background: rgba(135, 219, 255, 0.28);
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+.nav-small a {
+  -webkit-text-decoration: 0;
+          text-decoration: 0;
+  color: #000;
+  font-size: 25px;
+  font-weight: 400;
+}
+.nav-small a:hover {
+  text-decoration: underline;
+}
+
+.admin-kitties .--elem {
+  padding: 10px;
+}
+.admin-kitties input, .admin-kitties textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: "Nunito", sans-serif;
+}
+.admin-kitties textarea {
+  max-height: 200px;
+  max-width: 600px;
+  min-width: 100px;
+  min-height: 100px;
+}
+.admin-kitties .--col-wrap {
+  gap: 0 !important;
+}
+.admin-kitties .--desc-elem {
+  background: rgba(135, 219, 255, 0.28);
+  border-top: 1px solid #000;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+.admin-kitties .--desc-elem #--title {
+  background: #fff !important;
+}
+.admin-kitties .--desc-elem #--desc {
+  background: #fff !important;
+}
+.admin-kitties .--desc-elem .--flex-block div {
+  background: #fff;
+}
+
+.banner {
+  display: flex;
+  justify-content: center;
+  padding: 0 100px;
+  gap: 110px;
+  min-height: 456px;
+}
+.banner .banner-elem {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.banner .banner-elem textarea {
+  max-width: 369px;
+  max-height: 326px;
+  min-height: 50px;
+  min-width: 369px;
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+}
+.banner .banner-elem p {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+}
+.banner #block-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+.banner #block-2 p {
+  min-width: 343px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.--longrect {
+  width: 553px !important;
+  background-image: url("img/longrect.svg") !important;
+}
+.--longrect p {
+  min-width: 513px !important;
+}
+
+.--rect {
+  background-image: url("img/rect.svg");
+  width: 369px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+}
+.--rect p {
+  min-width: 343px;
+  display: flex;
+  justify-content: center;
+  font-size: 25px !important;
+  font-weight: 700 !important;
+}
+
+.separator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 64px;
+  margin-bottom: 42px;
+}
+
+.--btn-block {
+  width: 100%;
+  gap: 49px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 28px;
+}
+.--btn-block a {
+  background: #FFCC02;
+  width: 231px;
+  height: 55px;
+  -webkit-text-decoration: 0;
+          text-decoration: 0;
+  color: #000;
+  font-weight: 400;
+  font-size: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kitties {
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  padding: 0 262px;
+}
+.kitties .kittie-elem {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.kitties .kittie-elem .--col-wrap {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+.kitties .kittie-elem .--col-wrap .--price {
+  width: 146px;
+  height: 52px;
+  background: rgba(135, 219, 255, 0.28);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 317px;
+}
+.kitties .kittie-elem .--col-wrap .--price p {
+  font-size: 20px;
+  font-weight: 400;
+  color: #000;
+  text-align: center;
+}
+.kitties .kittie-elem .--col-wrap .--elem {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.kitties .kittie-elem .--col-wrap .--elem #--photo {
+  width: 285px;
+  height: 289px;
+}
+.kitties .kittie-elem .--col-wrap .--elem #--title {
+  min-height: 52px;
+  background: rgba(135, 219, 255, 0.28);
+  color: #000;
+  font-weight: 700;
+  font-size: 20px;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+}
+.kitties .kittie-elem .--col-wrap .--elem #--desc {
+  min-height: 226px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+  color: #000;
+  background: rgba(135, 219, 255, 0.28);
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+}
+
+.contacts {
+  padding: 0 108px;
+  display: flex;
+  flex-direction: row;
+  gap: 77px;
+}
+.contacts .map {
+  width: 592px;
+  height: 412px;
+  overflow: initial !important;
+}
+.contacts .--info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.contacts p {
+  font-size: 20px;
+  line-height: 42px;
+}
+
+footer {
+  background: #87DBFF;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  padding: 0 62px;
+  margin-top: 102px;
+}
+footer a {
+  color: rgba(0, 0, 0, 0.4);
+  -webkit-text-decoration: 0;
+          text-decoration: 0;
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.card {
+  padding: 0 133px;
+}
+.card .--photo-elem {
+  border: 1px solid #000;
+  min-width: 365px;
+  min-height: 370px;
+  background: rgba(135, 219, 255, 0.28);
+}
+.card .--photo-elem label[for=kitty_photo] {
+  width: 100%;
+  height: 100%;
+}
+.card .--elem #--photo {
+  width: 365px !important;
+  height: 370px !important;
+}
+.card .--elem .--price {
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+.card .--elem .--price p {
+  font-weight: 700 !important;
+}
+.card .--flex-block {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 17px;
+}
+.card .--flex-block input {
+  text-align: center;
+}
+.card .--flex-block div {
+  width: 100%;
+  height: 67px;
+  background: rgba(135, 219, 255, 0.28);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card .--flex-block div p {
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.f-container {
+  padding: 0 290px;
+  margin-top: 45px;
+}
+.f-container form {
+  background: rgba(135, 219, 255, 0.28);
+  min-height: 434px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 21px;
+}
+.f-container form div {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+.f-container form div label {
+  width: auto;
+  height: 57px;
+  box-sizing: border-box;
+  font-weight: 700;
+  font-size: 25px;
+  text-align: right;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+.f-container form div input {
+  width: 338px;
+  height: 57px;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 25px;
+  outline: 0;
+  font-family: "Nunito", sans-serif;
+}
+.f-container form input[type=submit] {
+  background: #FFCC02;
+  width: 258px;
+  height: 55px;
+  color: #000;
+  font-weight: 700;
+  font-size: 25px;
+  font-family: "Nunito", sans-serif;
+  cursor: pointer;
+  border: 0;
+  margin-top: 30px;
+}
+
+input[btn], label[btn] {
+  background: #FFCC02;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  font-size: 20px;
+  font-family: "Nunito", sans-serif;
+  padding: 10px 50px;
+  text-align: center;
+  width: auto;
+}
+
+.admin-orders {
+  padding: 0 137px;
+}
+.admin-orders table {
+  width: 100%;
+}
+.admin-orders table .--flex-block {
+  display: flex;
+  flex-direction: row;
+}
+.admin-orders table .--flex-block a {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-text-decoration: 0;
+          text-decoration: 0;
+  font-weight: 700;
+  color: #000;
+}
+.admin-orders table .--flex-block a:hover {
+  text-decoration: underline;
+}
+.admin-orders table th {
+  width: 190px;
+  height: 57px;
+  background: rgba(135, 219, 255, 0.28);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 20px;
+  font-weight: 600;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.admin-orders table td {
+  width: 190px;
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+  height: 57px;
+  background: rgba(135, 219, 255, 0.28);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.f-order-edit table input {
+  font-family: "Nunito", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  width: 100%;
+}
+.f-order-edit table tr {
+  display: flex;
+  gap: 30px;
+}
+.f-order-edit table th {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+.f-order-edit table td {
+  text-align: left;
+  padding: 0 12px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin-top: 10px;
+}/*# sourceMappingURL=style.css.map */

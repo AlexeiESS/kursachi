@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <nav>
+        <a href="#"><img src="img/logo.png" draggable="false" alt></a>
+        <p>г. Тюмень, ул. Пионеров, 24<br>
+            Тел. 7 (5522) 84-56-23</p>
+    </nav>
+    <div class="nav-small">
+        <a href="#">Basik Baby</a>
+        <a href="#" style="font-weight: 700;">Каталог</a>
+        <a href="#">Заявки</a>
+    </div>
+    <form>
+        <div class="separator">
+            <div class="--rect">
+                <p>Внесение изменений</p>
+            </div>
+        </div>
+        <section class="kitties card admin-kitties">
+            <div class="kittie-elem">
+                <div class="--col-wrap">
+                    <div class="--elem --photo-elem">
+                        <img id="--photo" src="img/basik.png" draggable="false" alt>
+                    </div>
+                    <div class="--elem --desc-elem">
+                        <p id="--title"><input type="text" value="Басик BABY в вязаной шапке" name="kitty_name"></p>
+                        <p id="--desc"><textarea name="kitty_desc">Малыш Басик в трогательной вязаной шапочке с завязочками и большим помпоном. В комплекте ярко-жёлтый флисовый шарфик с узелками на концах.</textarea></p>
+                        <div class="--flex-block">
+                            <div>
+                                <p><input type="number" value=1638 min=0 name="kitty_price"> руб</p>
+                            </div>
+                            <div>
+                                <p>Вес: <input type="number" value=0.5 min=0 step="0.1" name="kitty_weight"> кг</p>
+                            </div>
+                            <div>
+                                <p>Рост: <input type="number" value=20 min=0 name="kitty_height"> см</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="--col-wrap">
+                    <div class="--btn-block">
+                        <input type="submit" name="kittie_save" btn value="Изменить">
+                        <input type="submit" name="kittie_remove" btn value="Удалить">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+    <footer>
+        <a href="#">Выход из панели администратора</a>
+    </footer>
+</body>
+</html>
