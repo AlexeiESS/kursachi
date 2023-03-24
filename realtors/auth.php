@@ -1,3 +1,4 @@
+<?php session_start();if(isset($_SESSION['admin'])){header("Location: admin.php");} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,33 +32,21 @@
         <div class="container">
             <section class="top-block">
                 <div class="bar">
-                    <a href="#"><img src="img/back.png" draggable="false" alt></a>
-                    <a href="#">Преимущества</a>
-                    <a href="#">Объекты</a>
-                    <a href="#" style="font-weight: 700;">Оставить заявку</a>
-                    <a href="#"><img src="img/exit.png" draggable="false" alt></a>
+                    
                 </div>
-                <table>
-                    <tr>
-                        <th>Имя</th>
-                        <th>Номер телефона</th>
-                        <th>Адрес</th>
-                        <th>Статус</th>
-                        <th>Управление</th>
-                    </tr>
-                    <tr>
-                        <td>Арсений</td>
-                        <td>7 (985) 028 00 12</td>
-                        <td></td>
-                        <td>Ждет звонка</td>
-                        <td>
-                            <div class="--flex-block">
-                                <a href="#">Редактировать</a>
-                                <a href="#"><img src="img/cross.png" draggable="false" alt></a>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                <form class="f-admin-auth" method="POST" action="php/handlers/main.php">
+                    <div>
+                        <label for="user_login">Логин</label>
+                        <input type="text" name="user_login" id="user_login">
+                    </div>
+                    <div>
+                        <label for="password">Пароль</label>
+                        <input type="password" name="password" id="password">
+                    </div>
+                    <div class="--button-block">
+                        <input type="submit" style="font-weight:700;" value="Отправить" name="sign_in" btn>
+                    </div>
+                </form>
                 <div class="admin-bar">
                     <a href="#">Администратор</a>
                 </div>

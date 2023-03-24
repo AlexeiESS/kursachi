@@ -1,3 +1,7 @@
+<?php
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,53 +107,33 @@
                         <p>Объекты</p>
                     </div>
                 </div>
+                <?php $homes = $conn->query("SELECT * FROM objects "); foreach($homes as $row){ ?>
                 <div class="flat-container">
                     <div class="fc-elem">
                         <div class="--top-block">
-                            <img src="img/flat.png" draggable="false" alt>
+                            <img src="upload/<?php echo $row['img']; ?>" draggable="false" alt>
                             <div class="--desc-rect">
-                                <p>47 м², 1-комнатная квартира</p>
+                                <p><?php echo $row['name']; ?></p>
                             </div>
                             <div class="--desc-rect">
-                                <p>Ижевск, улица Максима Горького, 151</p>
+                                <p><?php echo $row['adress']; ?></p>
                             </div>
                             <div class="--desc-rect">
-                                <p>5 800 000 ₽</p>
+                                <p><?php echo $row['price']; ?> ₽</p>
                             </div>
                         </div>
                         <div class="--bottom-block">
-                            <p>Цена 5800000 рублей без мебели и техники. Если оставляем цена: 6000000 рублей Продам просторную, светлую, квартиру в центре города Ижевска. Сделан современный дизайнерский ремонт с новой мебелью, техникой в элитном ЖК «Ривьера Парк». В квартире никто не жил. В стоимость включено вся обстановка (техника, мебель). Продуманная система хранения в каждой комнате. Один взрослый собственник! Самый престижный и центральный район города! 3 квартиры на этаже, у всех сделан ремонт. В шаговой доступности всё необходимое для комфортного проживания: - Школы, детские сады, кафе, банки, аптеки, места развлечений, остановка общественного транспорта в минуте ходьбы! - В 5 минутах набережная Ижевского пруда! Дом построен по концепции "двор без машин", имеется подземный паркинг - место можно приобрести у застройщика за дополнительную плату или взять в аренду.</p>
+                            <p><?php echo $row['description']; ?></p>
                         </div>
                         <div class="--button-block">
-                            <a href="#">Подробнее</a>
-                            <a href="#">Связаться с риэлтором</a>
+                            <a href="card.php?id=<?php echo $row['id']; ?>">Подробнее</a>
+                            <a href="order.php?id=<?php echo $row['id']; ?>">Связаться с риэлтором</a>
                         </div>
                     </div>
                 </div>
+            <?php } ?>
             </section>
-            <section class="contacts">
-                <div class="stripe-container">
-                    <div class="stripes">
-                        <div id="--stripe-1"></div>
-                        <div id="--stripe-2"></div>
-                        <div id="--stripe-3"></div>
-                        <p>Оставить заявку</p>
-                    </div>
-                </div>
-                <form>
-                    <div>
-                        <label for="user_name" style="width: 83px;">Имя:</label>
-                        <input type="text" name="user_name" id="user_name">
-                    </div>
-                    <div>
-                        <label for="user_tel" style="width: 380px;">Номер телефона:</label>
-                        <input type="tel" name="user_tel" id="user_tel">
-                    </div>
-                    <div class="--button-block">
-                        <input type="submit" value="Отправить" name="user_send" btn>
-                    </div>
-                </form>
-            </section>
+
         </div>
     </div>
     <footer>

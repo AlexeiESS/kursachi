@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(!isset($_SESSION['admin'])){
+    header("Location: index.php");
+}if(!isset($_GET['id'])){header("Location: index.php");}
+
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,46 +46,49 @@
                     <a href="#">Оставить заявку</a>
                     <a href="#"><img src="img/exit.png" draggable="false" alt></a>
                 </div>
-                <section class="features">
+                <?php
+                            $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM objects WHERE id = '".$_GET['id']."'"));
+                            ?>
+                <form class="f-house-edit" method="POST" enctype="multipart/form-data" action="php/handlers/main.php?id=<?php echo $conn->arr['id']; ?>">
                     <div class="stripe-container">
                         <div class="stripes">
                             <div id="--stripe-1"></div>
                             <div id="--stripe-2"></div>
                             <div id="--stripe-3"></div>
-                            <p>Редактор</p>
+                            <p style="font-size: 30px; font-family: 'Open Sans', sans-serif;">Редактор</p>
                         </div>
                     </div>
                     <section class="objects">
                         <div class="flat-container">
                             <div class="fc-elem">
                                 <div class="--top-block">
-                                    <img src="img/flat.png" draggable="false" alt>
-                                    <div class="--desc-rect">
-                                        <p>47 м², 1-комнатная квартира</p>
+                                    <img src="upload/<?php echo $conn->arr['img']; ?>" draggable="false" alt>
+                                    <div class="--button-block" style="margin-top: 0; margin-bottom: 20px;">
+                                        <label btn style="width: 100%;" for="house_photo_new">Добавить новое фото</label>
+                                        <input type="file" style="display: none;" id="house_photo_new" name="house_photo_new">
                                     </div>
                                     <div class="--desc-rect">
-                                        <p>Ижевск, улица Максима Горького, 151</p>
+                                        <p><input type="text" value="<?php echo $conn->arr['name']; ?>" name="house_desc"></p>
                                     </div>
                                     <div class="--desc-rect">
-                                        <p>5 800 000 ₽</p>
+                                        <p><input type="text" value="<?php echo $conn->arr['adress']; ?>" name="house_location"></p>
+                                    </div>
+                                    <div class="--desc-rect">
+                                        <p><input type="number" value="<?php echo $conn->arr['price']; ?>" min=0 name="house_price"> ₽</p>
                                     </div>
                                 </div>
                                 <div class="--bottom-block">
-                                    <p>Цена 5800000 рублей без мебели и техники. Если оставляем цена: 6000000 рублей Продам просторную, светлую, квартиру в центре города Ижевска. Сделан современный дизайнерский ремонт с новой мебелью, техникой в элитном ЖК «Ривьера Парк». В квартире никто не жил. В стоимость включено вся обстановка (техника, мебель). Продуманная система хранения в каждой комнате. Один взрослый собственник! Самый престижный и центральный район города! 3 квартиры на этаже, у всех сделан ремонт. В шаговой доступности всё необходимое для комфортного проживания: - Школы, детские сады, кафе, банки, аптеки, места развлечений, остановка общественного транспорта в минуте ходьбы! - В 5 минутах набережная Ижевского пруда! Дом построен по концепции "двор без машин", имеется подземный паркинг - место можно приобрести у застройщика за дополнительную плату или взять в аренду.</p>
-                                </div>
-                                <div class="--button-block">
-                                    <a href="#">Изменить</a>
-                                    <a href="#">Удалить</a>
+                                    <p><input type="text" value='<?php echo $conn->arr['description']; ?>' name="house_full_desc"></p>
                                 </div>
                             </div>
                         </div>
                     </section>
                     <div class="--button-block" style="margin-bottom: 45px;">
-                        <a href="#" style="font-weight: 700;">Добавить ещё</a>
+                        <input type="submit" value="Сохранить" name="house_save_edit" btn style="font-weight: 700;">
                     </div>
-                </section>
+                </form>
                 <div class="admin-bar">
-                    <a href="#">Администратор</a>
+                    <a href="admin.php">Администратор</a>
                 </div>
             </section>
         </div>

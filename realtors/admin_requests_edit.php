@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(!isset($_SESSION['admin'])){
+    header("Location: index.php");
+}if(!isset($_GET['id'])){header("Location: index.php");}
+
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +46,10 @@
                     <a href="#" style="font-weight: 700;">Оставить заявку</a>
                     <a href="#"><img src="img/exit.png" draggable="false" alt></a>
                 </div>
-                <form class="f-request-edit">
+                <?php
+                            $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM contacts WHERE id = '".$_GET['id']."'"));
+                            ?>
+                <form class="f-request-edit" method="POST" action="php/handlers/main.php?id=<?php echo $conn->arr['id']; ?>">
                     <div class="stripe-container">
                         <div class="stripes">
                             <div id="--stripe-1"></div>
@@ -47,17 +59,18 @@
                         </div>
                     </div>
                     <table>
+                        
                         <tr>
                             <th>Имя</th>
-                            <td>Арсений</td>
+                            <td><input type="text" name="user_name" value="<?php echo $conn->arr['name']; ?>" required></td>
                         </tr>
                         <tr>
                             <th>Номер телефона</th>
-                            <td>7 (985) 028 00 12</td>
+                            <td><input type="text" name="user_phone" value="<?php echo $conn->arr['phonen']; ?>" required></td>
                         </tr>
                         <tr>
                             <th>Адрес</th>
-                            <td></td>
+                            <td><input type="text" name="adress_obj" value="<?php echo $conn->arr['object']; ?>" required></td>
                         </tr>
                         <tr>
                             <th>Статус</th>
@@ -65,18 +78,18 @@
                                 <div class="--flex-block">
                                     <div>
                                         <label for="req_waiting-0">Ждет звонка</label>
-                                        <input type="radio" name="req_waiting" id="req_waiting-0">
+                                        <input type="radio" <?php if($conn->arr['svaz']==0){echo 'checked';} ?> value="0" name="req_waiting" id="req_waiting-0">
                                     </div>
                                     <div>
                                         <label for="req_waiting-1">Связались</label>
-                                        <input type="radio" name="req_waiting" id="req_waiting-1">
+                                        <input type="radio" <?php if($conn->arr['svaz']==1){echo 'checked';} ?> name="req_waiting" value="1" id="req_waiting-1">
                                     </div>
                                 </div>
                             </td>
                         </tr>
                     </table>
                     <div class="--button-block" style="margin-bottom: 45px;">
-                        <input type="submit" value="Сохранить" name="house_save" btn style="font-weight: 700;">
+                        <input type="submit" value="Сохранить" name="house_save_req" btn style="font-weight: 700;">
                     </div>
                 </form>
                 <div class="admin-bar">

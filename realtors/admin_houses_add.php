@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(!isset($_SESSION['admin'])){
+    header("Location: index.php");
+}
+
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,36 +46,36 @@
                     <a href="#">Оставить заявку</a>
                     <a href="#"><img src="img/exit.png" draggable="false" alt></a>
                 </div>
-                <form class="f-house-edit">
+                <form class="f-house-add" method="POST" enctype="multipart/form-data" action="php/handlers/main.php">
                     <div class="stripe-container">
                         <div class="stripes">
                             <div id="--stripe-1"></div>
                             <div id="--stripe-2"></div>
                             <div id="--stripe-3"></div>
-                            <p style="font-size: 30px; font-family: 'Open Sans', sans-serif;">Редактор</p>
+                            <p style="font-size: 30px; font-family: 'Open Sans', sans-serif;">Добавить</p>
                         </div>
                     </div>
                     <section class="objects">
                         <div class="flat-container">
                             <div class="fc-elem">
                                 <div class="--top-block">
-                                    <img src="img/flat.png" draggable="false" alt>
+                                    <div class="--house-photo"></div>
                                     <div class="--button-block" style="margin-top: 0; margin-bottom: 20px;">
-                                        <label btn style="width: 100%;" for="house_photo_new">Добавить новое фото</label>
-                                        <input type="file" style="display: none;" id="house_photo_new" name="house_photo_new">
+                                        <label btn style="width: 100%;" for="house_photo_add"  >Добавить фото</label>
+                                        <input type="file" style="display: none;" required id="house_photo_add" name="house_photo_add">
                                     </div>
                                     <div class="--desc-rect">
-                                        <p><input type="text" value="47 м², 1-комнатная квартира" name="house_desc"></p>
+                                        <p><input type="text" placeholder="Название" name="house_desc" required></p>
                                     </div>
                                     <div class="--desc-rect">
-                                        <p><input type="text" value="Ижевск, улица Максима Горького, 151" name="house_location"></p>
+                                        <p><input type="text" placeholder="Адрес" name="house_location" required></p>
                                     </div>
                                     <div class="--desc-rect">
-                                        <p><input type="number" value=5800000 min=0 name="house_price"> ₽</p>
+                                        <p><input type="number" placeholder="Цена" min=0 name="house_price" required> ₽</p>
                                     </div>
                                 </div>
                                 <div class="--bottom-block">
-                                    <p><input type="text" value='Цена 5800000 рублей без мебели и техники. Если оставляем цена: 6000000 рублей Продам просторную, светлую, квартиру в центре города Ижевска. Сделан современный дизайнерский ремонт с новой мебелью, техникой в элитном ЖК «Ривьера Парк». В квартире никто не жил. В стоимость включено вся обстановка (техника, мебель). Продуманная система хранения в каждой комнате. Один взрослый собственник! Самый престижный и центральный район города! 3 квартиры на этаже, у всех сделан ремонт. В шаговой доступности всё необходимое для комфортного проживания: - Школы, детские сады, кафе, банки, аптеки, места развлечений, остановка общественного транспорта в минуте ходьбы! - В 5 минутах набережная Ижевского пруда! Дом построен по концепции "двор без машин", имеется подземный паркинг - место можно приобрести у застройщика за дополнительную плату или взять в аренду.' name="house_full_desc"></p>
+                                    <p><input type="text" placeholder="Описание" name="house_full_desc" required></p>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +85,7 @@
                     </div>
                 </form>
                 <div class="admin-bar">
-                    <a href="#">Администратор</a>
+                    <a href="admin.php">Администратор</a>
                 </div>
             </section>
         </div>
