@@ -21,7 +21,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
         <nav>
             <div class="nav-elem" style="justify-content: left; align-items: center; width: 192px;">
                 <div class="--logo-block">
-                    <a href="#"><img src="./img/logo.svg" draggable="false" alt></a>
+                <a href="./"><img src="./img/logo.svg" draggable="false" alt></a>
                 </div>
             </div>
             <div class="nav-elem" style="justify-content: center; align-items: center; flex-direction: column;">
@@ -40,7 +40,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
             </div>
         </nav>
         <div class="tinyblock">
-            <a href="#">
+            <a href="admin.php">
                 <img src="img/back-arrow.svg" draggable="false" alt>
                 Вернуться
             </a>
@@ -90,7 +90,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
     </div>
     <footer>
         <img src="img/logo.svg" draggable="false" alt>
-        <a href="#">Авторизация администратора</a>
+        <a href="auth.php">Авторизация администратора</a>
     </footer>
 </body>
 </html>

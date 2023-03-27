@@ -16,7 +16,7 @@ if(isset($_SESSION['admin'])){header("Location: admin.php");}
         <nav>
             <div class="nav-elem" style="justify-content: left; align-items: center; width: 192px;">
                 <div class="--logo-block">
-                    <a href="#"><img src="./img/logo.svg" draggable="false" alt></a>
+                <a href="./"><img src="./img/logo.svg" draggable="false" alt></a>
                 </div>
             </div>
             <div class="nav-elem" style="justify-content: center; align-items: center; flex-direction: column;">
@@ -50,7 +50,7 @@ if(isset($_SESSION['admin'])){header("Location: admin.php");}
     </div>
     <footer>
         <img src="img/logo.svg" draggable="false" alt>
-        <a href="#">Авторизация администратора</a>
+        <a href="auth.php">Авторизация администратора</a>
     </footer>
 </body>
 </html>

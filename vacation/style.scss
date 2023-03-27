@@ -69,9 +69,10 @@ nav {
 .banner {
     position: relative;
     background-image: url('img/bg.png');
-    background-size: contain;
+    background-size: 100% 100%;
     width: 100%;
     height: 370px;
+    background-repeat: no-repeat;
     .banner-phrase {
         position: absolute;
         color: #fff;
@@ -747,7 +748,6 @@ footer {
 .f-edit-house,.t-requests,.f-edit-req {
     font-family: 'Montserrat Alternates', sans-serif;
     color: #fff;
-    padding: 0 162px;
     margin-top: 60px;
     .--btn-cont {
         display: flex;
@@ -768,20 +768,19 @@ footer {
         }
     }
     table {
+        box-sizing: border-box;
         background: #fff;
+        width: 100%;
         th {
             padding: 10px;
             background: #43513e;
             font-size: 20px;
-            width: 205px;
         }
         td {
-            padding: 10px;
             background: #43513e;
             font-size: 15px;
             text-align: center;
             .--photo-cont {
-                width: 182px;
                 height: 177px;
                 img {
                     width: 100%;
