@@ -1,3 +1,10 @@
+<?php
+
+session_start();
+if(isset($_SESSION['admin']) || isset($_SESSION['user'])){
+    header("Location: index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +39,7 @@
                 <a href="#">Регистрация</a>
             </div>
             <h1 id="title" style="text-align: center;">Авторизация</h1>
-            <form class="f-auth">
+            <form class="f-auth" method="POST" action="php/handlers/main.php">
                 <div class="--content">
                     <div>
                         <label for="user_login">Логин</label>

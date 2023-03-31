@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['admin'])){
+    header("Location: index.php");
+}
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,11 +36,11 @@
         </nav>
         <div class="container">
             <div class="topbar">
-                <a href="#">Назад</a>
-                <a href="#" class="topbar-active">Специалисты</a>
-                <a href="#">Выход</a>
+                <a href="admin.php">Назад</a>
+                <a href="admin.php" class="topbar-active">Специалисты</a>
+                <a href="exit.php">Выход</a>
             </div>
-            <form class="f-editcard">
+            <form class="f-editcard" method="POST" action="php/handlers/main.php" enctype="multipart/form-data">
                 <section class="masters">
                     <div class="masters-cont">
                         <div class="master-elem">
@@ -55,24 +63,12 @@
                                                 <img src="img/image 5.svg" draggable="false" alt><p><input type="tel" placeholder="Введите номер" name="master_tel"></p>
                                              </div>
                                              <div class="--elem-col">
-                                                <img src="img/image 8.svg" draggable="false" alt><p style="display: flex; box-sizing: border-box; flex-direction: row; align-items: center; gap: 10px;"><input type="number" min=0 style="width: 100%; box-sizing: border-box; height: 30px;" placeholder="Введите цену"></p>
+                                                <img src="img/image 8.svg" draggable="false" alt><p style="display: flex; box-sizing: border-box; flex-direction: row; align-items: center; gap: 10px;"><input type="number" min=0 style="width: 100%; box-sizing: border-box; height: 30px;" name="price" placeholder="Введите цену"></p>
                                              </div>
                                         </div>
                                         <div class="--elem-row">
                                             <div class="--elem-col">
                                                 <img src="img/image 7.svg" draggable="false" alt><p><input type="text" name="master_location" placeholder="Введите адрес"></p>
-                                            </div>
-                                            <div class="--elem-col">
-                                                <details>
-                                                    <summary><img src="img/image 6.svg" draggable="false" alt><p>Типы массажа</p></summary>
-                                                    <div class="--content">
-                                                        <p><input type="text" name="master_massage_type" id="0" value=""></p>
-                                                        <p><input type="text" name="master_massage_type" id="1" value=""></p>
-                                                        <p><input type="text" name="master_massage_type" id="2" value=""></p>
-                                                        <p><input type="text" name="master_massage_type" id="3" value=""></p>
-                                                        <p><input type="text" name="master_massage_type" id="4" value=""></p>
-                                                    </div>
-                                                </details>
                                             </div>
                                         </div>
                                     </div>
@@ -82,7 +78,7 @@
                     </div>
                 </section>
                 <div class="center" style="margin-top: 125px;">
-                    <input type="submit" value="Сохранить" class="btn-1">
+                    <input type="submit" name="add_prod" value="Сохранить" class="btn-1">
                 </div>
             </form>
         </div>

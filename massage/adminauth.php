@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+if(isset($_SESSION['admin']) || isset($_SESSION['user'])){
+    header("Location: admin.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +39,7 @@
                 <a href="#">Авторизация</a>
             </div>
             <h1 id="title" style="text-align: center;">Авторизация Администратора</h1>
-            <form class="f-auth">
+            <form class="f-auth" method="POST" action="php/handlers/main.php">
                 <div class="--content">
                     <div>
                         <label for="user_login">Логин</label>
@@ -42,7 +50,7 @@
                         <input type="password" text id="password" name="password" required>
                     </div>
                     <div class="center">
-                        <input type="submit" value="Войти" class="btn-1" name="sign_in">
+                        <input type="submit" value="Войти" class="btn-1" name="sign_in_admin">
                     </div>
                 </div>
             </form>

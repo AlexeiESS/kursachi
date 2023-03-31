@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(!isset($_SESSION['admin'])){
+    header("Location: index.php");
+}if(!isset($_GET['id'])){header("Location: index.php");}
+
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,51 +37,42 @@
         </nav>
         <div class="container">
             <div class="topbar">
-                <a href="#">Назад</a>
-                <a href="#" class="topbar-active">Специалисты</a>
-                <a href="#">Выход</a>
+                <a href="admin.php">Назад</a>
+                <a href="admin.php" class="topbar-active">Специалисты</a>
+                <a href="exit.php">Выход</a>
             </div>
-            <form class="f-editcard">
+            <?php
+                            $conn->arr = $conn->fetchrow($conn->query("SELECT * FROM workers WHERE id = '".$_GET['id']."'"));
+                            ?>
+            <form class="f-editcard" method="POST" action="php/handlers/main.php?id=<?php echo $_GET['id']; ?>" enctype="multipart/form-data">
                 <section class="masters">
                     <div class="masters-cont">
                         <div class="master-elem">
                             <div class="--subelem --photo">
-                                <img src="img/image 1.png" draggable="false" alt>
+                                <img src="upload/<?php echo $conn->arr['img']; ?>" draggable="false" alt>
                                 <label for="master_photo" class="btn-1">Новое фото</label>
                                 <input type="file" name="master_photo" style="display: none;" id="master_photo">
                             </div>
                             <div class="--subelem">
                                 <div>
-                                    <p id="--name"><input type="text" value="Мария Гребенкина" name="master_name"></p>
+                                    <p id="--name"><input type="text" value="<?php echo $conn->arr['name']; ?>" name="master_name"></p>
                                 </div>
                                 <div>
-                                    <p id="--desc"><textarea name="master_desc" style="width: 100%; height: 100px; resize: none;">Частная массажистка с медицинским образованием, опыт работы в санатории и салоне красоты. Приглашаю женщин и мужчин на сеансы профессионального массажа в уютной, комфортной обстановке. Принимаю в частном кабинете рядом с метро Октябрьская. Предлагаю спортивный, классический, антицеллюлитный массаж и комплексные программы, есть так же фитосауна кедровая бочка, возможны спа программы. Цена за 1 час любого массажа или спа процедур 2500. Выезд на дом к Вам возможен, но это будет дороже.</textarea></p>
+                                    <p id="--desc"><textarea name="master_desc" style="width: 100%; height: 100px; resize: none;"><?php echo $conn->arr['description']; ?></textarea></p>
                                 </div>
                                 <div>
                                     <div class="info-block">
                                         <div class="--elem-row" style="max-width: 384px;">
                                             <div class="--elem-col">
-                                                <img src="img/image 5.svg" draggable="false" alt><p><input type="tel" value="798528416320" name="master_tel"></p>
+                                                <img src="img/image 5.svg" draggable="false" alt><p><input type="tel" value="<?php echo $conn->arr['phonen']; ?>" name="master_tel"></p>
                                              </div>
                                              <div class="--elem-col">
-                                                <img src="img/image 8.svg" draggable="false" alt><p style="display: flex; box-sizing: border-box; flex-direction: row; align-items: center; gap: 10px;">от <input type="number" value=1000 min=0 style="width: 100%; box-sizing: border-box; height: 30px;"> р/час</p>
+                                                <img src="img/image 8.svg" draggable="false" alt><p style="display: flex; box-sizing: border-box; flex-direction: row; align-items: center; gap: 10px;">от <input type="number" name="price" value="<?php echo $conn->arr['price']; ?>" min=0 style="width: 100%; box-sizing: border-box; height: 30px;"> р/час</p>
                                              </div>
                                         </div>
                                         <div class="--elem-row">
                                             <div class="--elem-col">
-                                                <img src="img/image 7.svg" draggable="false" alt><p><input type="text" name="master_location" value="Г. Москва, Ул. Октябрьская, 85, 5 Этаж"></p>
-                                            </div>
-                                            <div class="--elem-col">
-                                                <details>
-                                                    <summary><img src="img/image 6.svg" draggable="false" alt><p>Типы массажа</p></summary>
-                                                    <div class="--content">
-                                                        <p><input type="text" name="master_massage_type" id="0" value="Классический массаж спины"></p>
-                                                        <p><input type="text" name="master_massage_type" id="1" value="Антицеллюлитный массаж"></p>
-                                                        <p><input type="text" name="master_massage_type" id="2" value="Массаж шеи и рук"></p>
-                                                        <p><input type="text" name="master_massage_type" id="3" value="Массаж ног полностью"></p>
-                                                        <p><input type="text" name="master_massage_type" id="4" value="Расслабляющий массаж всего тела"></p>
-                                                    </div>
-                                                </details>
+                                                <img src="img/image 7.svg" draggable="false" alt><p><input type="text" name="master_location" value="<?php echo $conn->arr['adress']; ?>"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
                     </div>
                 </section>
                 <div class="center" style="margin-top: 125px;">
-                    <input type="submit" value="Изменить" class="btn-1">
+                    <input type="submit" value="Изменить" name="edit_master" class="btn-1">
                 </div>
             </form>
         </div>
