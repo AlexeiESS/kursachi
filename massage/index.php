@@ -1,4 +1,8 @@
-<?php?>
+<?php
+session_start();
+require_once 'php/init.php';
+$conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,7 +57,7 @@
                             </div>
                             <div>
                                 <div class="right">
-                                    <a href="card.php?id<?php echo $row['id']; ?>" class="btn-1">Подробнее</a>
+                                    <a href="card.php?id=<?php echo $row['id']; ?>" class="btn-1">Подробнее</a>
                                 </div>
                             </div>
                         </div>

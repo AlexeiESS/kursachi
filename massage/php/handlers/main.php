@@ -43,9 +43,9 @@ if(isset($_POST['sign_up'])){
 if(isset($_POST['review_send'])){
 	if(isset($_SESSION['admin'])){$name=$_SESSION['admin'];}else {$name=$_SESSION['user'];}
 	if(add_comm($_POST['review_msg'],$name,$_GET['id'])==1){
-		redirect('../../cart?id='.$_GET['id']);
+		redirect('../../card', 'id='.$_GET['id']);
 	}else {
-		redirect('../../cart?id='.$_GET['id']);
+		redirect('../../card', 'id='.$_GET['id']);
 	}
 }
 
@@ -60,7 +60,7 @@ if(isset($_POST['add_prod'])){
 }
 
 if(isset($_POST['edit_master'])){
-	if(edit_pets($_POST['master_name'],$_POST['master_desc'],$_POST['master_tel'],$_POST['price'],$_POST['master_location'],$_FILES['master_photo']['name'], $_GET['id'])==1){
+	if(edit_prod($_POST['master_name'],$_POST['master_desc'],$_POST['master_tel'],$_POST['price'],$_POST['master_location'],$_FILES['master_photo']['name'], $_GET['id'])==1){
 		if(empty($_FILES['master_photo']['name'])){redirect('../../admin', 'ok=true');}else {
 			if(!move_uploaded_file($_FILES['master_photo']['tmp_name'], "../../upload/".$_FILES['master_photo']['name']))
 	{

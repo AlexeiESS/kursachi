@@ -57,7 +57,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                                 </div>
                                 <div>
                                     <div class="right">
-                                        <a href="editcard.php?id=<?php echo $row['id']; ?>" class="btn-1">Изменить</a><a href="php/handlers/main.php?id=<?php echo $row['id']; ?>&table=workers" class="btn-1">Удалить</a>
+                                        <a href="editcard.php?id=<?php echo $row['id']; ?>" class="btn-1">Изменить</a><a href="php/handlers/main.php?id=<?php echo $row['id']; ?>&table=workers&action=remove" class="btn-1">Удалить</a>
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                     </div>
                 </section>
                 <div class="center" style="margin-top: 63px;">
-                    <input type="submit" name="specialist_add" class="btn-1" value="Добавить специалиста">
+                    <a href="addcard.php"><input class="btn-1" value="Добавить специалиста"></a>
                 </div>
             </form>
         </div>

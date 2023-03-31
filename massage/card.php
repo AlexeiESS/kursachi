@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(!isset($_GET['id'])){header("Location: index.php");}
 require_once 'php/init.php';
 $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
@@ -81,7 +82,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
             <section class="reviews">
                 <h1 id="title">Отзывы о специалисте:</h1>
                 <div class="review-cont">
-                    <?php $comm = $conn->query("SELECT * FROM comm WHERE id_worker=".$_GET['id']); foreach($comm as $row){ { ?>
+                    <?php $comm = $conn->query("SELECT * FROM comm WHERE id_worker=".$_GET['id']); foreach($comm as $row) { ?>
                     <div class="review-elem">
                         <div class="--elem">
                             <p id="--title">Пользователь: <?php echo $row['login']; ?></p>
@@ -93,7 +94,7 @@ $conn = new mysql($config['db_host'], $config['db_user'], $config['db_pass'], $c
                     <?php } ?>
                 </div>
             </section>
-            <?php if(isset($_SESSION['user'])){ ?>
+            <?php if(isset($_SESSION['user']) || isset($_SESSION['admin'])){ ?>
             <section class="leave-review">
                 <h1 id="title">Оставить отзыв:</h1>
                 <form method="POST" action="php/handlers/main.php?id=<?php echo $_GET['id']; ?>">

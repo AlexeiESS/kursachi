@@ -28,7 +28,7 @@ function qeury_search($table, $login, $password)
 
 function add_comm($text_com, $login, $id_worker){
 	global $conn;
-	$conn->query("INSERT INTO comm(id, text_com, login, id_worker) VALUES (NULL, '$name','$category','$age')");
+	$conn->query("INSERT INTO comm(id, text_com, login, id_worker) VALUES (NULL, '$text_com','$login','$id_worker')");
 	return 1;
 }
 
@@ -52,9 +52,9 @@ function edit_prod($name, $description, $phonen, $price,$adress, $img, $id){
 		$conn->query("
 		UPDATE workers 
 		SET name = '".$name."',
-		description = '".$category."',
-		phonen = '".$age."',
-		price = '".$description."',
+		description = '".$description."',
+		phonen = '".$phonen."',
+		price = '".$price."',
 		adress = '".$adress."'
 		WHERE id = $id;");
 		return 1;
@@ -62,9 +62,9 @@ function edit_prod($name, $description, $phonen, $price,$adress, $img, $id){
 		$conn->query("
 		UPDATE workers 
 		SET name = '".$name."',
-		description = '".$category."',
-		phonen = '".$age."',
-		price = '".$description."',
+		description = '".$description."',
+		phonen = '".$phonen."',
+		price = '".$price."',
 		adress = '".$adress."',
 		img = '".$img."'
 		WHERE id = $id;");
